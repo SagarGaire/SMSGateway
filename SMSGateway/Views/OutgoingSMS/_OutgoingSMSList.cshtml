@@ -1,0 +1,90 @@
+﻿@model PagedList.IPagedList<SMSGateway.Models.ReportOutgoingSMS>
+@using PagedList.Mvc;
+
+@{
+    var pageNumber = ViewBag.PageNumber;
+    var totalPages = ViewBag.PageCount;
+    var totalSMS = ViewBag.TotalSMS;
+    var totalCost = ViewBag.TotalCost;
+    DateTime? fromDate = ViewBag.FromDate;
+    DateTime? toDate = ViewBag.ToDate;
+    string status = ViewBag.Status;
+    string client = ViewBag.Clients;
+    string recipient = ViewBag.Recipients;
+}
+@{
+    var i = ViewBag.SN;
+}
+<div class="table-container">
+
+    <h3>Outgoing SMS List</h3>
+
+    @if (Model.Count > 0)
+    {
+        <br />
+        <h5><b>Total SMS Count: @totalSMS</b></h5>
+        <h5><b>Total SMS Cost: @totalCost</b></h5><br />
+
+
+
+        <table class="table table-striped table-outgoing">
+            <tr>
+                <th>SN</th>
+                <th>Request Code</th>
+                <th>Client</th>
+                <th>Message</th>
+                <th class="th-date">Date</th>
+                <th>Recipients</th>
+                <th class="th-recipient-count">Recipients Count</th>
+                <th class="th-part">Part</th>
+                <th class="th-cost">Cost</th>
+                <th>Status</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @i
+                        @{
+                            i = i + 1;
+                        }
+                    </td>
+                    <td>@item.RequestCode</td>
+                    <td class="td-client">@item.ClientName</td>
+                    <td class="td-msgtext">@item.MsgText</td>
+                    <td class="td-date">@item.MsgDateTime.Value.ToString("yyyy-MM-dd HH:mm:ss tt") </td>
+                    <td>@item.Recipients</td>
+                    <td class="td-recipient-count">@item.RecipientCount</td>
+                    <td class="td-part">@item.Part</td>
+                    <td class="td-cost">@item.SMSCost</td>
+                    <td>@item.StatusName</td>
+                </tr>
+                            }
+            </table>
+                                }
+                                else
+                                {
+               <b> There are currently no Outgoing SMS </b>
+                                }
+                            
+</div>
+
+@if (Model.Count > 0)
+{
+    <div class="pagination">
+        <div class="pre-text">Page </div>
+        <button class="btn btn-warning btnPage btnPrevPage"><i class="fa fa-chevron-left"></i></button>
+        <input type="text" value="@pageNumber" class="txtPageNo" />
+        @Html.HiddenFor(x => totalPages)
+        <button class="btn btn-warning btnPage btnNextPage"><i class="fa fa-chevron-right"></i></button>
+        <div class="post-text"> of @totalPages</div>
+    </div>
+    <div class="pagination-message text-danger">
+
+    </div>
+    @Html.HiddenFor(x => fromDate)
+    @Html.HiddenFor(x => toDate)
+    @Html.HiddenFor(x => status)
+    @Html.HiddenFor(x => recipient)
+    @Html.HiddenFor(x => client)
+}

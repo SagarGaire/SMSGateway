@@ -1,0 +1,80 @@
+﻿
+@{
+    string code = ViewBag.Code;
+}
+
+<h2>Statement</h2>
+<br />
+
+<script>
+    $('.datepicker').datepicker({
+        orientation: 'bottom',
+        autoclose: true,
+    })
+
+    $('.fromTime').timepicker({
+        minuteStep: 1,
+        showSeconds: true
+    })
+
+    $('.toTime').timepicker({
+        minuteStep: 1,
+        showSeconds: true,
+    })
+
+    $('.client-list').multiselect({
+        includeSelectAllOption: true,
+        enableCaseInsensitiveFiltering: true,
+        enableFiltering: true
+    })
+</script>
+
+<div class="form-horizontal filters">
+    <div class="form-group">
+        @if (code == "User")
+        {
+            <div class="div-client-filter col-md-4">
+                <fieldset>
+                    <legend class="form-group col-md-12">
+                        Client
+                    </legend>
+                    <div class="form-group col-md-12">
+                        @Html.DropDownList("Client", new SelectList(ViewBag.Client, "Value", "Text"), new { @class = "form-control client-list" })
+                    </div>
+                </fieldset>
+            </div>
+        }
+        <div class="div-datetime-filter col-md-4">
+            <fieldset>
+                <legend class="form-group col-md-12">
+                    Date/Time
+                </legend>
+                <div class="form-group col-md-12">
+                    @Html.Label("From: ", htmlAttributes: new { @class = "control-label" })<br />
+                    <div class="col-md-12">
+                        <input type="text" class="form-control datepicker fromDate" placeholder="Date" />
+                    </div>
+                    <div class="col-md-12 bootstrap-timepicker">
+                        <input type="text" class="form-control fromTime" placeholder="Time" />
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    @Html.Label("To: ", htmlAttributes: new { @class = "control-label" })<br />
+                    <div class="col-md-12">
+                        <input type="text" class="form-control datepicker toDate" placeholder="Date" />
+                    </div>
+                    <div class="col-md-12 bootstrap-timepicker">
+                        <input type="text" class="form-control toTime" placeholder="Time" />
+                    </div>
+                </div>
+            </fieldset>
+        </div> 
+        <div class="col-md-4">
+            <input type="button" class="btn btn-warning btnGenerateStatement" value="Generate Statement" />
+        </div>
+    </div>
+</div>
+
+<div class="statement">
+
+</div>

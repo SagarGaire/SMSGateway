@@ -1,0 +1,12 @@
+﻿@font-face {
+    font-family: 'SourceSansPro-ExtraLight';
+    src: url('../../fonts/SourceSansPro-ExtraLight.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'SourceSansPro-Light';
+    src: url('../../fonts/SourceSansPro-Light.otf') format('opentype');
+}
+*{
+    font-family: SourceSansPro-Light;
+    box-sizing: border-box;
+}

@@ -1,0 +1,107 @@
+﻿@model List<SMSGateway.Models.SMSPurchases>
+
+@{ 
+    var display = "display-none";
+    var i = 1;
+    var purchaseDate = "";
+    var color = "black";
+}
+
+<h2>SMS Purchases</h2>
+
+<div>
+    <input type="button" class="btn btn-warning sms-purchase-add" value="Purchase SMS" style="margin-bottom: 15px;" />
+</div>
+
+<div class="chk-show-canceled-purchases-container">
+    <input type="checkbox" value="0" class="chk-show-canceled-purchases" /> 
+    <text><b>  Show canceled purchases</b></text>
+</div>
+
+<div class="table-container tbl-sms-purchases-list">
+    @if (Model.Count == 0)
+    {
+        <b>There are no SMS Purchases.</b>
+    }
+    else
+    {
+        <table class="table table-striped table-sms-purchases">
+            <tr>
+                <th>SN</th>
+                <th class="th-record-ID">Record ID</th>
+                <th class="th-balance">Bill No</th>
+                <th>Supplier</th>
+                <th class="th-purchase-date">Purchase Date</th>
+                <th class="th-quantity">Quantity</th>
+                <th class="th-rate">Rate</th>
+                <th class="th-remarks">Remarks</th>
+                <th class="th-entry-by">Entry By</th>
+                <th class="th-entry-date">Entry Date</th>
+                <th class="th-canceled-by">Canceled By</th>
+                <th class="th-canceled-date">Canceled Date</th>
+                <th>Action</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                if (item.CancelledBy == null)
+                {
+                    display = "";
+                    color = "black";
+                }
+                else
+                {
+                    display = "display-none";
+                    color = "red";
+                }
+                <tr recordId="@item.Recid" class="@display" style="color:@color;">
+                    <td>
+                        @i
+                        @{
+                            i = i + 1;
+                            purchaseDate = @item.PurchaseDate.HasValue == true ? @item.PurchaseDate.Value.ToString("yyyy-MM-dd") : "";
+
+                        }
+                    </td>
+                    <td class="td-record-ID">@item.Recid</td>
+                    <td class="td-bill-no">@item.BillNo</td>
+                    @if(item.Supplier == null)
+                    {
+                        <td> </td>
+                    }
+                    else
+                    {
+                        <td class="td-supplier">@item.Suppliers.SupplierName</td>
+                    }
+                    <td class="td-purchase-date">@purchaseDate</td>
+                    <td class="td-quantity">@item.Quantity</td>
+                    <td class="td-rate">@item.Rate</td>
+                    <td class="td-remarks">@item.Remarks</td>
+                    <td class="td-entry-by">@item.EntryBy</td>
+                    <td class="td-entry-date">@item.EntryDate.ToString("yyyy-MM-dd")</td>
+                    @if (item.CancelledBy == null)
+                    {
+                        <td></td>
+                        <td></td>
+                        <td class="td-action">
+                            <ul class="links">
+                                <li class="sms-purchase-edit" style="cursor: pointer" data-toggle="tooltip" data-placement="bottom" title="Edit">
+                                    <img alt="Edit" src="@Url.Content("~/Images/edit-icon.png")">
+                                </li>
+                                <li class="sms-purchase-cancel" style="cursor: pointer" data-toggle="tooltip" data-placement="bottom" title="Cancel">
+                                    <img alt="Delete" src="@Url.Content("~/Images/cancel-icon.png")">
+                                </li>
+                            </ul>
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="td-canceled-by">@item.CancelledBy</td>
+                        <td class="td-canceled-date">@item.CancelledDateFormatted.ToString("yyyy-MM-dd")</td>
+                        <td></td>
+                    }
+                </tr>
+            }
+        </table>
+    }
+</div>

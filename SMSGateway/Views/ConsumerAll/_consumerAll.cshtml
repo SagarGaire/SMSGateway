@@ -1,0 +1,27 @@
+﻿@model List<SMSGateway.Models.ReportSMSClientConsumptionAll>
+
+@{
+    ViewBag.Title = "_consumerAll";
+}
+
+<h2>_consumerAll</h2>
+
+@foreach (var item in Model)
+{
+    <table>
+        <tr>@item.ClientCode</tr>
+        <tr>@item.ClientName</tr>
+        <tr>@item.OpeningBalanceCredit</tr>
+        <tr>@item.OpeningBalanceAmt</tr>
+        <tr>@item.PurchaseCredit</tr>
+        <tr>@item.PurchaseAmount</tr>
+        <tr>@item.ConsumedCredit</tr>
+        <tr>@item.ConsumedAmt</tr>
+        <tr>@item.ClosingBalanceCredit</tr>
+        <tr>@item.ClosingBalanceAmt</tr>
+        <tr>@item.OpeningBalanceAmt</tr>
+    </table>
+
+    @ViewBag.openingBalance;
+}
+

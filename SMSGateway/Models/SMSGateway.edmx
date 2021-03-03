@@ -1,0 +1,1688 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SMSGateway_DevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccessLogs">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LoggedFrom" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMSGateway_Dev.dbo.AlertLogs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AlertLogs">
+          <Key>
+            <PropertyRef Name="Recid" />
+            <PropertyRef Name="LogDate" />
+            <PropertyRef Name="LogType" />
+            <PropertyRef Name="ClientCode" />
+          </Key>
+          <Property Name="Recid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogDate" Type="datetime" Nullable="false" />
+          <Property Name="LogType" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ClientCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMSGateway_Dev.dbo.BakRefills' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BakRefills">
+          <Key>
+            <PropertyRef Name="RefillId" />
+            <PropertyRef Name="RefillValue" />
+            <PropertyRef Name="RefillBy" />
+          </Key>
+          <Property Name="RefillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="RefillValue" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="RefillBy" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="50" />
+          <Property Name="RefillDate" Type="datetime" />
+          <Property Name="CancelledBy" Type="nvarchar" MaxLength="10" />
+          <Property Name="CancelledDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ClientCode" />
+          </Key>
+          <Property Name="ClientCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PassKey" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Balance" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="EmailId" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="Rate" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="SMSNotification" Type="bit" Nullable="false" />
+          <Property Name="EmailNotification" Type="bit" Nullable="false" />
+          <Property Name="PostBilling" Type="bit" Nullable="false" />
+          <Property Name="MonthlyLimit" Type="int" Nullable="false" />
+          <Property Name="NotifiedAt" Type="datetime" />
+          <Property Name="AlertLimit" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="ColorVal" Type="nvarchar" MaxLength="7" Nullable="false" />
+          <Property Name="TotalCreditsUsed" Type="bigint" />
+          <Property Name="UsesSB" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="SupplierId" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMSGateway_Dev.dbo.ErrorLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="Recid" />
+          </Key>
+          <Property Name="Recid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogDate" Type="datetime" />
+          <Property Name="ErrorMsg" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="IncomingSMS">
+          <Key>
+            <PropertyRef Name="MsgId" />
+          </Key>
+          <Property Name="MsgId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MsgDateTime" Type="datetime" Nullable="false" />
+          <Property Name="MsgFrom" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="MsgTo" Type="nvarchar" MaxLength="10" />
+          <Property Name="KeyWord" Type="nvarchar" MaxLength="10" />
+          <Property Name="MsgText" Type="nvarchar" MaxLength="160" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMSGateway_Dev.dbo.June13Balance' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="June13Balance">
+          <Key>
+            <PropertyRef Name="ClientCode" />
+          </Key>
+          <Property Name="Total" Type="int" />
+          <Property Name="ClientCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMSGateway_Dev.dbo.OutgoingSMS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OutgoingSMS">
+          <Key>
+            <PropertyRef Name="MsgId" />
+            <PropertyRef Name="MsgDateTime" />
+            <PropertyRef Name="ClientCode" />
+            <PropertyRef Name="Recipients" />
+            <PropertyRef Name="MsgText" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="MsgId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MsgDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ClientCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Recipients" Type="nvarchar" MaxLength="1010" Nullable="false" />
+          <Property Name="RecipientCount" Type="int" />
+          <Property Name="MsgText" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Parts" Type="int" />
+          <Property Name="RequestCode" Type="nvarchar" MaxLength="36" />
+          <Property Name="RequestIp" Type="nvarchar" MaxLength="15" />
+          <Property Name="RegId" Type="nvarchar" MaxLength="36" />
+          <Property Name="CreditsUsed" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMSGateway_Dev.dbo.OutgoingSMSBak' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OutgoingSMSBak">
+          <Key>
+            <PropertyRef Name="MsgId" />
+            <PropertyRef Name="MsgDateTime" />
+            <PropertyRef Name="ClientCode" />
+            <PropertyRef Name="Recipients" />
+            <PropertyRef Name="MsgText" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="MsgId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MsgDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ClientCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Recipients" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RecipientCount" Type="int" />
+          <Property Name="MsgText" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Parts" Type="int" />
+          <Property Name="RequestCode" Type="nvarchar" MaxLength="36" />
+          <Property Name="RequestIP" Type="nvarchar" MaxLength="15" />
+          <Property Name="RegId" Type="nvarchar" MaxLength="36" />
+        </EntityType>
+        <EntityType Name="OutgoingSMSHist">
+          <Key>
+            <PropertyRef Name="MsgId" />
+          </Key>
+          <Property Name="MsgId" Type="int" Nullable="false" />
+          <Property Name="MsgDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ClientCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Recipients" Type="nvarchar" MaxLength="1010" Nullable="false" />
+          <Property Name="RecipientCount" Type="int" />
+          <Property Name="MsgText" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Parts" Type="int" />
+          <Property Name="RequestCode" Type="nvarchar" MaxLength="36" Nullable="false" />
+          <Property Name="RequestIP" Type="nvarchar" MaxLength="15" />
+          <Property Name="RegId" Type="nvarchar" MaxLength="36" Nullable="false" />
+          <Property Name="CreditsUsed" Type="int" />
+          <Property Name="Rate" Type="numeric" Precision="5" Scale="2" />
+          <Property Name="Balance" Type="numeric" Precision="18" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMSGateway_Dev.dbo.OutGoingSMSTuesday' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OutGoingSMSTuesday">
+          <Key>
+            <PropertyRef Name="MsgId" />
+            <PropertyRef Name="MsgDateTime" />
+            <PropertyRef Name="ClientCode" />
+            <PropertyRef Name="Recipients" />
+            <PropertyRef Name="MsgText" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="MsgId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MsgDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ClientCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Recipients" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RecipientCount" Type="int" />
+          <Property Name="MsgText" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Parts" Type="int" />
+          <Property Name="RequestCode" Type="nvarchar" MaxLength="36" />
+          <Property Name="RequestIP" Type="nvarchar" MaxLength="15" />
+          <Property Name="RegId" Type="nvarchar" MaxLength="36" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMSGateway_Dev.dbo.PeriodicOpLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PeriodicOpLog">
+          <Key>
+            <PropertyRef Name="Recid" />
+          </Key>
+          <Property Name="Recid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="RecordsUpdate" Type="int" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="Refills">
+          <Key>
+            <PropertyRef Name="RefillId" />
+          </Key>
+          <Property Name="RefillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="RefillValue" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="RefillBy" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="50" />
+          <Property Name="CancelledBy" Type="nvarchar" MaxLength="20" />
+          <Property Name="CancelledDate" Type="datetime" />
+          <Property Name="RefillDate" Type="datetime" />
+          <Property Name="RefillRate" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="BillNo" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Saf">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EmailId" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="MobileNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SMSPurchases">
+          <Key>
+            <PropertyRef Name="Recid" />
+          </Key>
+          <Property Name="Recid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PurchaseDate" Type="datetime" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Rate" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="EntryBy" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="CancelledBy" Type="nvarchar" MaxLength="20" />
+          <Property Name="CancelledDate" Type="nvarchar" MaxLength="20" />
+          <Property Name="BillNo" Type="nvarchar" MaxLength="10" />
+          <Property Name="Supplier" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMSGateway_Dev.dbo.SparrowLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SparrowLog">
+          <Key>
+            <PropertyRef Name="Recid" />
+            <PropertyRef Name="ResponseCode" />
+            <PropertyRef Name="ResponseMsg" />
+          </Key>
+          <Property Name="Recid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogDate" Type="datetime" />
+          <Property Name="MsgId" Type="int" />
+          <Property Name="Cnt" Type="int" />
+          <Property Name="CreditAvailable" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="CreditConsumed" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="MessageId" Type="bigint" />
+          <Property Name="ResponseCode" Type="int" Nullable="false" />
+          <Property Name="ResponseMsg" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RegId" Type="nvarchar" MaxLength="36" />
+        </EntityType>
+        <EntityType Name="StatusCodes">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Suppliers">
+          <Key>
+            <PropertyRef Name="SupplierId" />
+          </Key>
+          <Property Name="SupplierId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplierName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMSGateway_Dev.dbo.tempBalance' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tempBalance">
+          <Key>
+            <PropertyRef Name="ClientCOde" />
+          </Key>
+          <Property Name="ClientCOde" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreditsUsed" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMSGateway_Dev.dbo.UniqueLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UniqueLog">
+          <Key>
+            <PropertyRef Name="Recid" />
+          </Key>
+          <Property Name="Recid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogDateTime" Type="datetime" />
+          <Property Name="RequestCode" Type="nvarchar" MaxLength="40" />
+          <Property Name="MobileNo" Type="nvarchar" MaxLength="100" />
+          <Property Name="Msg" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMSGateway_Dev.dbo.Users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="EmailId" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Username" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EmailId" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMSGateway_Dev.dbo.vwClients' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwClients">
+          <Key>
+            <PropertyRef Name="ClientCode" />
+            <PropertyRef Name="PassKey" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="Balance" />
+            <PropertyRef Name="SMSNotification" />
+            <PropertyRef Name="EmailNotification" />
+            <PropertyRef Name="PostBilling" />
+            <PropertyRef Name="MonthlyLimit" />
+            <PropertyRef Name="ColorVal" />
+          </Key>
+          <Property Name="ClientCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PassKey" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Balance" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="EmailId" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="Rate" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="SMSNotification" Type="bit" Nullable="false" />
+          <Property Name="EmailNotification" Type="bit" Nullable="false" />
+          <Property Name="PostBilling" Type="bit" Nullable="false" />
+          <Property Name="MonthlyLimit" Type="int" Nullable="false" />
+          <Property Name="NotifiedAt" Type="datetime" />
+          <Property Name="AlertLimit" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="ColorVal" Type="nvarchar" MaxLength="7" Nullable="false" />
+          <Property Name="TotalCreditsUsed" Type="bigint" />
+          <Property Name="UsesSB" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="SupplierId" Type="int" />
+          <Property Name="Balamt" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMSGateway_Dev.dbo.vwClientStatics' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwClientStatics">
+          <Key>
+            <PropertyRef Name="ClientCode" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="ClientCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cnt" Type="int" />
+          <Property Name="ColorVal" Type="varchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMSGateway_Dev.dbo.vwExpectedBalance' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwExpectedBalance">
+          <Key>
+            <PropertyRef Name="SupplierId" />
+            <PropertyRef Name="SupplierName" />
+          </Key>
+          <Property Name="SupplierId" Type="int" Nullable="false" />
+          <Property Name="SupplierName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="AverageRate" Type="numeric" Precision="5" Scale="2" />
+          <Property Name="CreditsUsed" Type="bigint" />
+          <Property Name="Balance" Type="bigint" />
+        </EntityType>
+        <Association Name="Fk_AccessLogs_Saf_Username">
+          <End Role="Saf" Type="Self.Saf" Multiplicity="1" />
+          <End Role="AccessLogs" Type="Self.AccessLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Saf">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="AccessLogs">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_OutgoingSMS_Clients_ClientCode">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="OutgoingSMS" Type="Self.OutgoingSMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientCode" />
+            </Principal>
+            <Dependent Role="OutgoingSMS">
+              <PropertyRef Name="ClientCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_OutgoingSMS_StatusCodes_Status">
+          <End Role="StatusCodes" Type="Self.StatusCodes" Multiplicity="1" />
+          <End Role="OutgoingSMS" Type="Self.OutgoingSMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusCodes">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="OutgoingSMS">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_Refills_RefillBy_Saf_Username">
+          <End Role="Saf" Type="Self.Saf" Multiplicity="1" />
+          <End Role="Refills" Type="Self.Refills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Saf">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Refills">
+              <PropertyRef Name="RefillBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SMSPurchases_Suppliers">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="SMSPurchases" Type="Self.SMSPurchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="SupplierId" />
+            </Principal>
+            <Dependent Role="SMSPurchases">
+              <PropertyRef Name="Supplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fnGetSMSBalance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="numeric">
+          <Parameter Name="ClientCode" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="fnGetSMSParts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="Message" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetLocalDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="datetime" />
+        <Function Name="spBalanceAlert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="Balance" Type="numeric" Mode="In" />
+          <Parameter Name="EmailId" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="MobileNo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spDashBoardView1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spNotifications" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spRefillReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientCode" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+          <Parameter Name="PageNo" Type="int" Mode="In" />
+          <Parameter Name="PageCount" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="spReportOutgoingSMS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Status" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ClientCode" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Recipients" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+          <Parameter Name="PageNo" Type="int" Mode="In" />
+          <Parameter Name="PageCount" Type="int" Mode="InOut" />
+          <Parameter Name="SMSCount" Type="int" Mode="InOut" />
+          <Parameter Name="SMSCost" Type="numeric" Mode="InOut" />
+        </Function>
+        <Function Name="spReportSMSStmt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="spSendEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Subject" Type="nvarchar" Mode="In" />
+          <Parameter Name="Body" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="To" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ToCC" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="AttachmentPath" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spSendSMS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="PassKey" Type="nvarchar" Mode="In" />
+          <Parameter Name="Recipients" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="MsgText" Type="nvarchar" Mode="In" />
+          <Parameter Name="RequestCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="RequestIp" Type="nvarchar" Mode="In" />
+          <Parameter Name="RegId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spSGBUildBalance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientCode" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spSGPeriodicOp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spSMSClientConsumptionAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+          <Parameter Name="ClientCode" Type="varchar" Mode="In" />
+          <Parameter Name="ClientType" Type="varchar" Mode="In" />
+          <Parameter Name="OpeningBalanceCredit" Type="int" Mode="InOut" />
+          <Parameter Name="OpeningBalanceAmt" Type="numeric" Mode="InOut" />
+          <Parameter Name="PurchaseCredit" Type="int" Mode="InOut" />
+          <Parameter Name="PurchaseAmt" Type="numeric" Mode="InOut" />
+          <Parameter Name="ConsumedCredit" Type="int" Mode="InOut" />
+          <Parameter Name="ConsumedAmt" Type="numeric" Mode="InOut" />
+          <Parameter Name="ClosingBalanceCredit" Type="int" Mode="InOut" />
+          <Parameter Name="ClosingBalanceAmt" Type="numeric" Mode="InOut" />
+        </Function>
+        <Function Name="spSMSGateway_EOD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spSMSTimelyAlert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spUpdateSMSStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RegId" Type="nvarchar" Mode="In" />
+          <Parameter Name="StatusCode" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="SMSGateway_DevModelStoreContainer">
+          <EntitySet Name="AccessLogs" EntityType="Self.AccessLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IncomingSMS" EntityType="Self.IncomingSMS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OutgoingSMSHist" EntityType="Self.OutgoingSMSHist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Refills" EntityType="Self.Refills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Saf" EntityType="Self.Saf" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SMSPurchases" EntityType="Self.SMSPurchases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusCodes" EntityType="Self.StatusCodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlertLogs" EntityType="Self.AlertLogs" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AlertLogs].[Recid] AS [Recid], 
+    [AlertLogs].[LogDate] AS [LogDate], 
+    [AlertLogs].[LogType] AS [LogType], 
+    [AlertLogs].[ClientCode] AS [ClientCode]
+    FROM [dbo].[AlertLogs] AS [AlertLogs]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="BakRefills" EntityType="Self.BakRefills" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BakRefills].[RefillId] AS [RefillId], 
+    [BakRefills].[ClientCode] AS [ClientCode], 
+    [BakRefills].[RefillValue] AS [RefillValue], 
+    [BakRefills].[RefillBy] AS [RefillBy], 
+    [BakRefills].[Remarks] AS [Remarks], 
+    [BakRefills].[RefillDate] AS [RefillDate], 
+    [BakRefills].[CancelledBy] AS [CancelledBy], 
+    [BakRefills].[CancelledDate] AS [CancelledDate]
+    FROM [dbo].[BakRefills] AS [BakRefills]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ErrorLog].[Recid] AS [Recid], 
+    [ErrorLog].[LogDate] AS [LogDate], 
+    [ErrorLog].[ErrorMsg] AS [ErrorMsg]
+    FROM [dbo].[ErrorLog] AS [ErrorLog]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="June13Balance" EntityType="Self.June13Balance" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [June13Balance].[Total] AS [Total], 
+    [June13Balance].[ClientCode] AS [ClientCode]
+    FROM [dbo].[June13Balance] AS [June13Balance]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OutgoingSMS" EntityType="Self.OutgoingSMS" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OutgoingSMS].[MsgId] AS [MsgId], 
+    [OutgoingSMS].[MsgDateTime] AS [MsgDateTime], 
+    [OutgoingSMS].[ClientCode] AS [ClientCode], 
+    [OutgoingSMS].[Recipients] AS [Recipients], 
+    [OutgoingSMS].[RecipientCount] AS [RecipientCount], 
+    [OutgoingSMS].[MsgText] AS [MsgText], 
+    [OutgoingSMS].[Status] AS [Status], 
+    [OutgoingSMS].[Parts] AS [Parts], 
+    [OutgoingSMS].[RequestCode] AS [RequestCode], 
+    [OutgoingSMS].[RequestIp] AS [RequestIp], 
+    [OutgoingSMS].[RegId] AS [RegId], 
+    [OutgoingSMS].[CreditsUsed] AS [CreditsUsed]
+    FROM [dbo].[OutgoingSMS] AS [OutgoingSMS]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OutgoingSMSBak" EntityType="Self.OutgoingSMSBak" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OutgoingSMSBak].[MsgId] AS [MsgId], 
+    [OutgoingSMSBak].[MsgDateTime] AS [MsgDateTime], 
+    [OutgoingSMSBak].[ClientCode] AS [ClientCode], 
+    [OutgoingSMSBak].[Recipients] AS [Recipients], 
+    [OutgoingSMSBak].[RecipientCount] AS [RecipientCount], 
+    [OutgoingSMSBak].[MsgText] AS [MsgText], 
+    [OutgoingSMSBak].[Status] AS [Status], 
+    [OutgoingSMSBak].[Parts] AS [Parts], 
+    [OutgoingSMSBak].[RequestCode] AS [RequestCode], 
+    [OutgoingSMSBak].[RequestIP] AS [RequestIP], 
+    [OutgoingSMSBak].[RegId] AS [RegId]
+    FROM [dbo].[OutgoingSMSBak] AS [OutgoingSMSBak]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OutGoingSMSTuesday" EntityType="Self.OutGoingSMSTuesday" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OutGoingSMSTuesday].[MsgId] AS [MsgId], 
+    [OutGoingSMSTuesday].[MsgDateTime] AS [MsgDateTime], 
+    [OutGoingSMSTuesday].[ClientCode] AS [ClientCode], 
+    [OutGoingSMSTuesday].[Recipients] AS [Recipients], 
+    [OutGoingSMSTuesday].[RecipientCount] AS [RecipientCount], 
+    [OutGoingSMSTuesday].[MsgText] AS [MsgText], 
+    [OutGoingSMSTuesday].[Status] AS [Status], 
+    [OutGoingSMSTuesday].[Parts] AS [Parts], 
+    [OutGoingSMSTuesday].[RequestCode] AS [RequestCode], 
+    [OutGoingSMSTuesday].[RequestIP] AS [RequestIP], 
+    [OutGoingSMSTuesday].[RegId] AS [RegId]
+    FROM [dbo].[OutGoingSMSTuesday] AS [OutGoingSMSTuesday]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PeriodicOpLog" EntityType="Self.PeriodicOpLog" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PeriodicOpLog].[Recid] AS [Recid], 
+    [PeriodicOpLog].[StartTime] AS [StartTime], 
+    [PeriodicOpLog].[EndTime] AS [EndTime], 
+    [PeriodicOpLog].[RecordsUpdate] AS [RecordsUpdate], 
+    [PeriodicOpLog].[Status] AS [Status]
+    FROM [dbo].[PeriodicOpLog] AS [PeriodicOpLog]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SparrowLog" EntityType="Self.SparrowLog" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SparrowLog].[Recid] AS [Recid], 
+    [SparrowLog].[LogDate] AS [LogDate], 
+    [SparrowLog].[MsgId] AS [MsgId], 
+    [SparrowLog].[Cnt] AS [Cnt], 
+    [SparrowLog].[CreditAvailable] AS [CreditAvailable], 
+    [SparrowLog].[CreditConsumed] AS [CreditConsumed], 
+    [SparrowLog].[MessageId] AS [MessageId], 
+    [SparrowLog].[ResponseCode] AS [ResponseCode], 
+    [SparrowLog].[ResponseMsg] AS [ResponseMsg], 
+    [SparrowLog].[RegId] AS [RegId]
+    FROM [dbo].[SparrowLog] AS [SparrowLog]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tempBalance" EntityType="Self.tempBalance" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tempBalance].[ClientCOde] AS [ClientCOde], 
+    [tempBalance].[CreditsUsed] AS [CreditsUsed]
+    FROM [dbo].[tempBalance] AS [tempBalance]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UniqueLog" EntityType="Self.UniqueLog" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UniqueLog].[Recid] AS [Recid], 
+    [UniqueLog].[LogDateTime] AS [LogDateTime], 
+    [UniqueLog].[RequestCode] AS [RequestCode], 
+    [UniqueLog].[MobileNo] AS [MobileNo], 
+    [UniqueLog].[Msg] AS [Msg]
+    FROM [dbo].[UniqueLog] AS [UniqueLog]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Users" EntityType="Self.Users" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Users].[Username] AS [Username], 
+    [Users].[Password] AS [Password], 
+    [Users].[EmailId] AS [EmailId], 
+    [Users].[Status] AS [Status]
+    FROM [dbo].[Users] AS [Users]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwClients" EntityType="Self.vwClients" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwClients].[ClientCode] AS [ClientCode], 
+    [vwClients].[PassKey] AS [PassKey], 
+    [vwClients].[Name] AS [Name], 
+    [vwClients].[Status] AS [Status], 
+    [vwClients].[Balance] AS [Balance], 
+    [vwClients].[EmailId] AS [EmailId], 
+    [vwClients].[MobileNumber] AS [MobileNumber], 
+    [vwClients].[Rate] AS [Rate], 
+    [vwClients].[SMSNotification] AS [SMSNotification], 
+    [vwClients].[EmailNotification] AS [EmailNotification], 
+    [vwClients].[PostBilling] AS [PostBilling], 
+    [vwClients].[MonthlyLimit] AS [MonthlyLimit], 
+    [vwClients].[NotifiedAt] AS [NotifiedAt], 
+    [vwClients].[AlertLimit] AS [AlertLimit], 
+    [vwClients].[ColorVal] AS [ColorVal], 
+    [vwClients].[TotalCreditsUsed] AS [TotalCreditsUsed], 
+    [vwClients].[UsesSB] AS [UsesSB], 
+    [vwClients].[CreatedBy] AS [CreatedBy], 
+    [vwClients].[SupplierId] AS [SupplierId], 
+    [vwClients].[Balamt] AS [Balamt]
+    FROM [dbo].[vwClients] AS [vwClients]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwClientStatics" EntityType="Self.vwClientStatics" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwClientStatics].[ClientCode] AS [ClientCode], 
+    [vwClientStatics].[Name] AS [Name], 
+    [vwClientStatics].[Cnt] AS [Cnt], 
+    [vwClientStatics].[ColorVal] AS [ColorVal]
+    FROM [dbo].[vwClientStatics] AS [vwClientStatics]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwExpectedBalance" EntityType="Self.vwExpectedBalance" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwExpectedBalance].[SupplierId] AS [SupplierId], 
+    [vwExpectedBalance].[SupplierName] AS [SupplierName], 
+    [vwExpectedBalance].[Quantity] AS [Quantity], 
+    [vwExpectedBalance].[AverageRate] AS [AverageRate], 
+    [vwExpectedBalance].[CreditsUsed] AS [CreditsUsed], 
+    [vwExpectedBalance].[Balance] AS [Balance]
+    FROM [dbo].[vwExpectedBalance] AS [vwExpectedBalance]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="Fk_AccessLogs_Saf_Username" Association="Self.Fk_AccessLogs_Saf_Username">
+            <End Role="Saf" EntitySet="Saf" />
+            <End Role="AccessLogs" EntitySet="AccessLogs" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_OutgoingSMS_Clients_ClientCode" Association="Self.Fk_OutgoingSMS_Clients_ClientCode">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="OutgoingSMS" EntitySet="OutgoingSMS" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_OutgoingSMS_StatusCodes_Status" Association="Self.Fk_OutgoingSMS_StatusCodes_Status">
+            <End Role="StatusCodes" EntitySet="StatusCodes" />
+            <End Role="OutgoingSMS" EntitySet="OutgoingSMS" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_Refills_RefillBy_Saf_Username" Association="Self.Fk_Refills_RefillBy_Saf_Username">
+            <End Role="Saf" EntitySet="Saf" />
+            <End Role="Refills" EntitySet="Refills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SMSPurchases_Suppliers" Association="Self.FK_SMSPurchases_Suppliers">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="SMSPurchases" EntitySet="SMSPurchases" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SMSGateway_DevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccessLogs">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LoggedFrom" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Saf" Relationship="Self.Fk_AccessLogs_Saf_Username" FromRole="AccessLogs" ToRole="Saf" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ClientCode" />
+          </Key>
+          <Property Name="ClientCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PassKey" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Balance" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Rate" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="SMSNotification" Type="Boolean" Nullable="false" />
+          <Property Name="EmailNotification" Type="Boolean" Nullable="false" />
+          <Property Name="PostBilling" Type="Boolean" Nullable="false" />
+          <Property Name="MonthlyLimit" Type="Int32" Nullable="false" />
+          <Property Name="NotifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="AlertLimit" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="ColorVal" Type="String" MaxLength="7" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TotalCreditsUsed" Type="Int64" />
+          <Property Name="UsesSB" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierId" Type="Int32" />
+          <NavigationProperty Name="OutgoingSMS" Relationship="Self.Fk_OutgoingSMS_Clients_ClientCode" FromRole="Clients" ToRole="OutgoingSMS" />
+        </EntityType>
+        <EntityType Name="IncomingSMS">
+          <Key>
+            <PropertyRef Name="MsgId" />
+          </Key>
+          <Property Name="MsgId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MsgDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MsgFrom" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MsgTo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="KeyWord" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MsgText" Type="String" MaxLength="160" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OutgoingSMSHist">
+          <Key>
+            <PropertyRef Name="MsgId" />
+          </Key>
+          <Property Name="MsgId" Type="Int32" Nullable="false" />
+          <Property Name="MsgDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ClientCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Recipients" Type="String" MaxLength="1010" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RecipientCount" Type="Int32" />
+          <Property Name="MsgText" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Parts" Type="Int32" />
+          <Property Name="RequestCode" Type="String" MaxLength="36" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RequestIP" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="RegId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreditsUsed" Type="Int32" />
+          <Property Name="Rate" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Refills">
+          <Key>
+            <PropertyRef Name="RefillId" />
+          </Key>
+          <Property Name="RefillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RefillValue" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="RefillBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CancelledBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CancelledDate" Type="DateTime" Precision="3" />
+          <Property Name="RefillDate" Type="DateTime" Precision="3" />
+          <Property Name="RefillRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BillNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Saf" Relationship="Self.Fk_Refills_RefillBy_Saf_Username" FromRole="Refills" ToRole="Saf" />
+        </EntityType>
+        <EntityType Name="Saf">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmailId" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccessLogs" Relationship="Self.Fk_AccessLogs_Saf_Username" FromRole="Saf" ToRole="AccessLogs" />
+          <NavigationProperty Name="Refills" Relationship="Self.Fk_Refills_RefillBy_Saf_Username" FromRole="Saf" ToRole="Refills" />
+        </EntityType>
+        <EntityType Name="SMSPurchases">
+          <Key>
+            <PropertyRef Name="Recid" />
+          </Key>
+          <Property Name="Recid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchaseDate" Type="DateTime" Precision="3" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EntryBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CancelledBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CancelledDate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BillNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier" Type="Int32" />
+          <NavigationProperty Name="Suppliers" Relationship="Self.FK_SMSPurchases_Suppliers" FromRole="SMSPurchases" ToRole="Suppliers" />
+        </EntityType>
+        <EntityType Name="StatusCodes">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OutgoingSMS" Relationship="Self.Fk_OutgoingSMS_StatusCodes_Status" FromRole="StatusCodes" ToRole="OutgoingSMS" />
+        </EntityType>
+        <EntityType Name="Suppliers">
+          <Key>
+            <PropertyRef Name="SupplierId" />
+          </Key>
+          <Property Name="SupplierId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="SMSPurchases" Relationship="Self.FK_SMSPurchases_Suppliers" FromRole="Suppliers" ToRole="SMSPurchases" />
+        </EntityType>
+        <EntityType Name="AlertLogs">
+          <Key>
+            <PropertyRef Name="Recid" />
+            <PropertyRef Name="LogDate" />
+            <PropertyRef Name="LogType" />
+            <PropertyRef Name="ClientCode" />
+          </Key>
+          <Property Name="Recid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LogType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BakRefills">
+          <Key>
+            <PropertyRef Name="RefillId" />
+            <PropertyRef Name="RefillValue" />
+            <PropertyRef Name="RefillBy" />
+          </Key>
+          <Property Name="RefillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="RefillValue" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="RefillBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RefillDate" Type="DateTime" Precision="3" />
+          <Property Name="CancelledBy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CancelledDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="Recid" />
+          </Key>
+          <Property Name="Recid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogDate" Type="DateTime" Precision="3" />
+          <Property Name="ErrorMsg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="June13Balance">
+          <Key>
+            <PropertyRef Name="ClientCode" />
+          </Key>
+          <Property Name="Total" Type="Int32" />
+          <Property Name="ClientCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OutgoingSMS">
+          <Key>
+            <PropertyRef Name="MsgId" />
+            <PropertyRef Name="MsgDateTime" />
+            <PropertyRef Name="ClientCode" />
+            <PropertyRef Name="Recipients" />
+            <PropertyRef Name="MsgText" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="MsgId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MsgDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ClientCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Recipients" Type="String" MaxLength="1010" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RecipientCount" Type="Int32" />
+          <Property Name="MsgText" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Parts" Type="Int32" />
+          <Property Name="RequestCode" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="RequestIp" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="RegId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="CreditsUsed" Type="Int32" />
+          <NavigationProperty Name="Clients" Relationship="Self.Fk_OutgoingSMS_Clients_ClientCode" FromRole="OutgoingSMS" ToRole="Clients" />
+          <NavigationProperty Name="StatusCodes" Relationship="Self.Fk_OutgoingSMS_StatusCodes_Status" FromRole="OutgoingSMS" ToRole="StatusCodes" />
+        </EntityType>
+        <EntityType Name="OutgoingSMSBak">
+          <Key>
+            <PropertyRef Name="MsgId" />
+            <PropertyRef Name="MsgDateTime" />
+            <PropertyRef Name="ClientCode" />
+            <PropertyRef Name="Recipients" />
+            <PropertyRef Name="MsgText" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="MsgId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MsgDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ClientCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Recipients" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RecipientCount" Type="Int32" />
+          <Property Name="MsgText" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Parts" Type="Int32" />
+          <Property Name="RequestCode" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="RequestIP" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="RegId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OutGoingSMSTuesday">
+          <Key>
+            <PropertyRef Name="MsgId" />
+            <PropertyRef Name="MsgDateTime" />
+            <PropertyRef Name="ClientCode" />
+            <PropertyRef Name="Recipients" />
+            <PropertyRef Name="MsgText" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="MsgId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MsgDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ClientCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Recipients" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RecipientCount" Type="Int32" />
+          <Property Name="MsgText" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Parts" Type="Int32" />
+          <Property Name="RequestCode" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="RequestIP" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="RegId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PeriodicOpLog">
+          <Key>
+            <PropertyRef Name="Recid" />
+          </Key>
+          <Property Name="Recid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="RecordsUpdate" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SparrowLog">
+          <Key>
+            <PropertyRef Name="Recid" />
+            <PropertyRef Name="ResponseCode" />
+            <PropertyRef Name="ResponseMsg" />
+          </Key>
+          <Property Name="Recid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogDate" Type="DateTime" Precision="3" />
+          <Property Name="MsgId" Type="Int32" />
+          <Property Name="Cnt" Type="Int32" />
+          <Property Name="CreditAvailable" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CreditConsumed" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MessageId" Type="Int64" />
+          <Property Name="ResponseCode" Type="Int32" Nullable="false" />
+          <Property Name="ResponseMsg" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RegId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tempBalance">
+          <Key>
+            <PropertyRef Name="ClientCOde" />
+          </Key>
+          <Property Name="ClientCOde" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreditsUsed" Type="Int32" />
+        </EntityType>
+        <EntityType Name="UniqueLog">
+          <Key>
+            <PropertyRef Name="Recid" />
+          </Key>
+          <Property Name="Recid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogDateTime" Type="DateTime" Precision="3" />
+          <Property Name="RequestCode" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Msg" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="EmailId" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmailId" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwClients">
+          <Key>
+            <PropertyRef Name="ClientCode" />
+            <PropertyRef Name="PassKey" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="Balance" />
+            <PropertyRef Name="SMSNotification" />
+            <PropertyRef Name="EmailNotification" />
+            <PropertyRef Name="PostBilling" />
+            <PropertyRef Name="MonthlyLimit" />
+            <PropertyRef Name="ColorVal" />
+          </Key>
+          <Property Name="ClientCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PassKey" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Balance" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Rate" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="SMSNotification" Type="Boolean" Nullable="false" />
+          <Property Name="EmailNotification" Type="Boolean" Nullable="false" />
+          <Property Name="PostBilling" Type="Boolean" Nullable="false" />
+          <Property Name="MonthlyLimit" Type="Int32" Nullable="false" />
+          <Property Name="NotifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="AlertLimit" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="ColorVal" Type="String" MaxLength="7" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TotalCreditsUsed" Type="Int64" />
+          <Property Name="UsesSB" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierId" Type="Int32" />
+          <Property Name="Balamt" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="vwClientStatics">
+          <Key>
+            <PropertyRef Name="ClientCode" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="ClientCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cnt" Type="Int32" />
+          <Property Name="ColorVal" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwExpectedBalance">
+          <Key>
+            <PropertyRef Name="SupplierId" />
+            <PropertyRef Name="SupplierName" />
+          </Key>
+          <Property Name="SupplierId" Type="Int32" Nullable="false" />
+          <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="AverageRate" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="CreditsUsed" Type="Int64" />
+          <Property Name="Balance" Type="Int64" />
+        </EntityType>
+        <Association Name="Fk_AccessLogs_Saf_Username">
+          <End Role="Saf" Type="Self.Saf" Multiplicity="1" />
+          <End Role="AccessLogs" Type="Self.AccessLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Saf">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="AccessLogs">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_OutgoingSMS_Clients_ClientCode">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="OutgoingSMS" Type="Self.OutgoingSMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientCode" />
+            </Principal>
+            <Dependent Role="OutgoingSMS">
+              <PropertyRef Name="ClientCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_Refills_RefillBy_Saf_Username">
+          <End Role="Saf" Type="Self.Saf" Multiplicity="1" />
+          <End Role="Refills" Type="Self.Refills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Saf">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Refills">
+              <PropertyRef Name="RefillBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SMSPurchases_Suppliers">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="SMSPurchases" Type="Self.SMSPurchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="SupplierId" />
+            </Principal>
+            <Dependent Role="SMSPurchases">
+              <PropertyRef Name="Supplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_OutgoingSMS_StatusCodes_Status">
+          <End Role="StatusCodes" Type="Self.StatusCodes" Multiplicity="1" />
+          <End Role="OutgoingSMS" Type="Self.OutgoingSMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusCodes">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="OutgoingSMS">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SMSGateway_DevEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccessLogs" EntityType="Self.AccessLogs" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="IncomingSMS" EntityType="Self.IncomingSMS" />
+          <EntitySet Name="OutgoingSMSHist" EntityType="Self.OutgoingSMSHist" />
+          <EntitySet Name="Refills" EntityType="Self.Refills" />
+          <EntitySet Name="Saf" EntityType="Self.Saf" />
+          <EntitySet Name="SMSPurchases" EntityType="Self.SMSPurchases" />
+          <EntitySet Name="StatusCodes" EntityType="Self.StatusCodes" />
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" />
+          <EntitySet Name="AlertLogs" EntityType="Self.AlertLogs" />
+          <EntitySet Name="BakRefills" EntityType="Self.BakRefills" />
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" />
+          <EntitySet Name="June13Balance" EntityType="Self.June13Balance" />
+          <EntitySet Name="OutgoingSMS" EntityType="Self.OutgoingSMS" />
+          <EntitySet Name="OutgoingSMSBak" EntityType="Self.OutgoingSMSBak" />
+          <EntitySet Name="OutGoingSMSTuesday" EntityType="Self.OutGoingSMSTuesday" />
+          <EntitySet Name="PeriodicOpLog" EntityType="Self.PeriodicOpLog" />
+          <EntitySet Name="SparrowLog" EntityType="Self.SparrowLog" />
+          <EntitySet Name="tempBalance" EntityType="Self.tempBalance" />
+          <EntitySet Name="UniqueLog" EntityType="Self.UniqueLog" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="vwClients" EntityType="Self.vwClients" />
+          <EntitySet Name="vwClientStatics" EntityType="Self.vwClientStatics" />
+          <EntitySet Name="vwExpectedBalance" EntityType="Self.vwExpectedBalance" />
+          <AssociationSet Name="Fk_AccessLogs_Saf_Username" Association="Self.Fk_AccessLogs_Saf_Username">
+            <End Role="Saf" EntitySet="Saf" />
+            <End Role="AccessLogs" EntitySet="AccessLogs" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_OutgoingSMS_Clients_ClientCode" Association="Self.Fk_OutgoingSMS_Clients_ClientCode">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="OutgoingSMS" EntitySet="OutgoingSMS" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_Refills_RefillBy_Saf_Username" Association="Self.Fk_Refills_RefillBy_Saf_Username">
+            <End Role="Saf" EntitySet="Saf" />
+            <End Role="Refills" EntitySet="Refills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SMSPurchases_Suppliers" Association="Self.FK_SMSPurchases_Suppliers">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="SMSPurchases" EntitySet="SMSPurchases" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_OutgoingSMS_StatusCodes_Status" Association="Self.Fk_OutgoingSMS_StatusCodes_Status">
+            <End Role="StatusCodes" EntitySet="StatusCodes" />
+            <End Role="OutgoingSMS" EntitySet="OutgoingSMS" />
+          </AssociationSet>
+          <FunctionImport Name="spBalanceAlert">
+            <Parameter Name="ClientCode" Mode="In" Type="String" />
+            <Parameter Name="Balance" Mode="In" Type="Decimal" />
+            <Parameter Name="EmailId" Mode="In" Type="String" />
+            <Parameter Name="MobileNo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spDashBoardView1" ReturnType="Collection(SMSGateway_DevModel.spDashBoardView1_Result)" />
+          <FunctionImport Name="spNotifications" />
+          <FunctionImport Name="spRefillReport" ReturnType="Collection(SMSGateway_DevModel.spRefillReport_Result)">
+            <Parameter Name="ClientCode" Mode="In" Type="String" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="PageNo" Mode="In" Type="Int32" />
+            <Parameter Name="PageCount" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spReportOutgoingSMS">
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="ClientCode" Mode="In" Type="String" />
+            <Parameter Name="Recipients" Mode="In" Type="String" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="PageNo" Mode="In" Type="Int32" />
+            <Parameter Name="PageCount" Mode="InOut" Type="Int32" />
+            <Parameter Name="SMSCount" Mode="InOut" Type="Int32" />
+            <Parameter Name="SMSCost" Mode="InOut" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="spReportSMSStmt" ReturnType="Collection(SMSGateway_DevModel.spReportSMSStmt_Result)">
+            <Parameter Name="ClientCode" Mode="In" Type="String" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="spSendEmail">
+            <Parameter Name="Subject" Mode="In" Type="String" />
+            <Parameter Name="Body" Mode="In" Type="String" />
+            <Parameter Name="To" Mode="In" Type="String" />
+            <Parameter Name="ToCC" Mode="In" Type="String" />
+            <Parameter Name="AttachmentPath" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spSendSMS">
+            <Parameter Name="ClientCode" Mode="In" Type="String" />
+            <Parameter Name="PassKey" Mode="In" Type="String" />
+            <Parameter Name="Recipients" Mode="In" Type="String" />
+            <Parameter Name="MsgText" Mode="In" Type="String" />
+            <Parameter Name="RequestCode" Mode="In" Type="String" />
+            <Parameter Name="RequestIp" Mode="In" Type="String" />
+            <Parameter Name="RegId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spSGBUildBalance">
+          <Parameter Name="ClientCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spSGPeriodicOp" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="spSMSGateway_EOD" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="spSMSTimelyAlert" />
+          <FunctionImport Name="spUpdateSMSStatus">
+            <Parameter Name="RegId" Mode="In" Type="String" />
+            <Parameter Name="StatusCode" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spSMSClientConsumptionAll">
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ClientCode" Mode="In" Type="String" />
+            <Parameter Name="ClientType" Mode="In" Type="String" />
+            <Parameter Name="OpeningBalanceCredit" Mode="InOut" Type="Int32" />
+            <Parameter Name="OpeningBalanceAmt" Mode="InOut" Type="Decimal" />
+            <Parameter Name="PurchaseCredit" Mode="InOut" Type="Int32" />
+            <Parameter Name="PurchaseAmt" Mode="InOut" Type="Decimal" />
+            <Parameter Name="ConsumedCredit" Mode="InOut" Type="Int32" />
+            <Parameter Name="ConsumedAmt" Mode="InOut" Type="Decimal" />
+            <Parameter Name="ClosingBalanceCredit" Mode="InOut" Type="Int32" />
+            <Parameter Name="ClosingBalanceAmt" Mode="InOut" Type="Decimal" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="spDashBoardView1_Result">
+          <Property Type="Int32" Name="ExpectedBalance" Nullable="true" />
+          <Property Type="Int32" Name="TodayOutGoing" Nullable="true" />
+          <Property Type="Int32" Name="TotalSMSPurchases" Nullable="true" />
+          <Property Type="Int32" Name="TotalOutGoing" Nullable="true" />
+          <Property Type="Decimal" Name="ClientBalance" Nullable="true" Precision="18" Scale="3" />
+        </ComplexType>
+        <ComplexType Name="spRefillReport_Result">
+          <Property Type="Int64" Name="PageNo" Nullable="true" />
+          <Property Type="Int32" Name="RefillId" Nullable="true" />
+          <Property Type="String" Name="ClientCode" Nullable="true" MaxLength="10" />
+          <Property Type="Decimal" Name="RefillValue" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="RefillBy" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CancelledBy" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="CancelledDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="RefillDate" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="RefillRate" Nullable="true" Precision="5" Scale="2" />
+          <Property Type="String" Name="BillNo" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="RefillAmount" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="spReportSMSStmt_Result">
+          <Property Type="Int64" Name="SN" Nullable="true" />
+          <Property Type="DateTime" Name="TrnDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TrnDesc" Nullable="true" MaxLength="80" />
+          <Property Type="Decimal" Name="Debit" Nullable="true" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="Credit" Nullable="true" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="DebitAmt" Nullable="true" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="CreditAmt" Nullable="true" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="SMSBal" Nullable="true" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="Balance" Nullable="true" Precision="18" Scale="3" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SMSGateway_DevModelStoreContainer" CdmEntityContainer="SMSGateway_DevEntities">
+          <EntitySetMapping Name="AccessLogs">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.AccessLogs">
+              <MappingFragment StoreEntitySet="AccessLogs">
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
+                <ScalarProperty Name="LogDateTime" ColumnName="LogDateTime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LoggedFrom" ColumnName="LoggedFrom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+                <ScalarProperty Name="PassKey" ColumnName="PassKey" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="SMSNotification" ColumnName="SMSNotification" />
+                <ScalarProperty Name="EmailNotification" ColumnName="EmailNotification" />
+                <ScalarProperty Name="PostBilling" ColumnName="PostBilling" />
+                <ScalarProperty Name="MonthlyLimit" ColumnName="MonthlyLimit" />
+                <ScalarProperty Name="NotifiedAt" ColumnName="NotifiedAt" />
+                <ScalarProperty Name="AlertLimit" ColumnName="AlertLimit" />
+                <ScalarProperty Name="ColorVal" ColumnName="ColorVal" />
+                <ScalarProperty Name="TotalCreditsUsed" ColumnName="TotalCreditsUsed" />
+                <ScalarProperty Name="UsesSB" ColumnName="UsesSB" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IncomingSMS">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.IncomingSMS">
+              <MappingFragment StoreEntitySet="IncomingSMS">
+                <ScalarProperty Name="MsgId" ColumnName="MsgId" />
+                <ScalarProperty Name="MsgDateTime" ColumnName="MsgDateTime" />
+                <ScalarProperty Name="MsgFrom" ColumnName="MsgFrom" />
+                <ScalarProperty Name="MsgTo" ColumnName="MsgTo" />
+                <ScalarProperty Name="KeyWord" ColumnName="KeyWord" />
+                <ScalarProperty Name="MsgText" ColumnName="MsgText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OutgoingSMSHist">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.OutgoingSMSHist">
+              <MappingFragment StoreEntitySet="OutgoingSMSHist">
+                <ScalarProperty Name="MsgId" ColumnName="MsgId" />
+                <ScalarProperty Name="MsgDateTime" ColumnName="MsgDateTime" />
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+                <ScalarProperty Name="Recipients" ColumnName="Recipients" />
+                <ScalarProperty Name="RecipientCount" ColumnName="RecipientCount" />
+                <ScalarProperty Name="MsgText" ColumnName="MsgText" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Parts" ColumnName="Parts" />
+                <ScalarProperty Name="RequestCode" ColumnName="RequestCode" />
+                <ScalarProperty Name="RequestIP" ColumnName="RequestIP" />
+                <ScalarProperty Name="RegId" ColumnName="RegId" />
+                <ScalarProperty Name="CreditsUsed" ColumnName="CreditsUsed" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Refills">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.Refills">
+              <MappingFragment StoreEntitySet="Refills">
+                <ScalarProperty Name="RefillId" ColumnName="RefillId" />
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+                <ScalarProperty Name="RefillValue" ColumnName="RefillValue" />
+                <ScalarProperty Name="RefillBy" ColumnName="RefillBy" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="CancelledBy" ColumnName="CancelledBy" />
+                <ScalarProperty Name="CancelledDate" ColumnName="CancelledDate" />
+                <ScalarProperty Name="RefillDate" ColumnName="RefillDate" />
+                <ScalarProperty Name="RefillRate" ColumnName="RefillRate" />
+                <ScalarProperty Name="BillNo" ColumnName="BillNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Saf">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.Saf">
+              <MappingFragment StoreEntitySet="Saf">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SMSPurchases">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.SMSPurchases">
+              <MappingFragment StoreEntitySet="SMSPurchases">
+                <ScalarProperty Name="Recid" ColumnName="Recid" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="CancelledBy" ColumnName="CancelledBy" />
+                <ScalarProperty Name="CancelledDate" ColumnName="CancelledDate" />
+                <ScalarProperty Name="BillNo" ColumnName="BillNo" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusCodes">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.StatusCodes">
+              <MappingFragment StoreEntitySet="StatusCodes">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.Suppliers">
+              <MappingFragment StoreEntitySet="Suppliers">
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlertLogs">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.AlertLogs">
+              <MappingFragment StoreEntitySet="AlertLogs">
+                <ScalarProperty Name="Recid" ColumnName="Recid" />
+                <ScalarProperty Name="LogDate" ColumnName="LogDate" />
+                <ScalarProperty Name="LogType" ColumnName="LogType" />
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BakRefills">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.BakRefills">
+              <MappingFragment StoreEntitySet="BakRefills">
+                <ScalarProperty Name="RefillId" ColumnName="RefillId" />
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+                <ScalarProperty Name="RefillValue" ColumnName="RefillValue" />
+                <ScalarProperty Name="RefillBy" ColumnName="RefillBy" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="RefillDate" ColumnName="RefillDate" />
+                <ScalarProperty Name="CancelledBy" ColumnName="CancelledBy" />
+                <ScalarProperty Name="CancelledDate" ColumnName="CancelledDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLog">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="Recid" ColumnName="Recid" />
+                <ScalarProperty Name="LogDate" ColumnName="LogDate" />
+                <ScalarProperty Name="ErrorMsg" ColumnName="ErrorMsg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="June13Balance">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.June13Balance">
+              <MappingFragment StoreEntitySet="June13Balance">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OutgoingSMS">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.OutgoingSMS">
+              <MappingFragment StoreEntitySet="OutgoingSMS">
+                <ScalarProperty Name="MsgId" ColumnName="MsgId" />
+                <ScalarProperty Name="MsgDateTime" ColumnName="MsgDateTime" />
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+                <ScalarProperty Name="Recipients" ColumnName="Recipients" />
+                <ScalarProperty Name="RecipientCount" ColumnName="RecipientCount" />
+                <ScalarProperty Name="MsgText" ColumnName="MsgText" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Parts" ColumnName="Parts" />
+                <ScalarProperty Name="RequestCode" ColumnName="RequestCode" />
+                <ScalarProperty Name="RequestIp" ColumnName="RequestIp" />
+                <ScalarProperty Name="RegId" ColumnName="RegId" />
+                <ScalarProperty Name="CreditsUsed" ColumnName="CreditsUsed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OutgoingSMSBak">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.OutgoingSMSBak">
+              <MappingFragment StoreEntitySet="OutgoingSMSBak">
+                <ScalarProperty Name="MsgId" ColumnName="MsgId" />
+                <ScalarProperty Name="MsgDateTime" ColumnName="MsgDateTime" />
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+                <ScalarProperty Name="Recipients" ColumnName="Recipients" />
+                <ScalarProperty Name="RecipientCount" ColumnName="RecipientCount" />
+                <ScalarProperty Name="MsgText" ColumnName="MsgText" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Parts" ColumnName="Parts" />
+                <ScalarProperty Name="RequestCode" ColumnName="RequestCode" />
+                <ScalarProperty Name="RequestIP" ColumnName="RequestIP" />
+                <ScalarProperty Name="RegId" ColumnName="RegId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OutGoingSMSTuesday">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.OutGoingSMSTuesday">
+              <MappingFragment StoreEntitySet="OutGoingSMSTuesday">
+                <ScalarProperty Name="MsgId" ColumnName="MsgId" />
+                <ScalarProperty Name="MsgDateTime" ColumnName="MsgDateTime" />
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+                <ScalarProperty Name="Recipients" ColumnName="Recipients" />
+                <ScalarProperty Name="RecipientCount" ColumnName="RecipientCount" />
+                <ScalarProperty Name="MsgText" ColumnName="MsgText" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Parts" ColumnName="Parts" />
+                <ScalarProperty Name="RequestCode" ColumnName="RequestCode" />
+                <ScalarProperty Name="RequestIP" ColumnName="RequestIP" />
+                <ScalarProperty Name="RegId" ColumnName="RegId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PeriodicOpLog">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.PeriodicOpLog">
+              <MappingFragment StoreEntitySet="PeriodicOpLog">
+                <ScalarProperty Name="Recid" ColumnName="Recid" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="RecordsUpdate" ColumnName="RecordsUpdate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SparrowLog">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.SparrowLog">
+              <MappingFragment StoreEntitySet="SparrowLog">
+                <ScalarProperty Name="Recid" ColumnName="Recid" />
+                <ScalarProperty Name="LogDate" ColumnName="LogDate" />
+                <ScalarProperty Name="MsgId" ColumnName="MsgId" />
+                <ScalarProperty Name="Cnt" ColumnName="Cnt" />
+                <ScalarProperty Name="CreditAvailable" ColumnName="CreditAvailable" />
+                <ScalarProperty Name="CreditConsumed" ColumnName="CreditConsumed" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+                <ScalarProperty Name="ResponseMsg" ColumnName="ResponseMsg" />
+                <ScalarProperty Name="RegId" ColumnName="RegId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tempBalance">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.tempBalance">
+              <MappingFragment StoreEntitySet="tempBalance">
+                <ScalarProperty Name="ClientCOde" ColumnName="ClientCOde" />
+                <ScalarProperty Name="CreditsUsed" ColumnName="CreditsUsed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UniqueLog">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.UniqueLog">
+              <MappingFragment StoreEntitySet="UniqueLog">
+                <ScalarProperty Name="Recid" ColumnName="Recid" />
+                <ScalarProperty Name="LogDateTime" ColumnName="LogDateTime" />
+                <ScalarProperty Name="RequestCode" ColumnName="RequestCode" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwClients">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.vwClients">
+              <MappingFragment StoreEntitySet="vwClients">
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+                <ScalarProperty Name="PassKey" ColumnName="PassKey" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="SMSNotification" ColumnName="SMSNotification" />
+                <ScalarProperty Name="EmailNotification" ColumnName="EmailNotification" />
+                <ScalarProperty Name="PostBilling" ColumnName="PostBilling" />
+                <ScalarProperty Name="MonthlyLimit" ColumnName="MonthlyLimit" />
+                <ScalarProperty Name="NotifiedAt" ColumnName="NotifiedAt" />
+                <ScalarProperty Name="AlertLimit" ColumnName="AlertLimit" />
+                <ScalarProperty Name="ColorVal" ColumnName="ColorVal" />
+                <ScalarProperty Name="TotalCreditsUsed" ColumnName="TotalCreditsUsed" />
+                <ScalarProperty Name="UsesSB" ColumnName="UsesSB" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="Balamt" ColumnName="Balamt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwClientStatics">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.vwClientStatics">
+              <MappingFragment StoreEntitySet="vwClientStatics">
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Cnt" ColumnName="Cnt" />
+                <ScalarProperty Name="ColorVal" ColumnName="ColorVal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwExpectedBalance">
+            <EntityTypeMapping TypeName="SMSGateway_DevModel.vwExpectedBalance">
+              <MappingFragment StoreEntitySet="vwExpectedBalance">
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="AverageRate" ColumnName="AverageRate" />
+                <ScalarProperty Name="CreditsUsed" ColumnName="CreditsUsed" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spBalanceAlert" FunctionName="SMSGateway_DevModel.Store.spBalanceAlert" />
+          <FunctionImportMapping FunctionImportName="spDashBoardView1" FunctionName="SMSGateway_DevModel.Store.spDashBoardView1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMSGateway_DevModel.spDashBoardView1_Result">
+                <ScalarProperty Name="ExpectedBalance" ColumnName="ExpectedBalance" />
+                <ScalarProperty Name="TodayOutGoing" ColumnName="TodayOutGoing" />
+                <ScalarProperty Name="TotalSMSPurchases" ColumnName="TotalSMSPurchases" />
+                <ScalarProperty Name="TotalOutGoing" ColumnName="TotalOutGoing" />
+                <ScalarProperty Name="ClientBalance" ColumnName="ClientBalance" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spNotifications" FunctionName="SMSGateway_DevModel.Store.spNotifications" />
+          <FunctionImportMapping FunctionImportName="spRefillReport" FunctionName="SMSGateway_DevModel.Store.spRefillReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMSGateway_DevModel.spRefillReport_Result">
+                <ScalarProperty Name="PageNo" ColumnName="PageNo" />
+                <ScalarProperty Name="RefillId" ColumnName="RefillId" />
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+                <ScalarProperty Name="RefillValue" ColumnName="RefillValue" />
+                <ScalarProperty Name="RefillBy" ColumnName="RefillBy" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="CancelledBy" ColumnName="CancelledBy" />
+                <ScalarProperty Name="CancelledDate" ColumnName="CancelledDate" />
+                <ScalarProperty Name="RefillDate" ColumnName="RefillDate" />
+                <ScalarProperty Name="RefillRate" ColumnName="RefillRate" />
+                <ScalarProperty Name="BillNo" ColumnName="BillNo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RefillAmount" ColumnName="RefillAmount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spReportOutgoingSMS" FunctionName="SMSGateway_DevModel.Store.spReportOutgoingSMS" />
+          <FunctionImportMapping FunctionImportName="spReportSMSStmt" FunctionName="SMSGateway_DevModel.Store.spReportSMSStmt">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMSGateway_DevModel.spReportSMSStmt_Result">
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="TrnDate" ColumnName="TrnDate" />
+                <ScalarProperty Name="TrnDesc" ColumnName="TrnDesc" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="DebitAmt" ColumnName="DebitAmt" />
+                <ScalarProperty Name="CreditAmt" ColumnName="CreditAmt" />
+                <ScalarProperty Name="SMSBal" ColumnName="SMSBal" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spSendEmail" FunctionName="SMSGateway_DevModel.Store.spSendEmail" />
+          <FunctionImportMapping FunctionImportName="spSendSMS" FunctionName="SMSGateway_DevModel.Store.spSendSMS" />
+          <FunctionImportMapping FunctionImportName="spSGBUildBalance" FunctionName="SMSGateway_DevModel.Store.spSGBUildBalance" />
+          <FunctionImportMapping FunctionImportName="spSGPeriodicOp" FunctionName="SMSGateway_DevModel.Store.spSGPeriodicOp" />
+          <FunctionImportMapping FunctionImportName="spSMSGateway_EOD" FunctionName="SMSGateway_DevModel.Store.spSMSGateway_EOD" />
+          <FunctionImportMapping FunctionImportName="spSMSTimelyAlert" FunctionName="SMSGateway_DevModel.Store.spSMSTimelyAlert" />
+          <FunctionImportMapping FunctionImportName="spUpdateSMSStatus" FunctionName="SMSGateway_DevModel.Store.spUpdateSMSStatus" />
+          <FunctionImportMapping FunctionImportName="spSMSClientConsumptionAll" FunctionName="SMSGateway_DevModel.Store.spSMSClientConsumptionAll" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,105 @@
+﻿@model PagedList.IPagedList<SMSGateway.Models.Clients>
+@using PagedList.Mvc;
+
+@{ 
+    var i = ViewBag.SN;
+    var totalPages = Model.PageCount;
+    var session = ViewBag.Session;
+    var currentPage = Model.PageNumber;
+}
+
+@Html.HiddenFor(x => currentPage)
+
+<div class="table-container">
+    <table class="table table-striped table-client">
+        <tr>
+            <th>SN</th>
+            <th>Client</th>
+            <th>Client Code</th>
+            <th class="th-contact">Contact</th>
+            <th>Email</th>
+            <th class="th-status">Status</th>
+            <th class="th-balance">Balance</th>
+            <th class="th-monthly-limit">Monthly Limit</th>
+            <th class="th-rate">Rate</th>
+            <th>Action</th>
+        </tr>
+        @if (Model.Count == 0)
+        {
+            <tr>
+                <td colspan="10"><b>There are no clients registered.</b></td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr clientCode=@item.ClientCode editMode=false>
+                    <td>
+                        @i
+                        @{
+                            i = i + 1;
+                        }
+                    </td>
+                    <td class="col-md-4 clientName" style="cursor:pointer;">@item.Name</td>
+                    <td>@item.ClientCode</td>
+                    <td class="td-contact">@item.MobileNumber</td>
+                    <td>@item.EmailId</td>
+                    <td class="td-status">
+                        @if (item.Status == 1)
+                        {
+                            <img alt="Active" src="@Url.Content("~/Images/active.jpg")">
+                        }
+                        else
+                        {
+                            <img alt="Active" src="@Url.Content("~/Images/inactive.jpg")">
+                        }
+                    </td>
+                    <td class="td-balance">@item.Balance</td>
+                    <td class="td-monthly-limit">@item.MonthlyLimit</td>
+                    <td class="td-rate">@item.Rate</td>
+                    <td class="td-action">                      
+                        <ul class="links">
+                            @if (session != "4")
+                            {
+                                if (session == "1" || session == "2")
+                                {
+                                    <li class="client-edit" style="cursor: pointer" data-toggle="tooltip" data-placement="bottom" title="Edit">
+                                        <img alt="Edit" src="@Url.Content("~/Images/edit-icon.png")">
+                                    </li>
+                                }
+                                <li class="balance-refill" style="cursor: pointer" data-toggle="tooltip" data-placement="bottom" title="Refill Balance">
+                                    <img src="~/Images/refill-icon.png" />
+                                </li>
+                                if (session == "1" || session == "2")
+                                {
+                                    <li class="client-remove" style="cursor: pointer" data-toggle="tooltip" data-placement="bottom" title="Delete">
+                                        <img alt="Delete" src="@Url.Content("~/Images/delete-icon.png")">
+                                    </li>
+                                }
+
+                            }                         
+                        </ul>
+                    </td>
+                </tr>
+                                }
+                            }
+
+    </table>
+</div>
+
+@if (Model.Count > 0)
+{
+    <div class="pagination">
+        <div class="pre-text">Page </div>
+        <button class="btn btn-warning btnClientPage btnPrevPage"><i class="fa fa-chevron-left"></i></button>
+        <input type="text" value="@Model.PageNumber" class="txtClientPageNo" />
+        <button class="btn btn-warning btnClientPage btnNextPage"><i class="fa fa-chevron-right"></i></button>
+        <div class="post-text"> of @totalPages</div>
+        @Html.HiddenFor(x => totalPages)
+        @Html.HiddenFor(x=> currentPage)
+    </div>
+    <div class="pagination-message text-danger">
+
+    </div>
+}

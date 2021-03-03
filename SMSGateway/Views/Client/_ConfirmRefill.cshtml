@@ -1,0 +1,54 @@
+﻿<div class="form-horizontal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Confirm Refill</h4>
+    </div>
+    <br />
+
+    <div id="modal-body refill-balance-modal-body" class="modal-body refill-balance-modal-body" autocomplete="off">
+        <div class="form-group">
+            <b>Please check your refill information to avoid any mistakes.</b>
+        </div>
+
+        <div class="form-group">
+            <table class="table table-striped tbl-confirm-refill">
+                <tr>
+                    <td>Client Code: </td>
+                    <td class="clientCode">@ViewBag.ClientCode</td>
+                </tr>
+                <tr>
+                    <td>Bill No: </td>
+                    <td class="billno">@ViewBag.BillNo</td>
+                </tr>
+                <tr>
+                    <td>Client Name: </td>
+                    <td class="clientName">@ViewBag.ClientName</td>
+                </tr>
+                <tr>
+                    <td>Current Balance: </td>
+                    <td class="currentBalance">@ViewBag.CurrentBalance</td>
+                </tr>
+                <tr>
+                    <td>New Balance: </td>
+                    <td class="newBalance">@ViewBag.NewBalance</td>
+                </tr>
+                <tr>
+                    <td>Refill Amount: </td>
+                    <td class="refillAmount"><b>@ViewBag.RefillAmount</b></td>
+                </tr>
+                <tr>
+                    <td>Remarks: </td>
+                    <td class="remarks">@ViewBag.Remarks</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <input type="button" class="btn btn-warning btnConfirmRefill" value="Confirm" />
+        <input type="button" class="btn btn-warning btnCancelRefill" value="Cancel" />
+        <input type="button" class="btn btn-warning display-none btnCancel" value="Dismiss" data-dismiss="modal" />
+    </div>
+</div>
+
+

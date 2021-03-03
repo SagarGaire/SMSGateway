@@ -1,0 +1,93 @@
+﻿@model List<SMSGateway.Models.Refills>
+
+@{
+    var errorMessage = ViewBag.Error;
+    var level = ViewBag.Level;
+    var color = "black";
+    var totalRefill = ViewBag.TotalRefill;
+    var totalAmount = ViewBag.TotalAmount;
+    
+}
+
+@Html.HiddenFor(x => errorMessage)
+
+<h5><b>Total Refill: @totalRefill</b></h5>
+<h5><b>Total Refill Amount: @totalAmount </b></h5>
+
+<div class="display-none div-original-remarks">
+
+</div>
+<div class="display-none div-original-bill-no">
+
+</div>
+<table class="table table-striped tbl-refill-history">
+    <tr>
+        <th>Refill By</th>
+        <th>Bill No</th>
+        <th>Refill Value</th>
+        <th>Refill Rate</th>
+        <th>Amount</th>
+        <th>Refill Date</th>
+        <th>Remarks</th>
+
+        <th>Canceled By</th>
+        <th>Canceled Date</th>
+
+        @if (level != "5" && level != "" && level != null)
+        {
+            <th>Action</th>
+        }
+    </tr>
+    @foreach (var item in Model)
+    {
+        if (item.CancelledBy != null)
+        {
+            color = "red";
+        }
+        else
+        {
+            color = "black";
+        }
+
+
+        <tr refillId="@item.RefillId" style="color:@color;">
+            <td>@item.RefillBy</td>
+            <td class="td-bill-no">@item.BillNo</td>
+            <td>@Convert.ToInt32(item.RefillValue)</td>
+            <td>@item.RefillRate</td>
+            <td>@item.Amount.ToString("0.##")</td>
+            <td>@item.RefillDate</td>
+            <td class="td-remarks">@item.Remarks</td>
+
+            <td>@item.CancelledBy</td>
+            <td>@item.CancelledDate</td>
+
+            @if (level != "5" && level != "" && level != null)
+            {
+                <td>
+                    <ul class="links">
+                        @if (item.CancelledBy == null)
+                        {
+                            <li class="undo-refill" style="cursor: pointer" data-toggle="tooltip" data-placement="bottom" title="Undo">
+                                <a>Undo</a>
+                            </li>
+                        }
+                        @if (level != "5")
+                        {
+                            <li class="edit-refill" style="cursor: pointer" data-toggle="tooltip" data-placement="bottom" title="Edit">
+                                <a>Edit</a>
+                            </li>
+                        }
+                    </ul>
+                </td>
+            }
+            else
+            {
+                
+            }
+        </tr>
+    }
+</table>
+<div class="message">
+
+</div>

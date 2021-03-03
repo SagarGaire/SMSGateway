@@ -1,0 +1,94 @@
+﻿@model SMSGateway.Models.Clients
+
+@{ 
+    var user = "";
+    if (Model.isUser == true)
+    {
+        user = "exists";
+    }
+    else
+    {
+        user = "";
+    }
+}
+
+<p class="text-success">@ViewBag.Message</p>
+
+<div class="credentials @user">
+    <table class="table table-striped">
+        <tr>
+            <td>Client Code: </td>
+            <td>@Model.ClientCode</td>
+        </tr>
+        <tr>
+            <td>Client Name: </td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <td>Passkey: </td>
+            <td>@Model.PassKey</td>
+        </tr>
+        <tr>
+            <td>Mobile Number: </td>
+            <td>@Model.MobileNumber</td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td>@Model.EmailId</td>
+        </tr>
+    </table>
+
+    @if (Model.isUser == true)
+    {
+        <h4>User Credentials for Client Portal</h4>
+        <table class="table table-striped">
+            <tr>
+                <td>Username: </td>
+                <td>@Model.Username</td>
+            </tr>
+            <tr>
+                <td>Password: </td>
+                <td>@Model.Password</td>
+            </tr>           
+        </table>
+    }
+</div>
+
+<div class="form-group">
+    <label class="control-label">Do you want to send an email to the client?</label>
+    <input type="button" value="Yes" class="btn btn-warning col-md-offset-1 btnAddRecipient" />
+    <input type="button" value="No" class="btn btn-warning btnCancelSendMessage" data-dismiss="modal" />
+</div>
+
+<div class="btn-container form-group" hidden>
+    <input type="button" class="btn btn-warning btnAddCC" value="Add CC" />
+</div>
+
+<div class="form-group recipient" hidden>
+    <text style="color:gray">Recipient</text><br />
+    <div class="col-md-6">
+        <input type="text" class="form-control" value=@Model.EmailId />
+    </div>
+</div>
+
+<div class="cc form-group" hidden>
+    <text style="color:gray">CC</text><br />
+    <div class="col-md-12">
+        <input type="text" class="form-control col-md-6" />
+    </div>
+</div>
+
+<div class="form-group btn-send-email-container" hidden>
+    <input type="button" class="btn btn-warning btn-send-email pull-right" value="Send" />
+</div>
+
+<div class="form-group multiple-email-info" hidden>
+    *For multiple CCs, insert comma between each Email ID.
+</div>
+
+
+
+
+
+
+

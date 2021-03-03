@@ -1,0 +1,107 @@
+﻿@model SMSGateway.Models.SMSPurchases
+
+@{
+    var subtotal = ViewBag.Subtotal;
+    var total = ViewBag.Total;
+}
+
+<script>
+    $('.datepicker').datepicker({
+        orientation: 'bottom',
+        autoclose: true
+    })
+</script>
+
+<div class="form-horizontal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Purchase</h4>
+    </div>
+    <br />
+    @using (Ajax.BeginForm("EditSMSPurchase", "SMSPurchases", new AjaxOptions
+    {
+        HttpMethod = "POST",
+        OnSuccess = "EditSMSPurchaseSuccess",
+        InsertionMode = InsertionMode.Replace
+    }, new { @id = "form" }))
+    {
+        <div id="modal-body edit-sms-purchase-modal-body" class="modal-body edit-sms-purchase-modal-body">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Supplier, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-5">
+                    @Html.DropDownList("Supplier", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Supplier, "", new { @class = "text-danger" })
+                </div>
+            </div>
+                <div class="form-group">
+                @Html.LabelFor(x => x.Recid, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-5">
+                    @Html.Label(Model.Recid.ToString(), htmlAttributes: new { @class = "control-label default-font-weight" })
+                    @Html.HiddenFor(x => x.Recid)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.BillNo, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-5">
+                    @Html.EditorFor(x => x.BillNo, new { htmlAttributes = new { @class = "form-control txtBillNo", @placeholder = "Bill No", @Value = Model.BillNo } })
+                    @Html.ValidationMessageFor(x => x.BillNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PurchaseDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-5">
+                    @Html.EditorFor(x => x.PurchaseDate, new { htmlAttributes = new { @class = "form-control datepicker", @placeholder = "Client Name", @Value = Model.PurchaseDate.Value.ToString("yyyy-MM-dd") } })
+                    @Html.ValidationMessageFor(x => x.PurchaseDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-5">
+                    @Html.EditorFor(x => x.Quantity, new { htmlAttributes = new { @class = "form-control txtSMSPurchaseQuantity", @placeholder = "Client Name", @Value = Model.Quantity } })
+                    @Html.ValidationMessageFor(x => x.Quantity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Rate, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-5">
+                    @Html.EditorFor(x => x.Rate, new { htmlAttributes = new { @class = "form-control txtSMSPurchaseRate", @placeholder = "Rate", @Value = Model.Rate } })
+                    @Html.ValidationMessageFor(x => x.Rate, "", new { @class = "text-danger validation-message" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Subtotal", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-5">
+                    <label class="control-label txtSMSPurchaseSubtotal">@subtotal</label>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("VAT", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-5">
+                    <label class="control-label">13%</label>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Total", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-5">
+                    <label class="control-label txtSMSPurchaseTotal">@total</label>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Remarks", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-5">
+                    <textarea class="form-control txtRemarks" name="Remarks" placeholder="Remarks">@Model.Remarks</textarea>
+                    @Html.ValidationMessageFor(x => x.Remarks, "", new { @class = "text-danger validation-message" })
+                </div>
+            </div>
+            @Html.HiddenFor(x => x.EntryBy)
+            @Html.HiddenFor(x => x.EntryDate)
+            @Html.HiddenFor(x => x.CancelledBy)
+            @Html.HiddenFor(x => x.CancelledDate)
+        </div>
+
+        <div class="modal-footer">
+            <input type="submit" value="Edit" class="btn btn-warning btnEditSMSPurchase" />
+            <button type="button" class="btn btn-warning btnCancel" data-dismiss="modal">Cancel</button>
+        </div>
+    }
+</div>

@@ -1,0 +1,63 @@
+﻿@{ 
+    string clientCode = ViewBag.ClientCode;
+    string balance = ViewBag.Balance;
+    string clientName = ViewBag.ClientName;
+}
+
+<div class="form-horizontal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Refill Balance</h4>
+    </div>
+    <br />
+
+    <div id="modal-body refill-balance-modal-body" class="modal-body refill-balance-modal-body" autocomplete="off">
+        <div class="form-group">
+            <div class="col-md-4"><label>Client Code: </label></div>
+            <div class="col-md-4"><text>@clientCode</text></div>  
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-4"><label>Client Name: </label></div>
+            <div class="col-md-4"><text>@clientName</text></div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4"><label>Current Balance: </label></div>           
+            <div class="col-md-4"><text class="txtCurrentBalance">@balance</text></div>          
+        </div>       
+
+        <div class="form-group">
+            <div class="col-md-4"><label>Refill Amount: </label></div>
+            <div class="col-md-4">
+                <input type="text" class="form-control txtBalanceToRefill" placeholder="Refill Amount" value="@ViewBag.RefillAmount" />
+            </div>
+        </div> 
+
+        <div class="form-group">
+            <div class="col-md-4"><label>New Balance: </label></div>
+            <div class="col-md-4">
+                <text class="txtTotalBalance">@ViewBag.NewBalance</text>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4"><label>Remarks: </label></div>
+            <div class="col-md-6">
+                <textarea class="form-control txtRemarks" placeholder="Remarks">@ViewBag.Remarks</textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        @if (ViewBag.RefillAmount != "")
+        {
+            <input type="button" value="Refill" class="btn btn-warning btnRefillBalance" />
+        }
+        else
+        {
+            <input type="button" value="Refill" class="btn btn-warning btnRefillBalance" disabled />
+        }        
+        <button type="button" class="btn btn-warning btnCancel" data-dismiss="modal">Cancel</button>
+    </div>
+</div>

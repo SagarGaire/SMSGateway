@@ -1,0 +1,54 @@
+﻿@model SMSGateway.Models.Saf
+
+@{ 
+    var email = ViewBag.Email;
+}
+
+<p class="text-success">@ViewBag.Message</p>
+
+<div class="credentials">
+    <table class="table table-striped">
+        <tr>
+            <td>Username: </td>
+            <td>@Model.Username </td>
+        </tr>
+        <tr>
+            <td>Password: </td>
+            <td>@Model.Password </td>
+        </tr>
+        @if (Model.Status == 1)
+        {
+            <tr>
+                <td>Status: </td>
+                <td>Active</td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>Status: </td>
+                <td>Inactive</td>
+            </tr>
+        }
+        <tr>
+            <td>Contact: </td>
+            <td>@Model.MobileNo</td>
+        </tr>
+    </table>
+
+    @Html.HiddenFor(x=> email)
+</div>
+
+<div class="form-group">
+    <label class="control-label">Do you want to send an email to the user?</label>
+    <input type="button" value="Yes" class="btn btn-warning col-md-offset-1 btn-send-mail" />
+    <input type="button" value="No" class="btn btn-warning btnCancel" data-dismiss="modal" />
+</div>
+
+
+
+
+
+
+
+

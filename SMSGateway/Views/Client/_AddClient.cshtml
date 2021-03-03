@@ -1,0 +1,137 @@
+﻿@model SMSGateway.Models.Clients
+@{ 
+    var creatorid = ViewBag.creator;
+}
+<div class="form-horizontal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Client</h4>
+    </div>
+    <br />
+
+    @using (Ajax.BeginForm("AddClient", "Client", new AjaxOptions
+    {
+        HttpMethod = "POST",
+        OnSuccess = "AddClientSuccess",
+        InsertionMode = InsertionMode.Replace
+    }, new { @id = "form" }))
+    {
+        <div id="modal-body add-client-modal-body" class="modal-body add-client-modal-body">
+            <h4>Basic Information</h4>
+            <hr />
+            <div class="form-group">
+                <div class="col-md-6">
+                    <div class="form-group-col">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <input type="text" name="Name" data-val="true" data-val-required="Client Name is required." class="form-control txtClientName" readonly onfocus="this.removeAttribute('readonly');" placeholder="Client Name" style="background-color:white" />
+                    @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-col">
+                        @Html.LabelFor(model => model.MobileNumber, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    @Html.EditorFor(x => x.MobileNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mobile Number" } })
+                    @Html.ValidationMessageFor(x => x.MobileNumber, "", new { @class = "text-danger validation-message" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    <div class="form-group-col">
+                        @Html.LabelFor(model => model.EmailId, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    @Html.EditorFor(x => x.EmailId, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                    @Html.ValidationMessageFor(x => x.EmailId, "", new { @class = "text-danger validation-message" })
+                </div>
+                @*<div class="col-md-6">
+                    <div class="form-group-col">
+                        @Html.LabelFor(model => model.PassKey, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-8 no-padding">
+                        <input type="password" name="PassKey" data-val="true" data-val-required="Passkey is required." class="form-control txtPassKey" readonly onfocus="this.removeAttribute('readonly');" placeholder="Passkey" style="background-color:white" />
+                        @Html.ValidationMessageFor(x => x.PassKey, "", new { @class = "text-danger validation-message" })
+                    </div>
+                    <div class="col-md-4 no-padding">
+                        <button type="button" class="btn btn-danger col-md-6 btn-generate-passkey" data-toggle="tooltip" data-placement="bottom" title="Generate Random Passkey"><i class="fa fa-refresh"></i></button>
+                        <button type="button" class="btn btn-default col-md-6 btn-show-passkey" data-toggle="tooltip" data-placement="bottom" title="Toggle Passkey View"><i class="fa fa-eye"></i></button>
+                    </div>
+                </div>*@
+            </div>
+
+            <hr />
+            <h4>Notifications and Billing</h4>
+            <hr />
+            <div class="form-group">
+                <div class="col-md-4">
+                    <div><b>SMS Notification</b></div>
+                    <label class="switch col-md-6">
+                        @Html.CheckBoxFor(x => x.SMSNotification)
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <div><b>Email Notification</b></div>
+                    <label class="switch col-md-6">
+                        @Html.CheckBoxFor(x => x.EmailNotification)
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <div><b>Post Billing</b></div>
+                    <label class="switch col-md-6">
+                        @Html.CheckBoxFor(x => x.PostBilling, new { @class = "chk-post-billing" })
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <hr />
+            <h4>SMS Information</h4>
+            <hr />
+            <div class="form-group">
+                <div class="col-md-6">
+                    <div class="form-group-col">
+                        @Html.LabelFor(model => model.Rate, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    @Html.EditorFor(x => x.Rate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Rate" } })
+                    @Html.ValidationMessageFor(x => x.Rate, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-col">
+                        @Html.LabelFor(model => model.AlertLimit, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    @Html.EditorFor(x => x.AlertLimit, new { htmlAttributes = new { @class = "form-control", @placeholder = "Alert Limit", @Value = 0 } })
+                    @Html.ValidationMessageFor(x => x.AlertLimit, "", new { @class = "text-danger validation-message" })
+                </div>
+            </div>
+            <div class="form-group div-monthly-limit" hidden>
+                <div class="col-md-6">
+                    <div class="form-group-col">
+                        @Html.LabelFor(model => model.MonthlyLimit, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    @Html.EditorFor(x => x.MonthlyLimit, new { htmlAttributes = new { @class = "form-control", @placeholder = "Monthly Limit", @Value = 0 } })
+                    @Html.ValidationMessageFor(x => x.MonthlyLimit, "", new { @class = "text-danger validation-message" })
+                </div>
+            </div>
+           
+            @Html.Hidden("CreatedBy", (object)creatorid)
+            @*<hr />
+            <h4>Client Portal Login</h4>
+            <hr />
+
+            <div class="form-group">
+                <div class="col-md-6">
+                    <div><b>User Privilege</b></div>
+                    <label class="switch col-md-6">
+                        @Html.CheckBoxFor(x => x.isUser, new { @class = "slider-user-privilege" })
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>*@
+        </div>
+
+        <div class="modal-footer">
+            <input type="submit" value="Add" class="btn btn-warning btnAddClient" />
+            <button type="button" class="btn btn-warning btnCancel" data-dismiss="modal">Cancel</button>
+        </div>
+    }
+</div>

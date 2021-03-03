@@ -1,0 +1,102 @@
+﻿@model SMSGateway.Models.Saf
+
+@{
+    if (Model.Status == 1)
+    {
+        Model._Status = true;
+    }
+    else
+    {
+        Model._Status = false;
+    }
+}
+
+<div class="form-horizontal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit User</h4>
+    </div>
+    <br />
+    @using (Ajax.BeginForm("EditUser", "Saf", new AjaxOptions
+    {
+        HttpMethod = "POST",
+        OnSuccess = "EditUserResult",
+        InsertionMode = InsertionMode.Replace
+    }, new { @id = "form" }))
+    {
+        <div id="modal-body edit-user-modal-body" class="modal-body edit-user-modal-body">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Username, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-5">
+                    @Html.EditorFor(x=>x.Username, new { htmlAttributes = new { @class = "form-control" } })
+                    
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-5">
+                    <input type="password" name="Password" class="form-control txtPassKey" readonly onfocus="this.removeAttribute('readonly');" placeholder="Password" style="background-color:white" value="@Model.Password" />
+                    @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger validation-message" })
+                </div><div class="col-md-3">
+                    <button type="button" class="btn btn-danger col-md-5 btn-generate-passkey"><i class="fa fa-refresh"></i></button>
+                    <button type="button" class="btn btn-default col-md-offset-1 col-md-5 btn-show-passkey"><i class="fa fa-eye"></i></button>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-5">
+                    <label class="switch">
+                        @Html.CheckBoxFor(x => x._Status)
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            @if (Model.Level == 5)
+            {
+                @Html.HiddenFor(x=>x.Level)
+            }
+            else
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Level, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-5">
+                        @Html.DropDownList("Level", null, htmlAttributes: new { @class = "form-control dropdown-level-list" })
+                        @Html.ValidationMessageFor(x => x.Level, "", new { @class = "text-danger validation-message" })
+                    </div>
+                </div>
+            }
+            
+            <div class="form-group">
+                @Html.Label("Contact", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-5">
+                    @Html.EditorFor(x => x.MobileNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Contact" } })
+                    @Html.ValidationMessageFor(x => x.MobileNo, "", new { @class = "text-danger validation-message" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-5">
+                    @Html.EditorFor(x => x.EmailId, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                    @Html.ValidationMessageFor(x => x.EmailId, "", new { @class = "text-danger validation-message" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-5 col-md-offset-4">
+                   @Ajax.ActionLink("Send an email",
+                   "SendEmail",
+                   new { email = Model.EmailId, username= Model.Username, password= Model.Password },
+                   new AjaxOptions {
+                       HttpMethod = "GET",
+                       InsertionMode = InsertionMode.Replace,
+                       OnComplete = "SendEmailComplete"
+                   })
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <input type="submit" value="Edit" class="btn btn-warning btn-edit-user" />
+            <button type="button" class="btn btn-warning btnCancel" data-dismiss="modal">Cancel</button>
+        </div>
+    }
+</div>

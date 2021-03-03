@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c5edc503921b44e1aa380a56dfe5b695" Name="Diagram1">
+        <EntityTypeShape EntityType="SmsGateway_LiveModel.Clients" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmsGateway_LiveModel.OutgoingSMS" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmsGateway_LiveModel.Refills" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmsGateway_LiveModel.Saf" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmsGateway_LiveModel.SMSPurchases" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmsGateway_LiveModel.StatusCodes" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmsGateway_LiveModel.vwClientStatics" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="SmsGateway_LiveModel.Fk_OutgoingSMS_Clients_ClientCode" ManuallyRouted="false" />
+        <AssociationConnector Association="SmsGateway_LiveModel.Fk_OutgoingSMS_StatusCodes_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="SmsGateway_LiveModel.Fk_Refills_RefillBy_Saf_Username" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SmsGateway_LiveModel.AccessLogs" Width="1.5" PointX="8" PointY="5.375" />
+        <AssociationConnector Association="SmsGateway_LiveModel.Fk_AccessLogs_Saf_Username" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

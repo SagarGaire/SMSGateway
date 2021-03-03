@@ -1,0 +1,71 @@
+﻿@model List<SMSGateway.Models.Clients>
+@{
+    var i = 1;
+}
+
+<h2>Pending Approvals</h2>
+<br />
+<div>
+
+    <div class="table-container">
+        <table class="table table-striped table-pending-approval">
+            <tr class="parent">
+                <th>SN</th>
+                <th>Client</th>
+                <th>Client Code</th>
+                <th class="th-contact">Contact</th>
+                <th>Email</th>
+                <th class="th-status">Status</th>
+               <th>Created By</th>
+                <th>Action</th>
+            </tr>
+            @if (Model.Count == 0)
+            {
+                <tr>
+                    <td colspan="10"><b>There are no pending requests.</b></td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    <tr clientCode=@item.ClientCode editMode=false>
+                        <td>
+                            @i
+                            @{
+                                i = i + 1;
+                            }
+                        </td>
+                        <td class="col-md-4 clientName" style="cursor:pointer;">@item.Name</td>
+                        <td>@item.ClientCode</td>
+                        <td class="td-contact">@item.MobileNumber</td>
+                        <td>@item.EmailId</td>
+                        <td class="td-status">
+                            @if (item.Status == 1)
+                            {
+                                <img alt="Active" src="@Url.Content("~/Images/active.jpg")">
+                            }
+                            else if (item.Status == 0)
+                            {
+                                <img alt="Active" src="@Url.Content("~/Images/inactive.jpg")">
+                            }
+                            else if (item.Status == 2)
+                            {
+                                <img alt="Active" src="@Url.Content("~/Images/pending.png")">
+                            }
+                        </td>
+                        <td>@item.CreatedBy</td>
+                        <td class="td-action">
+                            <ul class="links">
+                                <li class="client-approval-edit" style="cursor: pointer" data-toggle="tooltip" data-placement="bottom" title="Approve">
+                                    <img alt="Edit" src="@Url.Content("~/Images/approve.png")">
+                                </li>
+                                </ul>
+                            </td>
+                    </tr>
+                                    }
+                                }
+</table>
+</div>
+</div>
+

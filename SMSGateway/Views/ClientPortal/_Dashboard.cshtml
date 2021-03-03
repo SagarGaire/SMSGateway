@@ -1,0 +1,74 @@
+﻿@model SMSGateway.Models.vwClients
+
+<h3>
+    Client Information 
+    <input type="button" class="btn btn-warning btn-edit-client-info" value="Edit Info" />
+    <input type="button" class="btn btn-warning display-none btn-submit-client-info" value="Done" />
+    <input type="button" class="btn btn-warning display-none btn-cancel-edit-client-info" value="Cancel" />
+</h3>
+
+<div class="message">
+
+</div>
+
+<div class="table-container">
+    <table class="table table-striped tbl-client-info">
+        <tr>
+            <td>Client Name: </td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <td>Client Code: </td>
+            <td class="td-clientcode">@Model.ClientCode</td>
+        </tr>
+        <tr>
+            <td>Status: </td>
+            <td>
+                @if (Model.Status == 1)
+                {
+                    <text>Active</text>
+                }
+                else
+                {
+                    <text>Inactive</text>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>Contact: </td>
+            <td class="td-contact">@Model.MobileNumber</td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td class="td-email">@Model.EmailId</td>
+        </tr>
+        <tr>
+            <td>Balance: </td>
+            <td>@ViewBag.Balance</td>
+        </tr>
+        <tr>
+            <td>Rate: </td>
+            <td>@ViewBag.Rate</td>
+        </tr>
+        <tr>
+            <td>Alert Limit: </td>
+            <td class="td-alertlimit">@ViewBag.AlertLimit</td>
+        </tr>
+    </table>
+</div>
+
+<h3>Refill History</h3>
+
+<div class="refill-history-container">
+    <div>
+        <text class="pull-right">Show canceled refills</text>
+        <input type="checkbox" class="canceled-refills pull-right" />
+    </div>
+
+    <br />
+
+    <div class="refill-history table-container">
+        @{ Html.RenderAction("_RefillHistory", "Client", new { clientCode = Model.ClientCode }); }
+    </div>
+</div>
+

@@ -1,0 +1,66 @@
+﻿@model SMSGateway.Models.Clients
+
+<h3>Client Information</h3>
+
+<div class="table-container">
+    <table class="table table-striped tbl-client-info">
+        <tr>
+            <td>Client Name: </td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <td>Client Code: </td>
+            <td>@Model.ClientCode</td>
+        </tr>
+        <tr>
+            <td>Status: </td>
+            <td>
+                @if (Model.Status == 1)
+                {
+                    <text>Active</text>
+                }
+                else
+                {
+                    <text>Inactive</text>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>Contact: </td>
+            <td>@Model.MobileNumber</td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td>@Model.EmailId</td>
+        </tr>
+        <tr>
+            <td>Balance: </td>
+            <td>@ViewBag.Balance</td>
+        </tr>
+        <tr>
+            <td>Rate: </td>
+            <td>@Model.Rate</td>
+        </tr>
+        <tr>
+            <td>Alert Limit: </td>
+            <td>@ViewBag.AlertLimit</td>
+        </tr>
+    </table>
+</div>
+
+<h3>Refill History</h3>
+
+<div class="refill-history-container">
+    <div>
+        <text class="pull-right">Show canceled refills</text>
+        <input type="checkbox" class="canceled-refills pull-right" />
+    </div>
+
+    <br />
+
+    <div class="refill-history table-container">
+        @{ Html.RenderAction("_RefillHistory", "Client", new { clientCode = Model.ClientCode }); }
+    </div>
+</div>
+
+

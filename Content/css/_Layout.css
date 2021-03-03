@@ -1,0 +1,546 @@
+﻿@font-face {
+    font-family: 'OpenSans-Regular';
+    src: url('../fonts/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'fontawesome-webfont';
+    src: url('../fonts/fontawesome-webfont.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'NotoSans-Regular';
+    src: url('../fonts/NotoSans-Regular.ttf') format('truetype');
+}
+
+.modal-lg {
+    background-color: white;
+}
+
+.form-group-col {
+    margin-bottom: 10px;
+}
+
+.color-preview {
+    height: 35px;
+    border-right: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+}
+
+.datepicker {
+    margin-bottom: 10px;
+}
+
+.filters legend {
+    text-align: center;
+}
+
+body .checkbox-filter {
+    margin-left: 20px;
+}
+
+.table-container {
+    overflow-x: auto;
+    width: 100%;
+}
+
+html, body {
+    min-height: 100%;
+    height: auto;
+    margin: 0;
+    background-color: #ecf0f5;
+}
+
+
+*, h1, h2, h3, h4, h5, h6 {
+    font-family: OpenSans-Regular, NotoSans-Regular;
+    box-sizing: border-box;
+}
+
+.table-client th,
+.table-sms-purchases th,
+.table-outgoing th,
+.table-user th,
+.table-statement th {
+    background-color: #222d32;
+    color: white;
+}
+
+    .table-client th:first-child,
+    .table-client tr td:first-child,
+    .table-sms-purchases th:first-child,
+    .table-sms-purchases tr td:first-child {
+        text-align: right;
+        width: 50px;
+    }
+
+.table-client tr .td-balance,
+.table-client tr .th-balance,
+.table-client tr .th-monthly-limit,
+.table-client tr .td-monthly-limit,
+.table-client tr .th-rate,
+.table-client tr .td-rate {
+    text-align: right;
+}
+
+.table-client tr th:last-child,
+.table-client tr td:last-child,
+.table-sms-purchases tr th:last-child,
+.table-sms-purchases tr td:last-child {
+    text-align: center;
+    width: 15%;
+}
+
+.table-sms-purchases .th-record-ID,
+.table-sms-purchases .td-record-ID,
+.table-sms-purchases .th-purchase-date,
+.table-sms-purchases .td-purchase-date {
+    text-align: right;
+}
+
+.table-client tr,
+.table-sms-purchases tr,
+.table-user tr,
+.table-statement tr {
+    height: 50px;
+}
+
+.table-client img,
+.table-sms-purchases img,
+.table-user img {
+    max-width: 100%;
+    height: 20px;
+    width: auto;
+    text-align: center;
+}
+
+.table-client .th-status,
+.table-client .td-status {
+    text-align: center;
+}
+
+.table-statement .th-sn,
+.table-statement .td-sn,
+.table-statement .th-debit,
+.table-statement .td-debit,
+.table-statement .th-credit,
+.table-statement .td-credit,
+.table-statement .th-debit-amount,
+.table-statement .td-debit-amount,
+.table-statement .th-credit-amount,
+.table-statement .td-credit-amount,
+.table-statement .th-sms-balance,
+.table-statement .td-sms-balance,
+.table-statement .th-balance,
+.table-statement .td-balance {
+    text-align: right;
+}
+
+.table-statement .th-image,
+.table-statement .td-image {
+    width: 20px;
+}
+
+.table-statement .td-load-more {
+    text-align: center;
+    background-color: lightblue;
+    text-decoration: underline;
+    color: #337ab7;
+    cursor: pointer;
+}
+
+.table-statement .td-load-more:hover {
+    color: cornflowerblue;
+    font-size: 15px;
+}
+
+    .table-statement .td-image img {
+        height: 75%;
+    }
+
+.table-statement .th-trn-desc,
+.table-statement .td-trn-desc {
+    min-width: 350px;
+}
+
+.table-statement .th-date,
+.table-statement .td-date {
+    min-width: 200px;
+    max-width: 200px;
+}
+
+ul.links {
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+    ul.links li {
+        display: inline-block;
+        border-right: 1px solid black;
+        padding-right: 10px;
+        margin-left: 10px;
+        height: 24px;
+    }
+
+        ul.links li:last-child {
+            border-right: 0;
+            padding-left: 0;
+            margin-left: 10px;
+        }
+
+.modal-body,
+.modal-body .form-group {
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.default-font-weight {
+    font-weight: normal;
+}
+
+a {
+    cursor: pointer;
+}
+
+.wait {
+    display: none;
+    position: fixed;
+    top: 40%;
+    left: 45%;
+    height: 30%;
+    width: 35%;
+    z-index: 1500;
+}
+
+    .wait img {
+        max-width: 50%;
+        max-height: 50%;
+    }
+
+.transparent-background {
+    background-color: white;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 2000;
+    opacity: 0.6;
+}
+
+.display-none {
+    display: none;
+}
+
+.multiple-email-info {
+    background-color: lightgray;
+    color: gray;
+    font-size: 12px;
+}
+
+textarea {
+    resize: none;
+}
+
+.tbl-confirm-refill tr td:first-child {
+    width: 40%;
+}
+
+.refill-history-container {
+    width: 60%;
+}
+
+    .refill-history-container text {
+        margin-left: 10px;
+    }
+
+.tbl-refill-history tr td:first-child,
+.tbl-refill-history th:first-child {
+    width: 10%;
+}
+
+    .tbl-refill-history tr td:first-child + td,
+    .tbl-refill-history th:first-child + th {
+        width: 13%;
+        text-align: right;
+        padding-right: 20px;
+    }
+
+.tbl-refill-history tr td:last-child,
+.tbl-refill-history th:last-child {
+    text-align: center;
+    width: 150px;
+}
+
+.tbl-refill-history tr td:nth-last-child(3),
+.tbl-refill-history th:nth-last-child(3) {
+    width: 10%;
+}
+
+.tbl-refill-history tr td:nth-last-child(5),
+.tbl-refill-history th:nth-last-child(5) {
+    width: 18%;
+}
+
+.pagination {
+    display: flex;
+    width: 200px;
+    margin: auto;
+}
+
+    .pagination input {
+        width: 60px;
+        text-align: center;
+        border: 1px solid white;
+    }
+
+.canceled-refills {
+    cursor: pointer;
+}
+
+.table-outgoing .td-cost,
+.table-outgoing .th-cost,
+.table-outgoing .td-recipient-count,
+.table-outgoing .th-recipient-count,
+.table-outgoing .th-part,
+.table-outgoing .td-part {
+    text-align: right;
+}
+
+.table-outgoing .td-msgtext {
+    width: 40%;
+    overflow: auto;
+}
+
+.table-outgoing .td-client {
+    width: 15%;
+    overflow: auto;
+}
+
+.table-outgoing .th-date,
+.table-outgoing .td-date {
+    min-width: 100px;
+    max-width: 100px;
+}
+
+.table-sms-purchases .th-canceled-date,
+.table-sms-purchases .td-canceled-date {
+    text-align: center;
+}
+
+.table-sms-purchases .th-remarks,
+.table-sms-purchases .td-remarks {
+    width: 35%;
+    overflow: auto;
+}
+
+.chk-show-canceled-purchases-container {
+    float: right;
+    margin: 15px 0;
+}
+
+.chk-show-canceled-purchases {
+    cursor: pointer;
+}
+
+.post-text {
+    white-space: nowrap;
+    line-height: 30px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.pre-text {
+    white-space: nowrap;
+    line-height: 30px;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+.pagination-message {
+    text-align: center;
+}
+
+ul.alert-limit-index {
+    float: right;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+    ul.alert-limit-index li {
+        list-style-type: none;
+        display: inline;
+        padding-left: 10px;
+    }
+
+        ul.alert-limit-index li div {
+            display: inline-block;
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+        }
+
+            ul.alert-limit-index li div.index-red-color {
+                background-color: #dd4b39;
+            }
+
+            ul.alert-limit-index li div.index-yellow-color {
+                background-color: #f39c12;
+            }
+
+.progress-group {
+    margin-bottom: 30px;
+}
+
+.index {
+    height: 20px;
+    margin-bottom: 15px;
+}
+
+table.tbl-client-info tr td:first-child {
+    font-weight: bold;
+    width: 250px;
+}
+
+@media (min-width: 768px) {
+    .div-datetime-filter,
+    .div-recipient-filter,
+    .div-status-filter,
+    .div-client-filter {
+        position: relative;
+        width: 50%;
+        float: left;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .btn-add-client-container {
+        position: relative;
+        width: 150px;
+        float: left;
+        min-height: 1px;
+    }
+
+    .client-search {
+        position: relative;
+        width: auto;
+        float: left;
+        min-height: 1px;
+        height: 35px;
+        border: 1px solid lightgrey;       
+    }
+}
+
+@media (min-width: 1360px) {
+    .div-datetime-filter,
+    .div-recipient-filter,
+    .div-status-filter,
+    .div-client-filter {
+        position: relative;
+        width: 40%;
+        float: left;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
+@media (min-width: 1580px) {
+    .div-datetime-filter,
+    .div-recipient-filter,
+    .div-status-filter,
+    .div-client-filter {
+        position: relative;
+        width: 33.33333333%;
+        float: left;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
+@media (min-width: 1780px) {
+    .div-datetime-filter,
+    .div-recipient-filter,
+    .div-status-filter,
+    .div-client-filter {
+        position: relative;
+        width: 30%;
+        float: left;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
+@media (max-width: 767px) {
+    .div-datetime-filter,
+    .div-recipient-filter,
+    .div-status-filter,
+    .div-client-filter {
+        position: relative;
+        width: 100%;
+        float: left;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .btn-add-client-container {
+        position: relative;
+        width: 100px;
+        float: left;
+        min-height: 1px;
+    }
+
+    .client-search {
+        position: relative;
+        width: auto;
+        float: left;
+        min-height: 1px;
+        height: 35px;
+        border: 1px solid lightgrey;
+    }
+}
+
+.txt-client-search {
+    height: 100%;
+    padding: 0px 15px;
+    border: 0;
+    border-left: 1px solid lightgrey;
+    width: 300px;
+}
+
+.btn-client-search {
+    height: 100%;
+    background: transparent;
+    border: 0;
+    width: 35px;
+}
+
+.txt-client-search:focus,
+.btn-client-search:focus{
+    outline: none !important;
+}
+
+.btn-edit-client-info,
+.btn-submit-client-info{
+    margin-left: 30px;
+}
+
+.txt-client-info-contact,
+.txt-client-info-email,
+.txt-client-info-alertlimit{
+    height: 100%;
+    border: 1px solid lightgrey;
+}
+
+.view-all{
+    font-size:12px;
+    cursor: pointer;
+}
+
+.view-all label{
+    margin-left: 5px;
+    cursor: pointer;
+}

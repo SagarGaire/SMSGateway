@@ -1,0 +1,20 @@
+﻿@{ 
+    var recID = ViewBag.RecID;
+}
+
+<div class="form-horizontal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Purchase SMS</h4>
+    </div>
+    <br />
+    <div id="modal-body cancel-sms-purchase-modal-body" class="modal-body cancel-sms-purchase-modal-body">
+        @Html.HiddenFor(x => recID)
+        <b>Are you sure you want to cancel this purchase?</b>
+    </div>
+
+    <div class="modal-footer">
+        <input type="button" value="Cancel" class="btn btn-warning btnCancelSMSPurchase" />
+        <button type="button" class="btn btn-warning btnCancel" data-dismiss="modal">Dismiss</button>
+    </div>
+</div>

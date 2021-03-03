@@ -1,0 +1,214 @@
+﻿@model List<SMSGateway.Models.Clients>
+
+<script>
+    $('document').ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    })
+</script>
+
+<h2>Dashboard</h2>
+<hr />
+
+@{
+    var expectedBalance = ViewBag.ExpectedBalance;
+    var todayOutGoing = ViewBag.TodayOutGoing;
+    var totalOutgoing = ViewBag.TotalOutgoing;
+    var totalSMSPurchases = ViewBag.TotalSMSPurchases;
+    var clientBalance = ViewBag.ClientBalance;
+}
+
+<div class="col-md-4">
+    <div>
+        <!-- small box -->
+        <div class="small-box bg-green">
+            <div class="inner">
+                <h3>@expectedBalance</h3>
+
+                <p>Expected Balance</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-cash"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    <div>
+        <!-- small box -->
+        <div class="small-box bg-red">
+            <div class="inner">
+                <h3>@todayOutGoing</h3>
+
+                <p>Today Outgoing</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-card"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div>
+        <!-- small box -->
+        <div class="small-box bg-yellow">
+            <div class="inner">
+                <h3>@totalOutgoing</h3>
+
+                <p>Total Outgoing</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pricetag"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div>
+        <!-- small box -->
+        <div class="small-box bg-aqua">
+            <div class="inner">
+                <h3>@totalSMSPurchases</h3>
+
+                <p>Total SMS Purchases</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-social-usd"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div>
+        <!-- small box -->
+        <div class="small-box bg-green">
+            <div class="inner">
+                <h3>@clientBalance</h3>
+
+                <p>Client Balance</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-cash"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+</div>
+<div class="col-md-8">
+    <div class="box box-warning">
+        <div class="box-header">
+            <h3 class="box-title">Balance Limit Alert</h3>
+        </div>
+        <div class="box-body">
+            <div class="index">
+                <ul class="alert-limit-index">
+                    <li class="index-yellow">
+                        <div class="index-yellow-color"></div>
+                        <span class="index-yellow-text">Balance low</span>
+                    </li>
+                    <li class="index-red">
+                        <div class="index-red-color"></div>
+                        <span class="index-red-text">Balance below 50%</span>
+                    </li>
+                </ul>
+            </div>
+            @if (Model.Count == 0)
+            {
+                <label class="text-success">No limits reached.</label>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    if (item.Balance <= item.AlertLimit / 2)
+                    {
+                        <div class="progress-group">
+                            <span class="progress-text">@item.Name</span>
+                            <span class="progress-number"><b>Balance: @item.Balance</b></span>
+                            @{
+                                var data = (item.Balance / item.AlertLimit * 100) + "%";
+                            }
+                            <div class="progress sm" data-toggle="tooltip" title="Limit: @item.AlertLimit">
+                                <div class="progress-bar progress-bar-red" style="width: @data"></div>
+                            </div>
+                        </div>
+                                }
+                                else
+                                {
+                                    <div class="progress-group">
+                                        <span class="progress-text">@item.Name</span>
+                                        <span class="progress-number"><b>Balance: @item.Balance</b></span>
+                                        @{
+                                            var data = (item.Balance / item.AlertLimit * 100) + "%";
+                                        }
+                                        <div class="progress sm" data-toggle="tooltip" title="Limit: @item.AlertLimit">
+                                            <div class="progress-bar progress-bar-yellow" style="width: @data"></div>
+                                        </div>
+                                    </div>
+                                                    }
+                                                }
+                                            }
+        </div>
+    </div>
+    <div class="box box-warning">
+        <div class="box-header">
+            <h3 class="box-title">Client Statistics</h3>
+            <div class="box-tools pull-right">
+                <a href="@Url.Action("Statistics", "Client")" target="_blank">
+                    <i class="fa fa-plus view-all"><label>View All</label></i>
+                </a>
+            </div>
+        </div>
+        <div class="box-body">
+            <div>
+                <canvas id="barChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var coopName = @Html.Raw(Json.Encode(ViewBag.CoopName));
+    var data = @Html.Raw(Json.Encode(ViewBag.Data));
+    var color = @Html.Raw(Json.Encode(ViewBag.Color));
+
+    var ctx = $('#barChart');
+    var pie = new Chart(ctx, {
+        type: 'horizontalBar',
+        data:{
+            labels: coopName,
+            datasets:[{
+                label: 'Bar Chart',
+                data: data,
+                backgroundColor: color
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    barPercentage: 0.6,
+                    categoryPercentage: 1
+                }]
+            },
+            legend: {
+                display: false
+            },
+            //segmentShowStroke    : true,
+            ////String - The colour of each segment stroke
+            //segmentStrokeColor   : '#fff',
+            ////Number - The width of each segment stroke
+            //segmentStrokeWidth   : 2,
+            ////Number - The percentage of the chart that we cut out of the middle
+            //percentageInnerCutout: 50, // This is 0 for Pie charts
+            ////Number - Amount of animation steps
+            //animationSteps       : 100,
+            ////String - Animation easing effect
+            //animationEasing      : 'easeOutBounce',
+            ////Boolean - Whether we animate the rotation of the Doughnut
+            //animateRotate        : true,
+            ////Boolean - Whether we animate scaling the Doughnut from the centre
+            //animateScale         : false,
+            ////Boolean - whether to make the chart responsive to window resizing
+            responsive           : true,
+            //// Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+            maintainAspectRatio  : true
+        }
+    })
+</script>
+
