@@ -34,6 +34,10 @@ namespace SMSGateway.Controllers
             {
                 return RedirectToAction("_Index", "Statement");
             }
+            else if (redirectTo == " Consumer Report")
+            {
+                return RedirectToAction("_Index", "Consumer");
+            }
             else if (redirectTo == " Refill")
             {
                 return RedirectToAction("_Index", "RefillReport");

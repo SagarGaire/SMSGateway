@@ -48,6 +48,44 @@ $('.content').on('click', '.client-add', function () {
     })
 })
 
+$('body').on('click', '.client-info', function () {
+    var param = $(this).closest('tr').attr('clientCode')
+    $.ajax({
+        type: "GET",
+        url: "/Client/_InfoClient",
+        data: { id: param },
+        success: function (data) {
+            $('.modal-content-lg').html('');
+            $('.modal-content-lg').append(data);
+
+            var form = $('.modal-content-lg').find('#form');
+
+            $(form).removeData("validator");
+            $(form).removeData("unobtrusivevalidation");
+            $.validator.unobtrusive.parse(form);
+
+            $('.myModalLg').modal('show');
+        }
+    })
+})
+
+
+function btnCopyClient() {
+    $('.modal-content-lg').append('<textarea class="copytoclipboard"></textarea>');
+    var textbox = $('.copytoclipboard');
+
+    var copytext = $('.copyme').html();
+    copytext = copytext.replace(/<li>/g, '');
+    copytext = copytext.replace(/<\/\li>/g, '');
+
+    $('.copytoclipboard').val(copytext);
+    textbox.focus();
+    textbox.select();
+    document.execCommand('copy');
+
+    $('.copytoclipboard').remove();
+}
+
 $('body').on('click', '.client-edit', function () {
     var param = $(this).closest('tr').attr('clientCode')
     $.ajax({

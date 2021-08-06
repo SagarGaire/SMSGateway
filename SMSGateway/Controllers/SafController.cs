@@ -8,6 +8,7 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using SMSGateway.Hubs;
+using System.Configuration;
 
 namespace SMSGateway.Controllers
 {
@@ -53,13 +54,13 @@ namespace SMSGateway.Controllers
         {
             try
             {
-                string sender = "noreply@mbnepal.com";
-                string key = "ubH8U5rNb4";
-                string alias = "MicroBanker Nepal Pvt. Ltd.";
+                string sender = ConfigurationManager.AppSettings["SendMail"];
+                string key = ConfigurationManager.AppSettings["Password"];
+                string alias = ConfigurationManager.AppSettings["Alias"];
 
-                SmtpClient smtp = new SmtpClient("smtpout.asia.secureserver.net");
+                SmtpClient smtp = new SmtpClient(ConfigurationManager.AppSettings["SMTP"]);
                 smtp.EnableSsl = false;
-                smtp.Port = 80;
+                smtp.Port = Convert.ToInt32(ConfigurationManager.AppSettings["PORT"]);
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtp.UseDefaultCredentials = true;
                 smtp.Credentials = new NetworkCredential(sender, key);
@@ -167,14 +168,14 @@ namespace SMSGateway.Controllers
         {
             try
             {
-                
-                string sender = "noreply@mbnepal.com";
-                string password = "ubH8U5rNb4";
-                string alias = "MicroBanker Nepal Pvt. Ltd.";
 
-                SmtpClient smtp = new SmtpClient("smtpout.secureserver.net");
+                string sender = ConfigurationManager.AppSettings["SendMail"];
+                string password = ConfigurationManager.AppSettings["Password"];
+                string alias = ConfigurationManager.AppSettings["Alias"];
+
+                SmtpClient smtp = new SmtpClient(ConfigurationManager.AppSettings["SMTP"]);
                 smtp.EnableSsl = false;
-                smtp.Port = 80;
+                smtp.Port = Convert.ToInt32(ConfigurationManager.AppSettings["PORT"]);
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtp.UseDefaultCredentials = true;
                 smtp.Credentials = new NetworkCredential(sender, password);

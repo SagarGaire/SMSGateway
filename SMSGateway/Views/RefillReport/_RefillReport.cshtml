@@ -1,0 +1,101 @@
+﻿
+@model PagedList.IPagedList<SMSGateway.Models.spRefillReport_Result>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    var pageNumber = ViewBag.PageNumber;
+    var totalPages = ViewBag.PageCount;
+    DateTime? fromDate = ViewBag.FromDate;
+    DateTime? toDate = ViewBag.ToDate;
+    string client = ViewBag.Clients;
+
+}
+@{
+    var i = ViewBag.SN;
+   
+    var display = "display-none";
+    var color = "black";
+    
+}
+
+<div class="table-container tbl-refill-report">
+    <div class="cancelled-purchase-container">
+        <input type="checkbox" value="0" class="canceled-purchase-refills" />
+        <text><b>  Show canceled purchases</b></text>
+    </div>
+    <h3>Refill Report</h3>
+
+    @if (Model.Count > 0)
+    {
+        <table class="table table-striped table-refill">
+            <tr>
+                <th>SN</th>
+                <th>Client Code</th>               
+                <th>Client</th>
+                <th>Bill No</th>
+                <th>SMS Purchased</th>
+                <th>Rate</th>
+                <th>Amount</th>
+                <th>Refill Date</th>
+                <th>Refill By</th>
+                <th>Remarks</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                if (item.CancelledBy == null)
+                {
+                    display = "";
+                    color = "black";
+                }
+                else
+                {
+                    display = "display-none";
+                    color = "red";
+                }
+                <tr refillId="@item.RefillId" class="@display" style="color:@color;">
+                    <td>
+                        @i
+                        @{
+                            i = i + 1;
+                        }
+                    </td>
+                    <td>@item.ClientCode</td>
+                    <td>@item.Name</td>
+                    <td>@item.BillNo</td>
+                    <td>@Convert.ToInt32(item.RefillValue)</td>
+                    <td>@item.RefillRate</td>
+                    <td>@item.RefillAmount</td>
+                    <td>@item.RefillDate</td>
+                    <td>@item.RefillBy</td>
+                    <td>@item.Remarks</td>
+
+                </tr>
+            }
+        </table>
+                            }
+                            else
+                            {
+                                <b> There are no current records.</b>
+                            }
+</div>
+
+
+@if (Model.Count > 0)
+{
+    <div class="pagination">
+        <div class="pre-text">Page </div>
+        <button class="btn btn-warning btnPage-refill btnPrevPage"><i class="fa fa-chevron-left"></i></button>
+        <input type="text" value="@pageNumber" class="txtPageNo-refill" />
+        @Html.HiddenFor(x => totalPages)
+        <button class="btn btn-warning btnPage-refill btnNextPage"><i class="fa fa-chevron-right"></i></button>
+        <div class="post-text"> of @totalPages</div>
+    </div>
+    <div class="pagination-message-refill text-danger">
+
+    </div>
+    @Html.HiddenFor(x => fromDate)
+    @Html.HiddenFor(x => toDate)
+    @Html.HiddenFor(x => client)
+}
+
+

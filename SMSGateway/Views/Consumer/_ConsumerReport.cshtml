@@ -1,0 +1,151 @@
+﻿@model List<SMSGateway.Models.SMSClientAll>
+
+@{
+    var totalOpeningBalanceCredit = ViewBag.TotalOpeningBalanceCredit;
+    var totalOpeningBalanceAmt = ViewBag.TotalOpeningBalanceAmt;
+    var totalPurchaseCredit = ViewBag.TotalPurchaseCredit;
+    var totalPurchaseAmount = ViewBag.TotalPurchaseAmount;
+    var totalConsumedCredit = ViewBag.TotalConsumedCredit;
+    var totalConsumedAmt = ViewBag.TotalConsumedAmt;
+    var totalClosingBalanceCredit = ViewBag.TotalClosingBalanceCredit;
+    var totalClosingBalanceAmt = ViewBag.TotalClosingBalanceAmt;
+    var totalRows = ViewBag.TotalRows;
+    var selectedRows = ViewBag.SelectedRows;
+
+}
+<br />
+<hr />
+
+
+<div class="form-horizontal col-md-12">
+    <div class="form-group">
+        <div class="col-md-3 bg-red">
+            <!-- small box -->
+            <div class="small-box">
+                <div class="inner col-md-12 text-center">
+                    <h4><b>Total Opening Balance</b></h4>
+                    <div class="inner col-md-6">
+                        <h4 class="text-bold">@totalOpeningBalanceAmt</h4>
+                        <p class="text-bold">Amount</p>
+                    </div>
+                    <div class="inner col-md-6">
+                        <h4 class="text-bold">@totalOpeningBalanceCredit</h4>
+                        <p class="text-bold">Credit</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-card"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 bg-green">
+            <!-- small box -->
+            <div class="small-box">
+                <div class="inner col-md-12 text-center">
+                    <h4><b>Total Purchase</b></h4>
+                            <div class="inner col-md-6">
+                                <h4 class="text-bold">@totalPurchaseAmount</h4>
+                                <p class="text-bold">Amount</p>
+                            </div>
+                            <div class="inner col-md-6">
+                                <h4 class="text-bold">@totalPurchaseCredit</h4>
+                                <p class="text-bold">Credit</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-pricetag"></i>
+                            </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3  bg-yellow">
+            <!-- small box -->
+            <div class="small-box">
+                <div class="inner col-md-12 text-center">
+                    <h4><b>Total Consumed</b></h4>
+                    <div class="inner col-md-6">
+                        <h4 class="text-bold">@totalConsumedAmt</h4>
+                        <p class="text-bold">Amount</p>
+                    </div>
+                    <div class="inner col-md-6">
+                        <h4 class="text-bold">@totalConsumedCredit</h4>
+                        <p class="text-bold">Credit</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-social-usd"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3  bg-aqua">
+            <!-- small box -->
+            <div class="small-box">
+                <div class="inner col-md-12 text-center">
+                    <h4><b>Total Closing Balance</b></h4>
+                    <div class="inner col-md-6">
+                        <h4 class="text-bold">@totalClosingBalanceAmt</h4>
+                        <p class="text-bold">Amount</p>
+                    </div>
+                    <div class="inner col-md-6">
+                        <h4 class="text-bold">@totalClosingBalanceCredit</h4>
+                        <p class="text-bold">Credit</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-cash"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="table-container">
+    @if (Model.Count > 0)
+     {
+        <table class="table table-striped table-consumer-report">
+            <tr>
+                <th class="th-client-code">Client Code</th>
+                <th class="th-client-name">Client Name</th>
+                <th class="th-opening-balance-credit">Opening Balance(Credit)</th>
+                <th class="th-opening-balance-amt">Opening Balance(Amount)</th>
+                <th class="th-purchase-credit">Purchase(Credit)</th>
+                <th class="th-purchase-amount">Purchase(Amount)</th>
+                <th class="th-consumed-credit">Consumed(Credit)</th>
+                <th class="th-consumed-amt">Consumed(Amount)</th>
+                <th class="th-closing-balance-credit">Closing Balance(Credit)</th>
+                <th class="th-closing-balance-amt">Closing Balance(Amount)</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="td-client-code">@item.ClientCode</td>
+                    <td class="td-client-name">@item.ClientName</td>
+                    <td class="td-opening-balance-credit">@item.OpeningBalanceCredit </td>
+                    <td class="td-opening-balance-amt">@item.OpeningBalanceAmt</td>
+                    <td class="td-purchase-credit">@item.PurchaseCredit</td>
+                    <td class="td-purchase-amount">@item.PurchaseAmount</td>
+                    <td class="td-consumed-credit">@item.ConsumedCredit</td>
+                    <td class="td-consumed-amt">@item.ConsumedAmt</td>
+                    <td class="td-closing-balance-credit">@item.ClosingBalanceCredit </td>
+                    <td class="td-closing-balance-amt">@item.ClosingBalanceAmt</td>
+                </tr>
+             }
+            @if (totalRows > selectedRows)
+                {
+                <tr>
+                    <td class="td-load-more" colspan="10">Load More</td>
+                </tr>
+                }
+        </table>
+     }
+
+    else
+    {
+        <b>No records could be found</b>
+    }
+</div>
+

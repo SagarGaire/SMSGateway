@@ -1,0 +1,31 @@
+﻿@model SMSGateway.Models.Clients
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Client Information</h4>
+</div>
+
+<div class="info-container modal-body">
+    <div class="col-md-6">
+        <div class="form-group-col">
+            <ul class="copyme" style="list-style-type: none;">
+                <li>Client Code: @ViewBag.Code</li>
+                <li>Client Name: @ViewBag.Name</li>
+                <li>PassKey: @ViewBag.Password</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" onclick="btnCopyClient()">Copy</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Exit</button>
+    </div>
+</div>
+
+<script>
+    $('.colorpicker').colorpicker({
+
+    })
+</script>

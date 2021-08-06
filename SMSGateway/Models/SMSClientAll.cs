@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace SMSGateway.Models
 {
-    public class ReportSMSClientConsumptionAll
+    public class SMSClientAll
     {
+		public DateTime FromDate { get; set; }
+
+		public DateTime ToDate { get; set; }
+		public string ClientType { get; set; }
 		public string ClientCode { get; set; }
 		public string ClientName { get; set; }
 		public decimal OpeningBalanceCredit { get; set; }
@@ -22,7 +27,7 @@ namespace SMSGateway.Models
 		public Nullable<decimal> TotalOpeningBalanceCredit { get; set; }
 		public Nullable<decimal> TotalOpeningBalanceAmt { get; set; }
 		public Nullable<decimal> TotalPurchaseCredit { get; set; }
-		public Nullable<decimal> TotalPurchaseAmt { get; set; }
+		public Nullable<decimal> TotalPurchaseAmount { get; set; }
 		public Nullable<decimal> TotalConsumedCredit { get; set; }
 		public Nullable<decimal> TotalConsumedAmt { get; set; }
 		public Nullable<decimal> TotalClosingBalanceCredit { get; set; }

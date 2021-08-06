@@ -39,6 +39,7 @@ namespace SMSGateway.Controllers
             }
 
             SqlCommand command = new SqlCommand("spReportOutgoingSMS", connection);
+            command.CommandTimeout = 600;
             connection.Open();
 
             command.CommandType = CommandType.StoredProcedure;
@@ -49,7 +50,7 @@ namespace SMSGateway.Controllers
             command.Parameters.AddWithValue("@ToDate", toDate);
             command.Parameters.AddWithValue("@PageNo", pageNumber);
 
-            command.CommandText = "spReportOutgoingSMS"; //store procedure name
+            command.CommandText = "spReportOutgoingSMS"; //stored procedure name
 
             command.Parameters.Add("@PageCount", SqlDbType.Int);
             command.Parameters["@PageCount"].Direction = ParameterDirection.Output;

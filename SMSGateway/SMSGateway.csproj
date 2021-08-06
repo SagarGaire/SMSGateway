@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -224,7 +224,7 @@
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ClientPortalController.cs" />
-    <Compile Include="Controllers\ConsumerAllController.cs" />
+    <Compile Include="Controllers\ConsumerController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -289,7 +289,7 @@
     </Compile>
     <Compile Include="Models\Refill_Report.cs" />
     <Compile Include="Models\ReportOutgoingSMS.cs" />
-    <Compile Include="Models\ReportSMSClientConsumptionAll.cs" />
+    <Compile Include="Models\SMSClientAll.cs" />
     <Compile Include="Models\Report_OutgoingSMS.cs" />
     <Compile Include="Models\Saf.cs">
       <DependentUpon>SMSGateway.tt</DependentUpon>
@@ -2106,6 +2106,7 @@
     <Content Include="Images\edit-icon.png" />
     <Content Include="Images\inactive.jpg" />
     <Content Include="Images\approve.png" />
+    <Content Include="Images\info.png" />
     <Content Include="Images\pending.png" />
     <Content Include="Images\refill-icon.png" />
     <Content Include="loader\ajax-loader.gif" />
@@ -2392,8 +2393,10 @@
     <Content Include="Models\SMSGateway.edmx.diagram">
       <DependentUpon>SMSGateway.edmx</DependentUpon>
     </Content>
+    <None Include="bundleconfig.json" />
     <None Include="Properties\PublishProfiles\SMSGateway.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Consumer.js" />
     <Content Include="Scripts\Dashboard.js" />
     <Content Include="Scripts\HubFunctions.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -2408,6 +2411,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\OutgoingSMS.js" />
     <Content Include="Scripts\RefillReport.js" />
+    <Content Include="Scripts\RefillReport.min.js">
+      <DependentUpon>RefillReport.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Saf.js" />
@@ -2489,10 +2495,13 @@
     <Content Include="Views\Statement\_Index.cshtml" />
     <Content Include="Views\Statement\_GenerateStatement.cshtml" />
     <Content Include="Views\Client\Statistics.cshtml" />
+    <Content Include="Views\Consumer\_Index.cshtml" />
+    <Content Include="Views\Consumer\_ConsumerReport.cshtml" />
     <Content Include="Views\RefillReport\_Index.cshtml" />
-    <Content Include="Views\RefillReport\_RefillReport.cshtml" />
-    <Content Include="Views\OutgoingSMS\_NoRecords.cshtml" />
     <Content Include="Views\RefillReport\_NoRecords.cshtml" />
+    <Content Include="Views\RefillReport\_RefillReport.cshtml" />
+    <Content Include="Views\Client\_InfoClient.cshtml" />
+    <Content Include="Views\OutgoingSMS\_NoRecords.cshtml" />
     <Content Include="Views\Client\_PendingApproval.cshtml" />
     <Content Include="Views\Saf\AddApprovedUser.cshtml" />
     <Content Include="Views\Supplier\_SupplierList.cshtml" />
@@ -2500,7 +2509,6 @@
     <Content Include="Views\Supplier\_ConfirmRemove.cshtml" />
     <Content Include="Views\Supplier\_EditSupplier.cshtml" />
     <Content Include="Views\Dashboard\_ExpectedBalance.cshtml" />
-    <Content Include="Views\ConsumerAll\_consumerAll.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2545,8 +2553,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

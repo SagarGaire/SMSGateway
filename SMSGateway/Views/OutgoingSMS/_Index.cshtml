@@ -132,7 +132,5 @@
 </div>
 }
 <div class="outgoing-sms-list">
-    @{ Html.RenderAction("_OutgoingSMSList", "OutgoingSMS", new { @client = code == "User" ? "": System.Configuration.ConfigurationManager.AppSettings["ClientCode"].ToString() }); }
+    @*@{ Html.RenderAction("_OutgoingSMSList", "OutgoingSMS", new { @client = code == "User" ? "" : System.Configuration.ConfigurationManager.AppSettings["ClientCode"].ToString() }); }*@
 </div>
-
-

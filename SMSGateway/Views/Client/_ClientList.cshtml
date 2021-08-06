@@ -68,6 +68,12 @@
                             {
                                 if (session == "1" || session == "2")
                                 {
+                                    <li class="client-info" style="cursor: pointer" data-toggle="tooltip" data-placement="bottom" title="Info">
+                                        <img alt="Info" src="@Url.Content("~/Images/info.png")">
+                                    </li>
+                                }
+                                if (session == "1" || session == "2")
+                                {
                                     <li class="client-edit" style="cursor: pointer" data-toggle="tooltip" data-placement="bottom" title="Edit">
                                         <img alt="Edit" src="@Url.Content("~/Images/edit-icon.png")">
                                     </li>
@@ -82,12 +88,12 @@
                                     </li>
                                 }
 
-                            }                         
+                            }
                         </ul>
                     </td>
                 </tr>
-                                }
-                            }
+            }
+        }
 
     </table>
 </div>

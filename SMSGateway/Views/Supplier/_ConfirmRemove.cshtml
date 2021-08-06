@@ -1,0 +1,21 @@
+﻿@{ var Supplierid = ViewBag.Supplierid; }
+
+@Html.HiddenFor(x => Supplierid)
+
+<div class="form-horizontal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Remove Supplier</h4>
+    </div>
+    <br />
+    <div id="modal-body remove-supplier-modal-body" class="modal-body remove-supplier-modal-body">
+        @Html.Label("Are you sure you want to remove this supplier from the directory?")
+    </div>
+
+    <div class="modal-footer">
+        <input type="button" value="Remove" class="btn btn-warning confirm-remove-supplier" />
+        <button type="button" class="btn btn-warning btnCancel" data-dismiss="modal">Cancel</button>
+    </div>
+</div>
+
+
