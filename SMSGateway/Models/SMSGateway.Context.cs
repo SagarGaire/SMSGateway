@@ -14,7 +14,10 @@ namespace SMSGateway.Models
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    
+    using System.Collections.Generic;
+    using System.Data.SqlClient;
+    using System.Data;
+
     public partial class SMSGateway_DevEntities : DbContext
     {
         public SMSGateway_DevEntities()
@@ -37,16 +40,10 @@ namespace SMSGateway.Models
         public virtual DbSet<StatusCodes> StatusCodes { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }
         public virtual DbSet<AlertLogs> AlertLogs { get; set; }
-        public virtual DbSet<BakRefills> BakRefills { get; set; }
         public virtual DbSet<ErrorLog> ErrorLog { get; set; }
-        public virtual DbSet<June13Balance> June13Balance { get; set; }
         public virtual DbSet<OutgoingSMS> OutgoingSMS { get; set; }
-        public virtual DbSet<OutgoingSMSBak> OutgoingSMSBak { get; set; }
-        public virtual DbSet<OutGoingSMSTuesday> OutGoingSMSTuesday { get; set; }
         public virtual DbSet<PeriodicOpLog> PeriodicOpLog { get; set; }
         public virtual DbSet<SparrowLog> SparrowLog { get; set; }
-        public virtual DbSet<tempBalance> tempBalance { get; set; }
-        public virtual DbSet<UniqueLog> UniqueLog { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<vwClients> vwClients { get; set; }
         public virtual DbSet<vwClientStatics> vwClientStatics { get; set; }
@@ -245,7 +242,7 @@ namespace SMSGateway.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spUpdateSMSStatus", regIdParameter, statusCodeParameter);
         }
     
-        public virtual int spSMSClientConsumptionAll(Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, string clientCode, string clientType, ObjectParameter openingBalanceCredit, ObjectParameter openingBalanceAmt, ObjectParameter purchaseCredit, ObjectParameter purchaseAmt, ObjectParameter consumedCredit, ObjectParameter consumedAmt, ObjectParameter closingBalanceCredit, ObjectParameter closingBalanceAmt)
+        public virtual int spSMSClientConsumptionAll(Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, string clientCode, string clientType, ObjectParameter totalOpeningBalanceCredit, ObjectParameter totalOpeningBalanceAmt, ObjectParameter totalPurchaseCredit, ObjectParameter totalPurchaseAmt, ObjectParameter totalConsumedCredit, ObjectParameter totalConsumedAmt, ObjectParameter totalClosingBalanceCredit, ObjectParameter totalClosingBalanceAmt)
         {
             var fromDateParameter = fromDate.HasValue ?
                 new ObjectParameter("FromDate", fromDate) :
@@ -263,7 +260,54 @@ namespace SMSGateway.Models
                 new ObjectParameter("ClientType", clientType) :
                 new ObjectParameter("ClientType", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spSMSClientConsumptionAll", fromDateParameter, toDateParameter, clientCodeParameter, clientTypeParameter, openingBalanceCredit, openingBalanceAmt, purchaseCredit, purchaseAmt, consumedCredit, consumedAmt, closingBalanceCredit, closingBalanceAmt);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spSMSClientConsumptionAll", fromDateParameter, toDateParameter, clientCodeParameter, clientTypeParameter, totalOpeningBalanceCredit, totalOpeningBalanceAmt, totalPurchaseCredit, totalPurchaseAmt, totalConsumedCredit, totalConsumedAmt, totalClosingBalanceCredit, totalClosingBalanceAmt);
+        }
+    
+        public virtual ObjectResult<spSMSPurchaseReport_Result>spSMSPurchaseReport(Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> supplierId, SqlParameter totalQuantity, SqlParameter totalAmount)
+        {
+            //var fromDateParameter = fromDate.HasValue ?
+            //    new SqlParameter("FromDate", fromDate) :
+            //    new SqlParameter("FromDate", typeof(System.DateTime));
+
+            //var toDateParameter = toDate.HasValue ?
+            //    new SqlParameter("ToDate", toDate) :
+            //    new SqlParameter("ToDate", typeof(System.DateTime));
+
+            //var supplierIdParameter = supplierId.HasValue ?
+            //    new SqlParameter("SupplierId", supplierId) :
+            //    new SqlParameter("SupplierId", typeof(int));
+
+            //return ((IObjectContextAdapter)this).ObjectContext.ExecuteStoreQuery<spSMSPurchaseReport_Result>("declare @TotalQuantity Integer declare @TotalAmount Numeric(18, 2) exec spSMSPurchaseReport @FromDate, @ToDate, @SupplierId, @TotalQuantity Output, @TotalAmount Output", fromDateParameter, toDateParameter, supplierIdParameter); 
+
+            SqlParameter fromDateParameter = new SqlParameter("@FromDate", fromDate); ;
+            SqlParameter toDateParameter = new SqlParameter("@ToDate", toDate);
+            SqlParameter supplierIdParameter = new SqlParameter("@SupplierId", supplierId);
+
+            var totalQuantityParameter = new SqlParameter
+            {
+                ParameterName = "@TotalQuantity",
+                SqlDbType=SqlDbType.Int,
+                Direction = ParameterDirection.Output
+            };
+
+            var totalAmountParameter = new SqlParameter
+            {
+                ParameterName = "@TotalAmount",
+                SqlDbType=SqlDbType.Decimal,
+                Direction = ParameterDirection.Output
+            };
+
+
+            var sql = "spSMSPurchaseReport @FromDate, @ToDate, @SupplierId, @TotalQuantity out, @TotalAmount out";
+
+            ObjectResult<spSMSPurchaseReport_Result> spSMSPurchaseReport_Result = ((IObjectContextAdapter)this).ObjectContext.ExecuteStoreQuery<spSMSPurchaseReport_Result>(sql, fromDateParameter, toDateParameter, supplierIdParameter, totalQuantityParameter, totalAmountParameter);
+            //totalQuantity = (int) totalQuantityParameter.Value;
+            //totalAmount = (double)totalAmountParameter.Value;
+            return spSMSPurchaseReport_Result;
+            //return ((IObjectContextAdapter)this).ObjectContext.ExecuteStoreQuery<spSMSPurchaseReport_Result>("spSMSPurchaseReport @FromDate, @ToDate, @SupplierId, @TotalQuantity out, @TotalAmount out", fromDateParameter, toDateParameter, supplierIdParameter, totalQuantityParameter, totalAmountParameter);
+
+
+
         }
     }
 }

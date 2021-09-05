@@ -50,10 +50,14 @@ namespace SMSGateway.Controllers
             {
                 return RedirectToAction("_SupplierList", "Supplier");
             }
-            else
+            else if (redirectTo == " Clients")
             {
                 return RedirectToAction("_Index", "Client");
-            }           
+            }
+            else
+            {
+                return RedirectToAction("_Index", "SMSPurchaseReport");
+            }          
         }
     }
 }

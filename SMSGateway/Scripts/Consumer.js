@@ -4,7 +4,6 @@
     var client = $('body').find('.client-list').val();
     var type = $('body').find('.clientType').val();
 
-
     if (fromDate != null || toDate != null || client != null || type != null) {
         $.ajax({
             type: "GET",

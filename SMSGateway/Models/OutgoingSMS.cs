@@ -26,6 +26,9 @@ namespace SMSGateway.Models
         public string RequestIp { get; set; }
         public string RegId { get; set; }
         public Nullable<int> CreditsUsed { get; set; }
+        public Nullable<decimal> Rate { get; set; }
+        public Nullable<decimal> Balance { get; set; }
+        public Nullable<int> SupplierId { get; set; }
     
         public virtual Clients Clients { get; set; }
         public virtual StatusCodes StatusCodes { get; set; }

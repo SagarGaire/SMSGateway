@@ -43,14 +43,14 @@
                             Client Type
                         </legend>
 
-                        <div class="col-md-8 clientType">
+                        <div class="col-md-8">
                             @Html.DropDownListFor(x => x.ClientType, new List<SelectListItem>
                                 {
                                     new SelectListItem{Text="All", Value="A"},
                                     new SelectListItem{Text="Clients", Value="C"},
                                     new SelectListItem{Text="Non-Clients", Value ="N" }
                                 }
-                                , new { @class = "form-control" })
+                                , new { @class = "form-control clientType" })
                         </div>
 
                     </fieldset>

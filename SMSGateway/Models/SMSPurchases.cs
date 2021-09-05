@@ -17,7 +17,7 @@ namespace SMSGateway.Models
         public int Recid { get; set; }
         public Nullable<System.DateTime> PurchaseDate { get; set; }
         public int Quantity { get; set; }
-        public decimal Rate { get; set; }
+        public Nullable<decimal> Rate { get; set; }
         public string Remarks { get; set; }
         public string EntryBy { get; set; }
         public System.DateTime EntryDate { get; set; }

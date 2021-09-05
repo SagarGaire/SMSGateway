@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a3da8df6eb374a148123a1f3f00e2aff" Name="Diagram1">
+      <Diagram DiagramId="a3da8df6eb374a148123a1f3f00e2aff" Name="Diagram1" ZoomLevel="52">
         <EntityTypeShape EntityType="SMSGateway_DevModel.AccessLogs" Width="1.5" PointX="8" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SMSGateway_DevModel.Clients" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SMSGateway_DevModel.IncomingSMS" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
@@ -15,16 +15,10 @@
         <EntityTypeShape EntityType="SMSGateway_DevModel.StatusCodes" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SMSGateway_DevModel.Suppliers" Width="1.5" PointX="2.75" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SMSGateway_DevModel.AlertLogs" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMSGateway_DevModel.BakRefills" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SMSGateway_DevModel.ErrorLog" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMSGateway_DevModel.June13Balance" Width="1.5" PointX="11.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SMSGateway_DevModel.OutgoingSMS" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMSGateway_DevModel.OutgoingSMSBak" Width="1.5" PointX="11.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMSGateway_DevModel.OutGoingSMSTuesday" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SMSGateway_DevModel.PeriodicOpLog" Width="1.5" PointX="2.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMSGateway_DevModel.SparrowLog" Width="1.5" PointX="4.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMSGateway_DevModel.tempBalance" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMSGateway_DevModel.UniqueLog" Width="1.5" PointX="6.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMSGateway_DevModel.SparrowLog" Width="1.5" PointX="10.375" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SMSGateway_DevModel.Users" Width="1.5" PointX="8.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SMSGateway_DevModel.vwClients" Width="1.5" PointX="13.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SMSGateway_DevModel.vwClientStatics" Width="1.5" PointX="13.75" PointY="13.75" IsExpanded="true" />
@@ -34,6 +28,7 @@
         <AssociationConnector Association="SMSGateway_DevModel.Fk_Refills_RefillBy_Saf_Username" ManuallyRouted="false" />
         <AssociationConnector Association="SMSGateway_DevModel.FK_SMSPurchases_Suppliers" ManuallyRouted="false" />
         <AssociationConnector Association="SMSGateway_DevModel.Fk_OutgoingSMS_StatusCodes_Status" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SMSGateway_DevModel.BalanceConsumptions" Width="1.5" PointX="0.75" PointY="15.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -28,5 +28,6 @@ namespace SMSGateway.Models
         public Nullable<int> CreditsUsed { get; set; }
         public Nullable<decimal> Rate { get; set; }
         public Nullable<decimal> Balance { get; set; }
+        public Nullable<int> SupplierId { get; set; }
     }
 }
