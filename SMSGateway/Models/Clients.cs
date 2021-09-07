@@ -22,7 +22,6 @@ namespace SMSGateway.Models
         }
     
         public string ClientCode { get; set; }
-        [Required]
         public string PassKey { get; set; }
         public string Name { get; set; }
         public int Status { get; set; }
