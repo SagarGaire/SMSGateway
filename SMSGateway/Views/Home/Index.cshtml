@@ -4,12 +4,15 @@
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-<div class="login-box">
-    <div class="login-logo">
+<div class="login-box" style="width: 25vw; margin: auto; padding-top: 10vw; padding-bottom: 1vw;">
+    @*<div class="login-logo">
         <b>SMS </b>Gateway Dashboard
-    </div>
+    </div>*@
     <!-- /.login-logo -->
     <div class="login-box-body">
+        <div class="sms-connect-logo">
+            <img  style="width: 100%; height: auto; padding-left: 1vw; padding-right: 1vw;" src="~/Images/SMSConnect.png"/>
+        </div>
         <p class="login-box-msg">Log in to start your session</p>
 
         @using (Html.BeginForm())
@@ -47,3 +50,4 @@
     </div>
     <!-- /.login-box-body -->
 </div>
+<p style="color:black; font-weight:600; text-align: center;">A product of <a href="https://mbnepal.com/" base target="_blank">MicroBanker Nepal Pvt. Ltd.</a></p>

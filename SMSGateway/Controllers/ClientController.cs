@@ -62,7 +62,7 @@ namespace SMSGateway.Controllers
             return PartialView();
         }
         public ActionResult _EditClient(string id)
-        {
+        {  
             var model = (from m in db.Clients.Where(x => x.ClientCode == id) select m).Single();
             var saf = db.Saf.Where(x => x.Username == model.ClientCode).SingleOrDefault();
             if (saf != null)

@@ -427,40 +427,38 @@ table.tbl-client-info tr td:first-child {
 
     /*SMS Purchase Report CSS start*/
     .div-supplier-filter {
-        position: relative;
-        width: 100%;
-        float: left;
+        /*position: relative;*/
+        /*//width: 100% !important;*/
+        /*float: left;
         min-height: 1px;
         padding-right: 15px;
-        padding-left: 1px;
+        padding-left: 1px;*/
     }
 
     .div-supplier-filter .sms-purchase-report-dropdown button{
     }
 
     .div-datetime-sms-pr-filter {
-        position: relative;
-        width: 50%;
-        float: left;
+        /*position: relative;*/
+       /* width: 50% !important;*/
+        /*float: left;
         min-height: 1px;
         padding-right: 15px;
-        padding-left: 1px;
+        padding-left: 1px;*/
     }
-    .div-datetime-sms-pr-filter .sms-purchase-report-to{
+/*    .div-datetime-sms-pr-filter .sms-purchase-report-to{
         text-align: center;
-    }
+    }*/
 
-    .div-datetime-sms-pr-filter .sms-purchase-report-fromDate {
+/*    .div-datetime-sms-pr-filter .sms-purchase-report-fromDate {
         width: 8.25vw;
-        text-align: center;
-    }
+    }*/
 
-    .div-datetime-sms-pr-filter .sms-purchase-report-toDate {
-        width: 8.25vw;
-        text-align: center;
-    }
+/*    .div-datetime-sms-pr-filter .sms-purchase-report-toDate {
+        width: 8.25vw !important;
+    }*/
     .sms-purchase-report-dropdown ul {
-        width: 275px;
+        width: 250px;
     }
     /*SMS Purchase Report CSS finish*/
 

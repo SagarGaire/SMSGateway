@@ -29,6 +29,9 @@ namespace SMSGateway.Controllers
             s_list.Add(new SelectListItem { Text = "Sparrow NCBL", Value = "2" });
             ViewBag.Supplier = s_list;
             ViewBag.Code = (string)Session["code"];
+            var todayDate = DateTime.Now;
+            //var date = string.Format("{yyyy-mm-dd}", todayDate);
+            ViewBag.DefaultDate = todayDate;
             return PartialView();
         }
 

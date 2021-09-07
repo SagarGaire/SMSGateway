@@ -2109,6 +2109,7 @@
     <Content Include="Images\info.png" />
     <Content Include="Images\pending.png" />
     <Content Include="Images\refill-icon.png" />
+    <Content Include="Images\SMSConnect.png" />
     <Content Include="loader\ajax-loader.gif" />
     <Content Include="Models\SMSGateway.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

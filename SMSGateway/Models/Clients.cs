@@ -11,6 +11,7 @@ namespace SMSGateway.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Clients
     {
@@ -21,18 +22,22 @@ namespace SMSGateway.Models
         }
     
         public string ClientCode { get; set; }
+        [Required]
         public string PassKey { get; set; }
         public string Name { get; set; }
         public int Status { get; set; }
         public decimal Balance { get; set; }
         public string EmailId { get; set; }
+        [Required]
         public string MobileNumber { get; set; }
+        [Required]
         public Nullable<decimal> Rate { get; set; }
         public bool SMSNotification { get; set; }
         public bool EmailNotification { get; set; }
         public bool PostBilling { get; set; }
         public int MonthlyLimit { get; set; }
         public Nullable<System.DateTime> NotifiedAt { get; set; }
+        [Required]
         public Nullable<decimal> AlertLimit { get; set; }
         public string ColorVal { get; set; }
         public Nullable<long> TotalCreditsUsed { get; set; }
