@@ -3,16 +3,19 @@
 }
 <h2>Clients</h2>
 
-@if (session == "1" || session =="2")
+@if (session == "1" || session == "2")
+
 {
     <div class="btn-add-client-container">
         <input type="button" class="btn btn-warning client-add" value="Add Client" style="margin-bottom: 15px;" />
     </div>
 }
+
 <div class="client-search">
     <input type="text" class="txt-client-search" placeholder="Search..." />
     <button class="btn-client-search"><i class="glyphicon glyphicon-search"></i></button>
 </div>
+
 
 
 <div class="div-client-list-container">

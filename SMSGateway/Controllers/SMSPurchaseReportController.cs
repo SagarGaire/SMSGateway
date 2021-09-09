@@ -29,9 +29,6 @@ namespace SMSGateway.Controllers
             s_list.Add(new SelectListItem { Text = "Sparrow NCBL", Value = "2" });
             ViewBag.Supplier = s_list;
             ViewBag.Code = (string)Session["code"];
-            var todayDate = DateTime.Now;
-            //var date = string.Format("{yyyy-mm-dd}", todayDate);
-            ViewBag.DefaultDate = todayDate;
             return PartialView();
         }
 
@@ -56,6 +53,7 @@ namespace SMSGateway.Controllers
 
             ViewBag.TotalQuantity = tq;
             ViewBag.TotalAmount = ta;
+
             return PartialView(model);
         }
 
@@ -75,27 +73,36 @@ namespace SMSGateway.Controllers
             var totalAmount = new SqlParameter { ParameterName = "@TotalAmount", SqlDbType = SqlDbType.Decimal, Direction = ParameterDirection.Output };
             var model = db.spSMSPurchaseReport(formSMSPurchase.FromDate, formSMSPurchase.ToDate, Convert.ToInt32(supplierfilter), totalQuantity, totalAmount).ToList();
 
-            GridView gv = new GridView() { AutoGenerateColumns = true };
+            if (model.Count == 0)
+            {
+                return PartialView("_NoRecords");
 
-            gv.DataSource = model;
+            }
+            else
+            {
+                GridView gv = new GridView() { AutoGenerateColumns = true };
 
-            gv.DataBind();
+                gv.DataSource = model;
 
-            Response.ClearContent();
-            Response.Buffer = true;
-            Response.AddHeader("content-disposition", "attachment; filename=SMSPurchase_Report.xls");
-            Response.ContentType = "application/ms-excel";
+                gv.DataBind();
 
-            Response.Charset = "";
-            StringWriter swriter = new StringWriter();
-            HtmlTextWriter htwriter = new HtmlTextWriter(swriter);
+                Response.ClearContent();
+                Response.Buffer = true;
+                Response.AddHeader("content-disposition", "attachment; filename=SMSPurchase_Report.xls");
+                Response.ContentType = "application/ms-excel";
 
-            gv.RenderControl(htwriter);
+                Response.Charset = "";
+                StringWriter swriter = new StringWriter();
+                HtmlTextWriter htwriter = new HtmlTextWriter(swriter);
 
-            Response.Output.Write(swriter.ToString());
-            Response.Flush();
-            Response.End();
-            return View();
+                gv.RenderControl(htwriter);
+
+                Response.Output.Write(swriter.ToString());
+                Response.Flush();
+                Response.End();
+
+                return View();
+            }
         }
     }
 }

@@ -306,7 +306,7 @@ $('body').on('click', '.btnConfirmRefill', function () {
             $('body').find('.btnCancelRefill').hide()
             $('body').find('.btnCancel').show()
 
-            triggerClick();
+            //triggerClick();
         }
     })
 })

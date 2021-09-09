@@ -97,7 +97,6 @@ namespace SMSGateway.Controllers
                 Response.Flush();
                 Response.End();
 
-
                 return View();
             }
         }

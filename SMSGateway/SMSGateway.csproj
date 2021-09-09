@@ -2411,6 +2411,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\OutgoingSMS.js" />
+    <Content Include="Scripts\PreviousPage.js" />
     <Content Include="Scripts\RefillReport.js" />
     <Content Include="Scripts\RefillReport.min.js">
       <DependentUpon>RefillReport.js</DependentUpon>
@@ -2513,6 +2514,7 @@
     <Content Include="Views\Dashboard\_ExpectedBalance.cshtml" />
     <Content Include="Views\SMSPurchaseReport\_Index.cshtml" />
     <Content Include="Views\SMSPurchaseReport\_SMSPurchaseReport.cshtml" />
+    <Content Include="Views\SMSPurchaseReport\_NoRecords.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

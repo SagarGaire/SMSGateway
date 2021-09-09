@@ -6,6 +6,7 @@
     var totalPages = Model.PageCount;
     var session = ViewBag.Session;
     var currentPage = Model.PageNumber;
+    TempData["cp"] = currentPage;
 }
 
 @Html.HiddenFor(x => currentPage)

@@ -2,6 +2,26 @@
 
 <h3>Client Information</h3>
 
+
+@*For Back Button*@
+@{
+    var currentPage = TempData["cp"];
+}
+@Html.HiddenFor(x => currentPage)
+@*End*@
+
+
+<div class="clients-previous-list">
+    <button class="btn btn-clients-previous-list fa fa-arrow-left" value="" style="margin-bottom: 20px;
+        margin-top: -50px;
+        border-radius: 5%;
+        padding: 10px 20px 10px 20px;
+        background-color: #222E32;
+        border: none;
+        float: right;
+        color: #fff;" />
+</div>
+
 <div class="table-container">
     <table class="table table-striped tbl-client-info">
         <tr>

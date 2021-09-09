@@ -39,6 +39,11 @@ namespace SMSGateway.Controllers
             return PartialView(model.ToPagedList(pageNumber, pageSize));
         }
 
+        //public ActionResult BackToClientList(string search, int page)
+        //{
+        //    return View();
+        //}
+
         public ActionResult _AddClient()
         {
             ViewBag.creator = (string)Session["Username"];
@@ -152,7 +157,7 @@ namespace SMSGateway.Controllers
         }
         public ActionResult _ClientInfo(string clientCode)
         {
-            var model = db.vwClients.Where(x => x.ClientCode == clientCode).Single();
+            var model = db.vwClients.Where(x => x.ClientCode == clientCode).Single();            
             ViewBag.Balance = model.Balance.ToString("0");
             if (model.AlertLimit.HasValue)
             {
