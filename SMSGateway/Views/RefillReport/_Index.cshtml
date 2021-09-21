@@ -1,35 +1,18 @@
 ﻿@model SMSGateway.Models.spRefillReport_Result
-  
-@{   
+
+@{
     string code = ViewBag.Code;
 }
 <script>
-        $('.datepicker').datepicker({
-            orientation: 'bottom',
-            autoclose: true,
-        })
-
-        //$('.datepicker').datepicker("setDate", new Date())
-
-        //$('.fromTime').timepicker({
-        //    minuteStep: 1,
-        //    showSeconds: true,
-        //    defaultTime: "12:00:00 AM"
-        //})
-
-        //$('.toTime').timepicker({
-        //    minuteStep: 1,
-        //    showSeconds: true,
-        //    defaultTime: "11:59:59 PM"
-        //})
-
-
-
-        $('.clientList').multiselect({
-            includeSelectAllOption: true,
-            enableCaseInsensitiveFiltering: true,
-            enableFiltering: true
-        })
+    $('.datepicker').datepicker({
+        orientation: 'bottom',
+        autoclose: true,
+    })
+    $('.clientList').multiselect({
+        includeSelectAllOption: true,
+        enableCaseInsensitiveFiltering: true,
+        enableFiltering: true
+    })
 </script>
 
 <h2>Refill Report</h2>
@@ -37,81 +20,71 @@
 
 @using (Html.BeginForm("ExportToExcel", "RefillReport", FormMethod.Post))
 {
-    <div class="form-group activate-filters">
+    @*<div class="row form-group activate-filters col-md-12">
         <label>Filter by: </label>
         <br />
-        <div class="col-sm-3">
-            <input type="checkbox" class="checkbox-filter-refill datetime-filter" value="div-datetime-filter" />
-            <text>Date/Time</text>
-        </div>
-        <div class="col-sm-3">
+        <div class="form-group col-sm-3">
             @if (code == "User")
             {
                 <input type="checkbox" class="checkbox-filter-refill client-filter" value="div-client-filter" />
                 <text>Client Name</text>
             }
         </div>
-    </div>
-    <br />
-    <div class="form-horizontal filters">
-        <div class="form-group">
-            <div class="div-datetime-filter display-none">
-                <fieldset>
-                    <legend class="form-group col-md-12">
-                        Date/Time
-                    </legend>
-                    <div class="form-group col-md-12">
-                        @Html.Label("From: ", htmlAttributes: new { @class = "control-label" })<br />
-                        <div class="col-md-12">
-                            <input type="text" name="FromDate" class="form-control datepicker fromDate" placeholder="Date" />
-                        </div>
-                        @*<div class="col-md-12 bootstrap-timepicker">
-                            <input type="text" class="form-control fromTime" placeholder="Time" />
-                        </div>*@
-                    </div>
-                    <div class="form-group col-md-12">
-                        @Html.Label("To: ", htmlAttributes: new { @class = "control-label" })<br />
-                        <div class="col-md-12">
-                            <input type="text" name="ToDate" class="form-control datepicker toDate" placeholder="Date" />
-                        </div>
-                        @*<div class="col-md-12 bootstrap-timepicker">
-                            <input type="text" class="form-control toTime" placeholder="Time" />
-                        </div>*@
-                    </div>
-                </fieldset>
-            </div>
+        <div class="form-group col-sm-3">
+            <input type="checkbox" class="checkbox-filter-refill datetime-filter" value="div-datetime-filter" />
+            <text>Date/Time</text>
+        </div>
+    </div>*@
 
-
-
+    <div class="row col-md-12">
+        <div class="form-group col-md-1">
+            @*@if (code == "User")
+            {
+                <input type="checkbox" class="checkbox-filter-refill client-filter" value="div-client-filter" />
+            }*@
+            <label>Client:</label>
+        </div>
+        <div class="form-group div-client-filter">
             @if (code == "User")
             {
-                <div class="display-none div-client-filter">
-                    <fieldset>
-                        <legend class="form-group col-md-12">
-                            Client
-                        </legend>
-                        <div class="form-group col-md-12">
-                            @Html.DropDownList("Client", null, new { @class = "form-control clientList", multiple = "multiple" })
-                        </div>
-                    </fieldset>
+                <div class="col-md-9">
+                    @Html.DropDownList("Client", null, new { @class = "form-control clientList", multiple = "multiple" })
                 </div>
             }
-            @*else
-                {
-                    @Html.HiddenFor(x => code, new { @class = "clientList" })
-                }*@
-
+            else
+            {
+                @Html.HiddenFor(x => code, new { @class = "clientList" })
+            }
         </div>
-        <div class="form-group col-md-12">
-            
-                <input type="button" class="btn btn-warning btnFilter-refill" value="Filter" />
-                <input type="submit" class="btn btn-warning btnexport-refillreport" value="Export" formtarget="_blank" />
-          
-        </div>
-
     </div>
-    <br />
+
+    <div class=" row form-group col-md-12">
+        <div class="form-group col-md-1">
+            @*<input type="checkbox" class="checkbox-filter-refill datetime-filter" value="div-datetime-filter" />*@
+            <label>Date:</label>
+        </div>
+        <div class="div-datetime-filter">
+            <div class="col-md-3" style="width: 115px;">
+                <input type="text" name="FromDate" class="form-control datepicker fromDate" placeholder="Date" />
+            </div>
+
+            <div class="col-md-1" style="right: 3px; margin: 5px 0 5px 0">
+                @Html.Label("to", htmlAttributes: new { @class = "control-label" })
+            </div>
+
+            <div class="col-md-3" style="width: 115px;">
+                <input type="text" name="ToDate" class="form-control datepicker toDate" placeholder="Date" />
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group col-md-12">
+        <input type="button" class="btn btn-warning btnFilter-refill" value="Filter" />
+        <input type="submit" class="btn btn-warning btnexport-refillreport" value="Export" formtarget="_blank" />
+    </div>
 }
-    <div class="refill-report">
-        @{ Html.RenderAction("_RefillReport", "RefillReport"); }
-    </div>
+
+<div class="refill-report">
+    @{ Html.RenderAction("_RefillReport", "RefillReport"); }
+</div>

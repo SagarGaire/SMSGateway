@@ -9,7 +9,7 @@
         autoclose: true,
     })
 
-  //  $('.datepicker').datepicker("setDate", new Date())
+    //  $('.datepicker').datepicker("setDate", new Date())
 
     //$('.fromTime').timepicker({
     //    minuteStep: 1,
@@ -41,96 +41,96 @@
 @using (Html.BeginForm("ExportToExcel", "OutgoingSMS", FormMethod.Post))
 {
 
+    @*<div class="form-group activate-filters">
+            <label>Filter by: </label>
+            @if (code == "User")
+            {
+                <input type="checkbox" class="checkbox-filter client-filter" value="div-client-filter" />
+                <text>Client Name</text>
+            }
+            <input type="checkbox" class="checkbox-filter status-filter" value="div-status-filter" />
+            <text>Status</text>
+            <input type="checkbox" class="checkbox-filter datetime-filter" value="div-datetime-filter" />
+            <text>Date/Time</text>
+            <input type="checkbox" class="checkbox-filter recipient-filter" value="div-recipient-filter" />
+            <text>Recipient</text>
+
+        </div>*@
 
 
-<div class="form-group activate-filters">
-    <label>Filter by: </label>
-    <input type="checkbox" class="checkbox-filter datetime-filter" value="div-datetime-filter" />
-    <text>Date/Time</text>
-    <input type="checkbox" class="checkbox-filter recipient-filter" value="div-recipient-filter" />
-    <text>Recipient</text>
-    <input type="checkbox" class="checkbox-filter status-filter" value="div-status-filter" />
-    <text>Status</text>
-    @if (code == "User")
-    {
-        <input type="checkbox" class="checkbox-filter client-filter" value="div-client-filter" />
-        <text>Client Name</text>
-    }
-</div>
-<div class="form-horizontal filters">
-    <div class="form-group">
-        <div class="div-datetime-filter display-none">
-            <fieldset>
-                <legend class="form-group col-md-12">
-                    Date/Time
-                </legend>
-                <div class="form-group col-md-12">
-                    @Html.Label("From: ", htmlAttributes: new { @class = "control-label" })<br />
-                    <div class="col-md-12">
-                        <input type="text" name="FromDate" class="form-control datepicker fromDate" placeholder="Date" />
-                    </div>
-                   
-                </div>
-                <div class="form-group col-md-12">
-                    @Html.Label("To: ", htmlAttributes: new { @class = "control-label" })<br />
-                    <div class="col-md-12">
-                        <input type="text" name="ToDate" class="form-control datepicker toDate" placeholder="Date" />
-                    </div>
-                   
-                </div>
-            </fieldset>
+
+    <div class="row form-group" style="width: 50%;">
+        <div class="col-md-3" style="left: 20px;">
+            @*@if (code == "User")
+            {
+                <input type="checkbox" class="checkbox-filter client-filter" value="div-client-filter" />
+            }*@
+            <label>Client:</label>
         </div>
-        <div class="display-none div-recipient-filter">
-            <fieldset>
-                <legend class="form-group col-md-12">
-                    Recipients
-                </legend>
-                <div class="form-group col-md-12">
-                    <input type="text" name="Recipients" class="form-control reciepients" />
+        <div class="col-md-9 div-client-filter">
+            @if (code == "User")
+            {
+                <div class="sms-purchase-report-dropdown">
+                    @Html.DropDownList("Clients", null, new { @class = "form-control clientList", multiple = "multiple"})
                 </div>
-                <div class="form-group col-md-12 multiple-email-info">
-                    *For multiple recipients, insert comma between each recipient
-                </div>
-            </fieldset>
+            }
         </div>
     </div>
-    <div class="form-group">
-        <div class="display-none div-status-filter">
-            <fieldset>
-                <legend class="form-group col-md-12">
-                    Status
-                </legend>
-                <div class="form-group col-md-12">
-                    @Html.DropDownList("Status", null, new { @class = "form-control statusList", multiple = "multiple" })
-                </div>
-            </fieldset>
+
+    <div class="row form-group" style="width: 50%;">
+        <div class="col-md-3" style="left: 20px;">
+            @*<input type="checkbox" class="checkbox-filter status-filter" value="div-status-filter" />*@
+            <label>Status:</label>
         </div>
-      
-        @if (code == "User")
-        {
-            <div class="display-none div-client-filter">
-                <fieldset>
-                    <legend class="form-group col-md-12">
-                        Client
-                    </legend>
-                    <div class="form-group col-md-12">
-                        @Html.DropDownList("Clients", null, new { @class = "form-control clientList", multiple = "multiple" })
-                    </div>
-                </fieldset>
-            </div>
-        }
+        <div class="col-md-9">
+            @Html.DropDownList("Status", null, new { @class = "form-control statusList", multiple = "multiple"})
+        </div>
+    </div>
+
+    <div class="row form-group" style="width: 50%;">
+        <div class="col-md-3" style="left: 20px;">
+            @*<input type="checkbox" class="checkbox-filter datetime-filter" value="div-datetime-filter" />*@
+            <label>Date:</label>
+        </div>
+        <div class="col-md-1" style="width: 140px;">
+            <input type="text" name="FromDate" class="form-control datepicker fromDate" placeholder="Date" />
+        </div>
+        <div class="col-md-1">
+            @Html.Label("to", htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-md-1" style="width: 140px;">
+            <input type="text" name="ToDate" class="form-control datepicker toDate" placeholder="Date" />
+        </div>
+    </div>
+
+    <div class="row form-group" style="width: 50%;">
+        <div class="col-md-3" style="left: 20px;">
+            @*<input type="checkbox" class="checkbox-filter recipient-filter" value="div-recipient-filter"/>*@
+            <label>Recipient:</label>
+        </div>
+        <div class="col-md-9 form-group div-recipient-filter">
+            <input type="text" name="Recipients" class="form-control reciepients"/>
+        </div>
 
     </div>
+        <div class="row">
+            <div class="multiple-email-info" style="font-size: 16px; text-align: center; width: 40%; margin: -20px 0 15px 30px;">
+            *For multiple recipients, insert comma between each recipient.
+        </div>
+    </div>
+
+
+
     <div class="form-group col-md-12">
         <span>
             <input type="button" class="btn btn-warning btnFilter" value="Filter" />
             <input type="submit" class="btn btn-warning btnexport-outgoing" value="Export" formtarget="_blank" />
-           
+
         </span>
     </div>
-
-</div>
 }
+
+
 <div class="outgoing-sms-list">
     @*@{ Html.RenderAction("_OutgoingSMSList", "OutgoingSMS", new { @client = code == "User" ? "" : System.Configuration.ConfigurationManager.AppSettings["ClientCode"].ToString() }); }*@
 </div>

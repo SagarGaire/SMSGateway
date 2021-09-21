@@ -5,13 +5,15 @@
 
 @*For Back Button*@
 @{
-    var currentPage = TempData["cp"];
+    var currentPage = TempData["currentPage"];
+    var searchItem = TempData["search"];
 }
 @Html.HiddenFor(x => currentPage)
+@Html.HiddenFor(x => searchItem)
 @*End*@
 
 
-<div class="clients-previous-list">
+@*<div class="clients-previous-list">
     <button class="btn btn-clients-previous-list fa fa-arrow-left" value="" style="margin-bottom: 20px;
         margin-top: -50px;
         border-radius: 5%;
@@ -20,7 +22,7 @@
         border: none;
         float: right;
         color: #fff;" />
-</div>
+</div>*@
 
 <div class="table-container">
     <table class="table table-striped tbl-client-info">

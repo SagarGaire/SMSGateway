@@ -1,4 +1,4 @@
-﻿@font-face {
+﻿multiple-email-info@font-face {
     font-family: 'OpenSans-Regular';
     src: url('../fonts/OpenSans-Regular.ttf') format('truetype');
 }
@@ -246,6 +246,7 @@ a {
     background-color: lightgray;
     color: gray;
     font-size: 12px;
+    padding: 5px 2px 5px 2px !important;
 }
 
 textarea {
@@ -499,7 +500,7 @@ table.tbl-client-info tr td:first-child {
     .div-status-filter,
     .div-client-filter {
         position: relative;
-        width: 33.33333333%;
+        width: 33.333333%;
         float: left;
         min-height: 1px;
         padding-right: 15px;
@@ -597,4 +598,11 @@ table.tbl-client-info tr td:first-child {
     position: relative;    
     min-height: 1px;
     font-size: 14px;
+}
+
+.content-header > .breadcrumb > li > a > .fa:hover {
+    color: #f39c12;
+}
+.content-header > .breadcrumb > li > a > span:hover {
+    color: #f39c12;
 }

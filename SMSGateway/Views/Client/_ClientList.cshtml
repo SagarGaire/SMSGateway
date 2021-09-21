@@ -1,15 +1,16 @@
 ﻿@model PagedList.IPagedList<SMSGateway.Models.vwClients>
 @using PagedList.Mvc;
 
-@{ 
+@{
     var i = ViewBag.SN;
     var totalPages = Model.PageCount;
     var session = ViewBag.Session;
     var currentPage = Model.PageNumber;
-    TempData["cp"] = currentPage;
-}
+    var search = ViewBag.Search;
+    TempData["currentPage"] = currentPage;
+    TempData["search"] = search;
 
-@Html.HiddenFor(x => currentPage)
+}
 
 <div class="table-container">
     <table class="table table-striped table-client">
@@ -63,7 +64,7 @@
                     <td class="td-balance">@item.Balamt</td>
                     <td class="td-monthly-limit">@item.MonthlyLimit</td>
                     <td class="td-rate">@item.Rate</td>
-                    <td class="td-action">                      
+                    <td class="td-action">
                         <ul class="links">
                             @if (session != "4")
                             {
@@ -108,7 +109,7 @@
         <button class="btn btn-warning btnClientPage btnNextPage"><i class="fa fa-chevron-right"></i></button>
         <div class="post-text"> of @totalPages</div>
         @Html.HiddenFor(x => totalPages)
-        @Html.HiddenFor(x=> currentPage)
+        @Html.HiddenFor(x => currentPage)
     </div>
     <div class="pagination-message text-danger">
 

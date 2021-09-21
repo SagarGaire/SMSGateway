@@ -25,9 +25,10 @@ namespace SMSGateway.Controllers
             return PartialView();
         }
 
-        public ActionResult _ClientList(string search, int pageNumber = 1, int pageSize = 10)
+        public ActionResult _ClientList(string search, int pageNumber=1, int pageSize = 10)
         {
             ViewBag.SN = ((pageNumber - 1) * pageSize) + 1;
+            ViewBag.Search = search;
             
             var model = db.vwClients.Where(x => x.ClientCode.CompareTo("0000") >= 0 && x.ClientCode.CompareTo("9999") <= 0).ToList();
            
@@ -38,11 +39,6 @@ namespace SMSGateway.Controllers
             ViewBag.Session = (string)Session["level"];
             return PartialView(model.ToPagedList(pageNumber, pageSize));
         }
-
-        //public ActionResult BackToClientList(string search, int page)
-        //{
-        //    return View();
-        //}
 
         public ActionResult _AddClient()
         {

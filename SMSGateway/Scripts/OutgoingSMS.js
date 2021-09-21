@@ -1,39 +1,86 @@
-﻿
-    
-    $('body').on('change', '.checkbox-filter', function () {
-        debugger;
-        var isChecked = $(this).is(':checked')
-        var value = $(this).val();
-        if ($(this).hasClass('datetime-filter')) {
-            if (isChecked) {
-                $('body').find('.' + value).find('.fromDate, .toDate').datepicker("setDate", new Date())
-            }
-            else {
-                $('body').find('.' + value).find('.fromDate, .toDate').val('');
-            }
-        }
-        else if ($(this).hasClass('recipient-filter')) {
-            if (!isChecked) {
-                $('body').find('.' + value).find('.reciepients').val('');
-            }
-        }
-        else if ($(this).hasClass('status-filter')) {
-            if (!isChecked) {
-                $('body').find('.' + value).find('.statusList').val('');
-            }
+﻿//$('body').on('change', '.checkbox-filter', function () {
+//    debugger;
+//    var isChecked = $(this).is(':checked')
+//    var value = $(this).val();
+//    if ($(this).hasClass('datetime-filter')) {
+//        if (isChecked) {
+//            $('body').find('.' + value).find('.fromDate, .toDate').datepicker("setDate", new Date())
+//        }
+//        else {
+//            $('body').find('.' + value).find('.fromDate, .toDate').val('');
+//        }
+//    }
+//    else if ($(this).hasClass('recipient-filter')) {
+//        if (!isChecked) {
+//            $('body').find('.' + value).find('.reciepients').val('');
+//        }
+//    }
+//    else if ($(this).hasClass('status-filter')) {
+//        if (!isChecked) {
+//            $('body').find('.' + value).find('.statusList').val('');
+//        }
             
 
-        }
-        else if ($(this).hasClass('client-filter')) {
-            if (!isChecked) {
-                $('body').find('.' + value).find('.clientList').val('');
-            }
+//    }
+//    else if ($(this).hasClass('client-filter')) {
+//        if (!isChecked) {
+//            $('body').find('.' + value).find('.clientList').val('');
+//        }
            
 
-        }
-        $('body').find('.' + value).toggleClass('display-none');
-    })
+//    }
+//   // $('body').find('.' + value).toggleClass('display-none');
+//})
 
+
+//$('body').on('change', '.checkbox-filter', function () {
+//    var isChecked = $(this).is(':checked')
+//    if ($(this).hasClass('datetime-filter')) {
+//        if (isChecked) {
+//            $('body').find('.fromDate, .toDate').removeAttr("disabled");
+//            $('body').find('.fromDate, .toDate').datepicker("setDate", new Date())
+//        }
+//        else {
+//            $('body').find('.fromDate, .toDate').attr("disabled", "disabled");
+//            $('body').find('.fromDate, .toDate').val('');
+//        }
+//    }
+//    else if ($(this).hasClass('client-filter')) {
+//        if (isChecked) {
+//            $('body').find('.client-dropdown').removeAttr("disabled");
+//            $('body').find('.client-dropdown').val();
+//        }
+//        else {
+//            $('body').find('.client-dropdown').attr("disabled", "disabled");
+//            $('body').find('.client-dropdown').val('');
+//        }
+
+//    }
+//    else if ($(this).hasClass('status-filter')) {
+//        if (isChecked) {
+//            $('body').find('.status-dropdown').removeAttr("disabled");
+//            $('body').find('.status-dropdown').val();
+//        }
+//        else {
+//            $('body').find('.status-dropdown').attr("disabled", "disabled");
+//            $('body').find('.status-dropdown').val('');
+//        }
+
+//    }
+//    else if ($(this).hasClass('recipient-filter')) {
+//        if (isChecked) {
+//            $('body').find('.reciepients').removeAttr("disabled");
+//            $('body').find('.reciepients').val();
+//        }
+//        else {
+//            $('body').find('.reciepients').attr("disabled", "disabled");
+//            $('body').find('.reciepients').val('');
+//        }
+
+//    }
+//    //$('body').find('.' + value).removeAttr("disabled");
+//    //$(".clientList").attr("disabled", true);
+//})
 
 
     $('body').on('change', '.txtPageNo', function () {
@@ -112,59 +159,59 @@
         var fromDateTime = $('body').find('.fromDate').val();
         var toDateTime = $('body').find('.toDate').val();
         var recipients = $('body').find('.div-recipient-filter').find('input:text').val();
-        var status = $('body').find('.div-status-filter').find('.statusList').val();
+        var status = $('body').find('.statusList').val();
         var client = $('body').find('.clientList').val();
         var statusString = "";
         var clientString = "";
 
-        if ($('body').find('.datetime-filter').is(':checked') == false) {
-           fromDateTime = null
-           toDateTime = null
-            $('body').find('#fromDate').val(fromDateTime);
-            $('body').find('#toDate').val(toDateTime);
-        }
-        if ($('body').find('.recipient-filter').is(':checked') == false) {
-            recipients = null
-            $('body').find('#recipients').val(recipients);
-        }
-        if ($('body').find('.status-filter').is(':checked') == false) {
-            status = null
-            $('body').find('#status').val(status);
-        }
-        else {
-            if (status != null) {
-                var length = $(status).length;
-                for (i = 0; i < length; i++) {
-                    if (i != length - 1) {
-                        statusString = statusString + status[i] + ",";
-                    }
-                    else {
-                        statusString = statusString + status[i];
-                    }
+        //if ($('body').find('.datetime-filter').is(':checked') == false) {
+        //   fromDateTime = null
+        //   toDateTime = null
+        //    $('body').find('#fromDate').val(fromDateTime);
+        //    $('body').find('#toDate').val(toDateTime);
+        //}
+        //if ($('body').find('.recipient-filter').is(':checked') == false) {
+        //    recipients = null
+        //    $('body').find('#recipients').val(recipients);
+        //}
+        //if ($('body').find('.status-filter').is(':checked') == false) {
+        //    status = null
+        //    $('body').find('#status').val(status);
+        //}
+        //else {
+        if (status != null) {
+            var length = $(status).length;
+            for (i = 0; i < length; i++) {
+                if (i != length - 1) {
+                    statusString = statusString + status[i] + ",";
                 }
+                else {
+                    statusString = statusString + status[i];
+                }
+            }
                 
-            }
         }
-        if (client != undefined) {
-            if ($('body').find('.client-filter').is(':checked') == false) {
-                client = null
-                $('body').find('#clients').val(client);
-            }
-            else {
-                if (client != null) {
-                    var length = $(client).length;
-                    for (i = 0; i < length; i++) {
-                        if (i != length - 1) {
-                            clientString = clientString + client[i] + ",";
-                        }
-                        else {
-                            clientString = clientString + client[i];
-                        }
-                    }
-                    $('body').find('#clients').val(clientString);
+        //}
+        //if (client != undefined) {
+        //    if ($('body').find('.client-filter').is(':checked') == false) {
+        //        client = null
+        //        $('body').find('#clients').val(client);
+        //    }
+        //    else {
+        if (client != null) {
+            var length = $(client).length;
+            for (i = 0; i < length; i++) {
+                if (i != length - 1) {
+                    clientString = clientString + client[i] + ",";
+                }
+                else {
+                    clientString = clientString + client[i];
                 }
             }
+            $('body').find('#clients').val(clientString);
         }
+            //}
+        //}
         else {
             client = "";
         }

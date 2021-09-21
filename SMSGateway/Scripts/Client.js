@@ -305,8 +305,6 @@ $('body').on('click', '.btnConfirmRefill', function () {
             $('body').find('.btnConfirmRefill').hide()
             $('body').find('.btnCancelRefill').hide()
             $('body').find('.btnCancel').show()
-
-            //triggerClick();
         }
     })
 })
@@ -320,6 +318,7 @@ $('body').on('click', '.clientName', function () {
         success: function (data) {
             $('body').find('.partial-container').html('')
             $('body').find('.partial-container').append(data)
+            $('html, body').animate({ scrollTop: 0 }, 0);
         }
     })
 })
@@ -496,7 +495,7 @@ $('body').on('change', '.chk-edit-post-billing', function () {
     }
 })
 
-$('body').on('click', '.btnClientPage', function () {
+$('body').on('click', '.btnClientPage', function () {   //For Next Page or Previous Page with Next or Previous Button
     $('body').find('.pagination-text').text("");
     var pageNo = parseInt($(this).closest('.pagination').find('input:text').val());
     var totalPages = $('body').find('#totalPages').val();
@@ -519,6 +518,7 @@ $('body').on('click', '.btnClientPage', function () {
             success: function (data) {
                 $('body').find('.div-client-list-container').html('');
                 $('body').find('.div-client-list-container').append(data);
+                $('html, body').animate({ scrollTop: 0 }, 0);
             }
         })
     }
@@ -532,7 +532,7 @@ $('body').on('click', '.btnClientPage', function () {
     }
 })
 
-$('body').on('change', '.txtClientPageNo', function () {
+$('body').on('change', '.txtClientPageNo', function () {    //For Next or Previous Page by entering Page Number
     $('body').find('.pagination-text').text("");
     var pageNo = $('body').find('#currentPage').val();
     var newPageNo = parseInt($(this).val());
@@ -548,6 +548,7 @@ $('body').on('change', '.txtClientPageNo', function () {
             success: function (data) {
                 $('body').find('.div-client-list-container').html('')
                 $('body').find('.div-client-list-container').append(data)
+                $('html, body').animate({ scrollTop: 0 }, 0);
             }
         })
     }
