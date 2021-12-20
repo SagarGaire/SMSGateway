@@ -4,15 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="SMSGateway_DevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
+    <Schema Namespace="SMSGateway_DevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccessLogs">
           <Key>
             <PropertyRef Name="LogId" />
           </Key>
-          <Property Name="LogId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="LogDateTime" Nullable="false" Type="datetime" />
-          <Property Name="UserName" Nullable="false" MaxLength="20" Type="nvarchar" />
-          <Property Name="LoggedFrom" Nullable="false" MaxLength="20" Type="nvarchar" />
+          <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LoggedFrom" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMSGateway_Dev.dbo.AlertLogs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -23,33 +23,33 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.AlertLogs' does not have a prim
             <PropertyRef Name="LogType" />
             <PropertyRef Name="ClientCode" />
           </Key>
-          <Property Name="Recid" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="LogDate" Nullable="false" Type="datetime" />
-          <Property Name="LogType" Nullable="false" MaxLength="10" Type="nvarchar" />
-          <Property Name="ClientCode" Nullable="false" MaxLength="10" Type="nvarchar" />
+          <Property Name="Recid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogDate" Type="datetime" Nullable="false" />
+          <Property Name="LogType" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ClientCode" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="ClientCode" />
           </Key>
-          <Property Name="ClientCode" Nullable="false" MaxLength="10" Type="nvarchar" />
-          <Property Name="PassKey" Nullable="false" MaxLength="20" Type="nvarchar" />
-          <Property Name="Name" Nullable="false" MaxLength="50" Type="nvarchar" />
-          <Property Name="Status" Nullable="false" Type="int" />
-          <Property Name="Balance" Nullable="false" Precision="18" Scale="3" Type="numeric" />
-          <Property Name="EmailId" MaxLength="50" Type="nvarchar" />
-          <Property Name="MobileNumber" MaxLength="10" Type="nvarchar" />
-          <Property Name="Rate" Precision="18" Scale="3" Type="numeric" />
-          <Property Name="SMSNotification" Nullable="false" Type="bit" />
-          <Property Name="EmailNotification" Nullable="false" Type="bit" />
-          <Property Name="PostBilling" Nullable="false" Type="bit" />
-          <Property Name="MonthlyLimit" Nullable="false" Type="int" />
+          <Property Name="ClientCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PassKey" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Balance" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="EmailId" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="Rate" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="SMSNotification" Type="bit" Nullable="false" />
+          <Property Name="EmailNotification" Type="bit" Nullable="false" />
+          <Property Name="PostBilling" Type="bit" Nullable="false" />
+          <Property Name="MonthlyLimit" Type="int" Nullable="false" />
           <Property Name="NotifiedAt" Type="datetime" />
-          <Property Name="AlertLimit" Precision="18" Scale="3" Type="numeric" />
-          <Property Name="ColorVal" Nullable="false" MaxLength="7" Type="nvarchar" />
+          <Property Name="AlertLimit" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="ColorVal" Type="nvarchar" MaxLength="7" Nullable="false" />
           <Property Name="TotalCreditsUsed" Type="bigint" />
           <Property Name="UsesSB" Type="bit" />
-          <Property Name="CreatedBy" MaxLength="50" Type="nvarchar" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="SupplierId" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -58,7 +58,7 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.ErrorLog' does not have a prima
           <Key>
             <PropertyRef Name="Recid" />
           </Key>
-          <Property Name="Recid" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Recid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="LogDate" Type="datetime" />
           <Property Name="ErrorMsg" Type="nvarchar(max)" />
         </EntityType>
@@ -66,12 +66,12 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.ErrorLog' does not have a prima
           <Key>
             <PropertyRef Name="MsgId" />
           </Key>
-          <Property Name="MsgId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="MsgDateTime" Nullable="false" Type="datetime" />
-          <Property Name="MsgFrom" Nullable="false" MaxLength="20" Type="nvarchar" />
-          <Property Name="MsgTo" MaxLength="10" Type="nvarchar" />
-          <Property Name="KeyWord" MaxLength="10" Type="nvarchar" />
-          <Property Name="MsgText" MaxLength="160" Type="nvarchar" />
+          <Property Name="MsgId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MsgDateTime" Type="datetime" Nullable="false" />
+          <Property Name="MsgFrom" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="MsgTo" Type="nvarchar" MaxLength="10" />
+          <Property Name="KeyWord" Type="nvarchar" MaxLength="10" />
+          <Property Name="MsgText" Type="nvarchar" MaxLength="160" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMSGateway_Dev.dbo.OutgoingSMS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -84,40 +84,40 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.OutgoingSMS' does not have a pr
             <PropertyRef Name="MsgText" />
             <PropertyRef Name="Status" />
           </Key>
-          <Property Name="MsgId" Nullable="false" StoreGeneratedPattern="Identity" Type="bigint" />
-          <Property Name="MsgDateTime" Nullable="false" Type="datetime" />
-          <Property Name="ClientCode" Nullable="false" MaxLength="10" Type="nvarchar" />
-          <Property Name="Recipients" Nullable="false" MaxLength="1010" Type="nvarchar" />
+          <Property Name="MsgId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MsgDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ClientCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Recipients" Type="nvarchar" MaxLength="1010" Nullable="false" />
           <Property Name="RecipientCount" Type="int" />
-          <Property Name="MsgText" Nullable="false" MaxLength="1000" Type="nvarchar" />
-          <Property Name="Status" Nullable="false" Type="int" />
+          <Property Name="MsgText" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="Parts" Type="int" />
-          <Property Name="RequestCode" MaxLength="36" Type="nvarchar" />
-          <Property Name="RequestIp" MaxLength="15" Type="nvarchar" />
-          <Property Name="RegId" MaxLength="36" Type="nvarchar" />
+          <Property Name="RequestCode" Type="nvarchar" MaxLength="36" />
+          <Property Name="RequestIp" Type="nvarchar" MaxLength="15" />
+          <Property Name="RegId" Type="nvarchar" MaxLength="36" />
           <Property Name="CreditsUsed" Type="int" />
-          <Property Name="Rate" Precision="5" Scale="3" Type="numeric" />
-          <Property Name="Balance" Precision="18" Scale="2" Type="numeric" />
+          <Property Name="Rate" Type="numeric" Precision="5" Scale="3" />
+          <Property Name="Balance" Type="numeric" Precision="18" Scale="2" />
           <Property Name="SupplierId" Type="int" />
         </EntityType>
         <EntityType Name="OutgoingSMSHist">
           <Key>
             <PropertyRef Name="MsgId" />
           </Key>
-          <Property Name="MsgId" Nullable="false" Type="int" />
-          <Property Name="MsgDateTime" Nullable="false" Type="datetime" />
-          <Property Name="ClientCode" Nullable="false" MaxLength="10" Type="nvarchar" />
-          <Property Name="Recipients" Nullable="false" MaxLength="1010" Type="nvarchar" />
+          <Property Name="MsgId" Type="int" Nullable="false" />
+          <Property Name="MsgDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ClientCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Recipients" Type="nvarchar" MaxLength="1010" Nullable="false" />
           <Property Name="RecipientCount" Type="int" />
-          <Property Name="MsgText" Nullable="false" MaxLength="1000" Type="nvarchar" />
-          <Property Name="Status" Nullable="false" Type="int" />
+          <Property Name="MsgText" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="Parts" Type="int" />
-          <Property Name="RequestCode" Nullable="false" MaxLength="36" Type="nvarchar" />
-          <Property Name="RequestIP" MaxLength="15" Type="nvarchar" />
-          <Property Name="RegId" Nullable="false" MaxLength="36" Type="nvarchar" />
+          <Property Name="RequestCode" Type="nvarchar" MaxLength="36" Nullable="false" />
+          <Property Name="RequestIP" Type="nvarchar" MaxLength="15" />
+          <Property Name="RegId" Type="nvarchar" MaxLength="36" Nullable="false" />
           <Property Name="CreditsUsed" Type="int" />
-          <Property Name="Rate" Precision="5" Scale="3" Type="numeric" />
-          <Property Name="Balance" Precision="18" Scale="2" Type="numeric" />
+          <Property Name="Rate" Type="numeric" Precision="5" Scale="3" />
+          <Property Name="Balance" Type="numeric" Precision="18" Scale="2" />
           <Property Name="SupplierId" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -126,7 +126,7 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.PeriodicOpLog' does not have a 
           <Key>
             <PropertyRef Name="Recid" />
           </Key>
-          <Property Name="Recid" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Recid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StartTime" Type="datetime" />
           <Property Name="EndTime" Type="datetime" />
           <Property Name="RecordsUpdate" Type="int" />
@@ -136,43 +136,45 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.PeriodicOpLog' does not have a 
           <Key>
             <PropertyRef Name="RefillId" />
           </Key>
-          <Property Name="RefillId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="ClientCode" MaxLength="20" Type="nvarchar" />
-          <Property Name="RefillValue" Nullable="false" Precision="18" Scale="3" Type="numeric" />
-          <Property Name="RefillBy" Nullable="false" MaxLength="20" Type="nvarchar" />
-          <Property Name="Remarks" MaxLength="50" Type="nvarchar" />
-          <Property Name="CancelledBy" MaxLength="20" Type="nvarchar" />
+          <Property Name="RefillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="RefillValue" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="RefillBy" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="50" />
+          <Property Name="CancelledBy" Type="nvarchar" MaxLength="20" />
           <Property Name="CancelledDate" Type="datetime" />
           <Property Name="RefillDate" Type="datetime" />
-          <Property Name="RefillRate" Precision="18" Scale="2" Type="numeric" />
-          <Property Name="BillNo" MaxLength="10" Type="nvarchar" />
+          <Property Name="RefillRate" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="BillNo" Type="nvarchar" MaxLength="10" />
+          <Property Name="CreditsConsumed" Type="int" />
         </EntityType>
         <EntityType Name="Saf">
           <Key>
             <PropertyRef Name="Username" />
           </Key>
-          <Property Name="Username" Nullable="false" MaxLength="20" Type="nvarchar" />
-          <Property Name="Password" Nullable="false" MaxLength="20" Type="nvarchar" />
-          <Property Name="EmailId" Nullable="false" MaxLength="40" Type="nvarchar" />
-          <Property Name="MobileNo" MaxLength="20" Type="nvarchar" />
-          <Property Name="Status" Nullable="false" Type="int" />
-          <Property Name="Level" Nullable="false" Type="int" />
+          <Property Name="Username" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EmailId" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="MobileNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SMSPurchases">
           <Key>
             <PropertyRef Name="Recid" />
           </Key>
-          <Property Name="Recid" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Recid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PurchaseDate" Type="datetime" />
-          <Property Name="Quantity" Nullable="false" Type="int" />
-          <Property Name="Rate" Precision="18" Scale="4" Type="numeric" />
-          <Property Name="Remarks" MaxLength="100" Type="nvarchar" />
-          <Property Name="EntryBy" Nullable="false" MaxLength="20" Type="nvarchar" />
-          <Property Name="EntryDate" Nullable="false" Type="datetime" />
-          <Property Name="CancelledBy" MaxLength="20" Type="nvarchar" />
-          <Property Name="CancelledDate" MaxLength="20" Type="nvarchar" />
-          <Property Name="BillNo" MaxLength="10" Type="nvarchar" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Rate" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="EntryBy" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="CancelledBy" Type="nvarchar" MaxLength="20" />
+          <Property Name="CancelledDate" Type="nvarchar" MaxLength="20" />
+          <Property Name="BillNo" Type="nvarchar" MaxLength="10" />
           <Property Name="Supplier" Type="int" />
+          <Property Name="CreditsConsumed" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMSGateway_Dev.dbo.SparrowLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -182,32 +184,32 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.SparrowLog' does not have a pri
             <PropertyRef Name="ResponseCode" />
             <PropertyRef Name="ResponseMsg" />
           </Key>
-          <Property Name="Recid" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Recid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="LogDate" Type="datetime" />
           <Property Name="MsgId" Type="int" />
           <Property Name="Cnt" Type="int" />
-          <Property Name="CreditAvailable" Precision="18" Scale="0" Type="numeric" />
-          <Property Name="CreditConsumed" Precision="18" Scale="0" Type="numeric" />
+          <Property Name="CreditAvailable" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="CreditConsumed" Type="numeric" Precision="18" Scale="0" />
           <Property Name="MessageId" Type="bigint" />
-          <Property Name="ResponseCode" Nullable="false" Type="int" />
-          <Property Name="ResponseMsg" Nullable="false" MaxLength="100" Type="nvarchar" />
-          <Property Name="RegId" MaxLength="36" Type="nvarchar" />
+          <Property Name="ResponseCode" Type="int" Nullable="false" />
+          <Property Name="ResponseMsg" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RegId" Type="nvarchar" MaxLength="36" />
         </EntityType>
         <EntityType Name="StatusCodes">
           <Key>
             <PropertyRef Name="Code" />
           </Key>
-          <Property Name="Code" Nullable="false" Type="int" />
-          <Property Name="Description" MaxLength="50" Type="nvarchar" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Suppliers">
           <Key>
             <PropertyRef Name="SupplierId" />
           </Key>
-          <Property Name="SupplierId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="SupplierName" Nullable="false" MaxLength="50" Type="nvarchar" />
-          <Property Name="Status" Nullable="false" Type="int" />
-          <Property Name="Email" Nullable="false" MaxLength="50" Type="nvarchar" />
+          <Property Name="SupplierId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplierName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMSGateway_Dev.dbo.Users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -218,10 +220,10 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.Users' does not have a primary 
             <PropertyRef Name="EmailId" />
             <PropertyRef Name="Status" />
           </Key>
-          <Property Name="Username" Nullable="false" MaxLength="20" Type="nvarchar" />
-          <Property Name="Password" Nullable="false" MaxLength="20" Type="nvarchar" />
-          <Property Name="EmailId" Nullable="false" MaxLength="40" Type="nvarchar" />
-          <Property Name="Status" Nullable="false" Type="int" />
+          <Property Name="Username" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EmailId" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMSGateway_Dev.dbo.vwClients' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -238,26 +240,26 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.vwClients' does not have a prim
             <PropertyRef Name="MonthlyLimit" />
             <PropertyRef Name="ColorVal" />
           </Key>
-          <Property Name="ClientCode" Nullable="false" MaxLength="10" Type="nvarchar" />
-          <Property Name="PassKey" Nullable="false" MaxLength="20" Type="nvarchar" />
-          <Property Name="Name" Nullable="false" MaxLength="50" Type="nvarchar" />
-          <Property Name="Status" Nullable="false" Type="int" />
-          <Property Name="Balance" Nullable="false" Precision="18" Scale="3" Type="numeric" />
-          <Property Name="EmailId" MaxLength="50" Type="nvarchar" />
-          <Property Name="MobileNumber" MaxLength="10" Type="nvarchar" />
-          <Property Name="Rate" Precision="18" Scale="3" Type="numeric" />
-          <Property Name="SMSNotification" Nullable="false" Type="bit" />
-          <Property Name="EmailNotification" Nullable="false" Type="bit" />
-          <Property Name="PostBilling" Nullable="false" Type="bit" />
-          <Property Name="MonthlyLimit" Nullable="false" Type="int" />
+          <Property Name="ClientCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PassKey" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Balance" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="EmailId" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="Rate" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="SMSNotification" Type="bit" Nullable="false" />
+          <Property Name="EmailNotification" Type="bit" Nullable="false" />
+          <Property Name="PostBilling" Type="bit" Nullable="false" />
+          <Property Name="MonthlyLimit" Type="int" Nullable="false" />
           <Property Name="NotifiedAt" Type="datetime" />
-          <Property Name="AlertLimit" Precision="18" Scale="3" Type="numeric" />
-          <Property Name="ColorVal" Nullable="false" MaxLength="7" Type="nvarchar" />
+          <Property Name="AlertLimit" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="ColorVal" Type="nvarchar" MaxLength="7" Nullable="false" />
           <Property Name="TotalCreditsUsed" Type="bigint" />
           <Property Name="UsesSB" Type="bit" />
-          <Property Name="CreatedBy" MaxLength="50" Type="nvarchar" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="SupplierId" Type="int" />
-          <Property Name="Balamt" Precision="18" Scale="0" Type="numeric" />
+          <Property Name="Balamt" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMSGateway_Dev.dbo.vwClientStatics' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -266,8 +268,8 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.vwClientStatics' does not have 
             <PropertyRef Name="ClientCode" />
             <PropertyRef Name="Name" />
           </Key>
-          <Property Name="ClientCode" Nullable="false" MaxLength="10" Type="nvarchar" />
-          <Property Name="Name" Nullable="false" MaxLength="50" Type="nvarchar" />
+          <Property Name="ClientCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Cnt" Type="int" />
           <Property Name="ColorVal" Type="varchar(max)" />
         </EntityType>
@@ -278,16 +280,16 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.vwExpectedBalance' does not hav
             <PropertyRef Name="SupplierId" />
             <PropertyRef Name="SupplierName" />
           </Key>
-          <Property Name="SupplierId" Nullable="false" Type="int" />
-          <Property Name="SupplierName" Nullable="false" MaxLength="50" Type="nvarchar" />
+          <Property Name="SupplierId" Type="int" Nullable="false" />
+          <Property Name="SupplierName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Quantity" Type="int" />
-          <Property Name="AverageRate" Precision="5" Scale="2" Type="numeric" />
+          <Property Name="AverageRate" Type="numeric" Precision="5" Scale="2" />
           <Property Name="CreditsUsed" Type="bigint" />
           <Property Name="Balance" Type="bigint" />
         </EntityType>
         <Association Name="Fk_AccessLogs_Saf_Username">
-          <End Type="Self.Saf" Multiplicity="1" Role="Saf" />
-          <End Type="Self.AccessLogs" Multiplicity="*" Role="AccessLogs" />
+          <End Role="Saf" Type="Self.Saf" Multiplicity="1" />
+          <End Role="AccessLogs" Type="Self.AccessLogs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Saf">
               <PropertyRef Name="Username" />
@@ -298,8 +300,8 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.vwExpectedBalance' does not hav
           </ReferentialConstraint>
         </Association>
         <Association Name="Fk_OutgoingSMS_Clients_ClientCode">
-          <End Type="Self.Clients" Multiplicity="1" Role="Clients" />
-          <End Type="Self.OutgoingSMS" Multiplicity="*" Role="OutgoingSMS" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="OutgoingSMS" Type="Self.OutgoingSMS" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clients">
               <PropertyRef Name="ClientCode" />
@@ -310,8 +312,8 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.vwExpectedBalance' does not hav
           </ReferentialConstraint>
         </Association>
         <Association Name="Fk_OutgoingSMS_StatusCodes_Status">
-          <End Type="Self.StatusCodes" Multiplicity="1" Role="StatusCodes" />
-          <End Type="Self.OutgoingSMS" Multiplicity="*" Role="OutgoingSMS" />
+          <End Role="StatusCodes" Type="Self.StatusCodes" Multiplicity="1" />
+          <End Role="OutgoingSMS" Type="Self.OutgoingSMS" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="StatusCodes">
               <PropertyRef Name="Code" />
@@ -322,8 +324,8 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.vwExpectedBalance' does not hav
           </ReferentialConstraint>
         </Association>
         <Association Name="Fk_Refills_RefillBy_Saf_Username">
-          <End Type="Self.Saf" Multiplicity="1" Role="Saf" />
-          <End Type="Self.Refills" Multiplicity="*" Role="Refills" />
+          <End Role="Saf" Type="Self.Saf" Multiplicity="1" />
+          <End Role="Refills" Type="Self.Refills" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Saf">
               <PropertyRef Name="Username" />
@@ -333,13 +335,13 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.vwExpectedBalance' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fnGetSMSBalance" ReturnType="numeric" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="fnGetSMSBalance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="numeric">
           <Parameter Name="ClientCode" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="fnGetSMSParts" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="fnGetSMSParts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
           <Parameter Name="Message" Type="nvarchar(max)" Mode="In" />
         </Function>
-        <Function Name="GetLocalDate" ReturnType="datetime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetLocalDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="datetime" />
         <Function Name="spBalanceAlert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ClientCode" Type="nvarchar" Mode="In" />
           <Parameter Name="Balance" Type="numeric" Mode="In" />
@@ -368,6 +370,10 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.vwExpectedBalance' does not hav
         </Function>
         <Function Name="spReportSMSStmt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ClientCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="spRevenueReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FromDate" Type="datetime" Mode="In" />
           <Parameter Name="ToDate" Type="datetime" Mode="In" />
         </Function>
@@ -536,20 +542,20 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.vwExpectedBalance' does not hav
     FROM [dbo].[vwExpectedBalance] AS [vwExpectedBalance]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="Fk_AccessLogs_Saf_Username" Association="Self.Fk_AccessLogs_Saf_Username">
-            <End EntitySet="Saf" Role="Saf" />
-            <End EntitySet="AccessLogs" Role="AccessLogs" />
+            <End Role="Saf" EntitySet="Saf" />
+            <End Role="AccessLogs" EntitySet="AccessLogs" />
           </AssociationSet>
           <AssociationSet Name="Fk_OutgoingSMS_Clients_ClientCode" Association="Self.Fk_OutgoingSMS_Clients_ClientCode">
-            <End EntitySet="Clients" Role="Clients" />
-            <End EntitySet="OutgoingSMS" Role="OutgoingSMS" />
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="OutgoingSMS" EntitySet="OutgoingSMS" />
           </AssociationSet>
           <AssociationSet Name="Fk_OutgoingSMS_StatusCodes_Status" Association="Self.Fk_OutgoingSMS_StatusCodes_Status">
-            <End EntitySet="StatusCodes" Role="StatusCodes" />
-            <End EntitySet="OutgoingSMS" Role="OutgoingSMS" />
+            <End Role="StatusCodes" EntitySet="StatusCodes" />
+            <End Role="OutgoingSMS" EntitySet="OutgoingSMS" />
           </AssociationSet>
           <AssociationSet Name="Fk_Refills_RefillBy_Saf_Username" Association="Self.Fk_Refills_RefillBy_Saf_Username">
-            <End EntitySet="Saf" Role="Saf" />
-            <End EntitySet="Refills" Role="Refills" />
+            <End Role="Saf" EntitySet="Saf" />
+            <End Role="Refills" EntitySet="Refills" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -637,6 +643,7 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.vwExpectedBalance' does not hav
           <Property Name="RefillRate" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="BillNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Saf" Relationship="Self.Fk_Refills_RefillBy_Saf_Username" FromRole="Refills" ToRole="Saf" />
+          <Property Name="CreditsConsumed" Type="Int32" />
         </EntityType>
         <EntityType Name="Saf">
           <Key>
@@ -667,6 +674,7 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.vwExpectedBalance' does not hav
           <Property Name="BillNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Supplier" Type="Int32" />
           <NavigationProperty Name="Suppliers" Relationship="Self.FK_SMSPurchases_Suppliers" FromRole="SMSPurchases" ToRole="Suppliers" />
+          <Property Name="CreditsConsumed" Type="Int32" />
         </EntityType>
         <EntityType Name="StatusCodes">
           <Key>
@@ -928,82 +936,86 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.vwExpectedBalance' does not hav
             <End Role="OutgoingSMS" EntitySet="OutgoingSMS" />
           </AssociationSet>
           <FunctionImport Name="spBalanceAlert">
-            <Parameter Name="ClientCode" Type="String" Mode="In" />
-            <Parameter Name="Balance" Type="Decimal" Mode="In" />
-            <Parameter Name="EmailId" Type="String" Mode="In" />
-            <Parameter Name="MobileNo" Type="String" Mode="In" />
+            <Parameter Name="ClientCode" Mode="In" Type="String" />
+            <Parameter Name="Balance" Mode="In" Type="Decimal" />
+            <Parameter Name="EmailId" Mode="In" Type="String" />
+            <Parameter Name="MobileNo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spDashBoardView1" ReturnType="Collection(SMSGateway_DevModel.spDashBoardView1_Result)" />
           <FunctionImport Name="spNotifications" />
           <FunctionImport Name="spRefillReport" ReturnType="Collection(SMSGateway_DevModel.spRefillReport_Result)">
-            <Parameter Name="ClientCode" Type="String" Mode="In" />
-            <Parameter Name="FromDate" Type="DateTime" Mode="In" />
-            <Parameter Name="ToDate" Type="DateTime" Mode="In" />
-            <Parameter Name="PageNo" Type="Int32" Mode="In" />
-            <Parameter Name="PageCount" Type="Int32" Mode="InOut" />
+            <Parameter Name="ClientCode" Mode="In" Type="String" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="PageNo" Mode="In" Type="Int32" />
+            <Parameter Name="PageCount" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spReportOutgoingSMS">
-            <Parameter Name="Status" Type="String" Mode="In" />
-            <Parameter Name="ClientCode" Type="String" Mode="In" />
-            <Parameter Name="Recipients" Type="String" Mode="In" />
-            <Parameter Name="FromDate" Type="DateTime" Mode="In" />
-            <Parameter Name="ToDate" Type="DateTime" Mode="In" />
-            <Parameter Name="PageNo" Type="Int32" Mode="In" />
-            <Parameter Name="PageCount" Type="Int32" Mode="InOut" />
-            <Parameter Name="SMSCount" Type="Int32" Mode="InOut" />
-            <Parameter Name="SMSCost" Type="Decimal" Mode="InOut" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="ClientCode" Mode="In" Type="String" />
+            <Parameter Name="Recipients" Mode="In" Type="String" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="PageNo" Mode="In" Type="Int32" />
+            <Parameter Name="PageCount" Mode="InOut" Type="Int32" />
+            <Parameter Name="SMSCount" Mode="InOut" Type="Int32" />
+            <Parameter Name="SMSCost" Mode="InOut" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spReportSMSStmt" ReturnType="Collection(SMSGateway_DevModel.spReportSMSStmt_Result)">
-            <Parameter Name="ClientCode" Type="String" Mode="In" />
-            <Parameter Name="FromDate" Type="DateTime" Mode="In" />
-            <Parameter Name="ToDate" Type="DateTime" Mode="In" />
+            <Parameter Name="ClientCode" Mode="In" Type="String" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="spSendEmail">
-            <Parameter Name="Subject" Type="String" Mode="In" />
-            <Parameter Name="Body" Type="String" Mode="In" />
-            <Parameter Name="To" Type="String" Mode="In" />
-            <Parameter Name="ToCC" Type="String" Mode="In" />
-            <Parameter Name="AttachmentPath" Type="String" Mode="In" />
+            <Parameter Name="Subject" Mode="In" Type="String" />
+            <Parameter Name="Body" Mode="In" Type="String" />
+            <Parameter Name="To" Mode="In" Type="String" />
+            <Parameter Name="ToCC" Mode="In" Type="String" />
+            <Parameter Name="AttachmentPath" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spSendSMS">
-            <Parameter Name="ClientCode" Type="String" Mode="In" />
-            <Parameter Name="PassKey" Type="String" Mode="In" />
-            <Parameter Name="Recipients" Type="String" Mode="In" />
-            <Parameter Name="MsgText" Type="String" Mode="In" />
-            <Parameter Name="RequestCode" Type="String" Mode="In" />
-            <Parameter Name="RequestIp" Type="String" Mode="In" />
-            <Parameter Name="RegId" Type="String" Mode="In" />
+            <Parameter Name="ClientCode" Mode="In" Type="String" />
+            <Parameter Name="PassKey" Mode="In" Type="String" />
+            <Parameter Name="Recipients" Mode="In" Type="String" />
+            <Parameter Name="MsgText" Mode="In" Type="String" />
+            <Parameter Name="RequestCode" Mode="In" Type="String" />
+            <Parameter Name="RequestIp" Mode="In" Type="String" />
+            <Parameter Name="RegId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spSGBUildBalance">
-          <Parameter Name="ClientCode" Type="String" Mode="In" />
+          <Parameter Name="ClientCode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spSGPeriodicOp" ReturnType="Collection(Int32)" />
           <FunctionImport Name="spSMSGateway_EOD" ReturnType="Collection(Int32)" />
           <FunctionImport Name="spSMSTimelyAlert" />
           <FunctionImport Name="spUpdateSMSStatus">
-            <Parameter Name="RegId" Type="String" Mode="In" />
-            <Parameter Name="StatusCode" Type="Int32" Mode="In" />
+            <Parameter Name="RegId" Mode="In" Type="String" />
+            <Parameter Name="StatusCode" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spSMSClientConsumptionAll">
-            <Parameter Name="FromDate" Type="DateTime" Mode="In" />
-            <Parameter Name="ToDate" Type="DateTime" Mode="In" />
-            <Parameter Name="ClientCode" Type="String" Mode="In" />
-            <Parameter Name="ClientType" Type="String" Mode="In" />
-            <Parameter Name="TotalOpeningBalanceCredit" Type="Int32" Mode="InOut" />
-            <Parameter Name="TotalOpeningBalanceAmt" Type="Decimal" Mode="InOut" />
-            <Parameter Name="TotalPurchaseCredit" Type="Int32" Mode="InOut" />
-            <Parameter Name="TotalPurchaseAmt" Type="Decimal" Mode="InOut" />
-            <Parameter Name="TotalConsumedCredit" Type="Int32" Mode="InOut" />
-            <Parameter Name="TotalConsumedAmt" Type="Decimal" Mode="InOut" />
-            <Parameter Name="TotalClosingBalanceCredit" Type="Int32" Mode="InOut" />
-            <Parameter Name="TotalClosingBalanceAmt" Type="Decimal" Mode="InOut" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ClientCode" Mode="In" Type="String" />
+            <Parameter Name="ClientType" Mode="In" Type="String" />
+            <Parameter Name="TotalOpeningBalanceCredit" Mode="InOut" Type="Int32" />
+            <Parameter Name="TotalOpeningBalanceAmt" Mode="InOut" Type="Decimal" />
+            <Parameter Name="TotalPurchaseCredit" Mode="InOut" Type="Int32" />
+            <Parameter Name="TotalPurchaseAmt" Mode="InOut" Type="Decimal" />
+            <Parameter Name="TotalConsumedCredit" Mode="InOut" Type="Int32" />
+            <Parameter Name="TotalConsumedAmt" Mode="InOut" Type="Decimal" />
+            <Parameter Name="TotalClosingBalanceCredit" Mode="InOut" Type="Int32" />
+            <Parameter Name="TotalClosingBalanceAmt" Mode="InOut" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spSMSPurchaseReport">
-            <Parameter Name="FromDate" Type="DateTime" Mode="In" />
-            <Parameter Name="ToDate" Type="DateTime" Mode="In" />
-            <Parameter Name="SupplierId" Type="Int32" Mode="In" />
-            <Parameter Name="TotalQuantity" Type="Int32" Mode="InOut" />
-            <Parameter Name="TotalAmount" Type="Decimal" Mode="InOut" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="SupplierId" Mode="In" Type="Int32" />
+            <Parameter Name="TotalQuantity" Mode="InOut" Type="Int32" />
+            <Parameter Name="TotalAmount" Mode="InOut" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="spRevenueReport">
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spDashBoardView1_Result">
@@ -1116,6 +1128,7 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.vwExpectedBalance' does not hav
           <EntitySetMapping Name="Refills">
             <EntityTypeMapping TypeName="SMSGateway_DevModel.Refills">
               <MappingFragment StoreEntitySet="Refills">
+                <ScalarProperty Name="CreditsConsumed" ColumnName="CreditsConsumed" />
                 <ScalarProperty Name="RefillId" ColumnName="RefillId" />
                 <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
                 <ScalarProperty Name="RefillValue" ColumnName="RefillValue" />
@@ -1144,6 +1157,7 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.vwExpectedBalance' does not hav
           <EntitySetMapping Name="SMSPurchases">
             <EntityTypeMapping TypeName="SMSGateway_DevModel.SMSPurchases">
               <MappingFragment StoreEntitySet="SMSPurchases">
+                <ScalarProperty Name="CreditsConsumed" ColumnName="CreditsConsumed" />
                 <ScalarProperty Name="Recid" ColumnName="Recid" />
                 <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
@@ -1358,6 +1372,7 @@ warning 6002: The table/view 'SMSGateway_Dev.dbo.vwExpectedBalance' does not hav
           <FunctionImportMapping FunctionImportName="spUpdateSMSStatus" FunctionName="SMSGateway_DevModel.Store.spUpdateSMSStatus" />
           <FunctionImportMapping FunctionImportName="spSMSClientConsumptionAll" FunctionName="SMSGateway_DevModel.Store.spSMSClientConsumptionAll" />
           <FunctionImportMapping FunctionImportName="spSMSPurchaseReport" FunctionName="SMSGateway_DevModel.Store.spSMSPurchaseReport" />
+          <FunctionImportMapping FunctionImportName="spRevenueReport" FunctionName="SMSGateway_DevModel.Store.spRevenueReport" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

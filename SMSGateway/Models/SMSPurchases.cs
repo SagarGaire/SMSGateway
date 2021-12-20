@@ -25,6 +25,7 @@ namespace SMSGateway.Models
         public string CancelledDate { get; set; }
         public string BillNo { get; set; }
         public Nullable<int> Supplier { get; set; }
+        public Nullable<int> CreditsConsumed { get; set; }
     
         public virtual Suppliers Suppliers { get; set; }
     }

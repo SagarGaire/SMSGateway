@@ -24,6 +24,7 @@ namespace SMSGateway.Models
         public Nullable<System.DateTime> RefillDate { get; set; }
         public Nullable<decimal> RefillRate { get; set; }
         public string BillNo { get; set; }
+        public Nullable<int> CreditsConsumed { get; set; }
     
         public virtual Saf Saf { get; set; }
     }

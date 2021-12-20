@@ -249,6 +249,7 @@
     <Compile Include="Controllers\OutgoingSMSController.cs" />
     <Compile Include="Controllers\RedirectionController.cs" />
     <Compile Include="Controllers\RefillReportController.cs" />
+    <Compile Include="Controllers\RevenueReportController.cs" />
     <Compile Include="Controllers\SafController.cs" />
     <Compile Include="Controllers\SMSPurchaseReportController.cs" />
     <Compile Include="Controllers\SMSPurchasesController.cs" />
@@ -294,6 +295,7 @@
     </Compile>
     <Compile Include="Models\Refill_Report.cs" />
     <Compile Include="Models\ReportOutgoingSMS.cs" />
+    <Compile Include="Models\Report_Revenue.cs" />
     <Compile Include="Models\Report_SMSPurchase.cs" />
     <Compile Include="Models\SMSClientAll.cs" />
     <Compile Include="Models\Report_OutgoingSMS.cs" />
@@ -2110,6 +2112,7 @@
     <Content Include="Images\pending.png" />
     <Content Include="Images\refill-icon.png" />
     <Content Include="Images\SMSConnect.png" />
+    <Content Include="Images\status.png" />
     <Content Include="loader\ajax-loader.gif" />
     <Content Include="Models\SMSGateway.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2420,6 +2423,7 @@
     </Content>
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\RevenueReport.js" />
     <Content Include="Scripts\Saf.js" />
     <Content Include="Scripts\SMSPurchaseReport.js" />
     <Content Include="Scripts\SMSPurchases.js" />
@@ -2461,7 +2465,7 @@
     <Content Include="Views\Client\_ClientInfo.cshtml" />
     <Content Include="Views\Client\_ClientList.cshtml" />
     <Content Include="Views\Client\_ConfirmRefill.cshtml" />
-    <Content Include="Views\Client\_ConfirmRemove.cshtml" />
+    <Content Include="Views\Client\_ConfirmChangeStatus.cshtml" />
     <Content Include="Views\Client\_EditClient.cshtml" />
     <Content Include="Views\Client\_RefillBalance.cshtml" />
     <Content Include="Views\Client\_RefillHistory.cshtml" />
@@ -2517,6 +2521,9 @@
     <Content Include="Views\SMSPurchaseReport\_Index.cshtml" />
     <Content Include="Views\SMSPurchaseReport\_SMSPurchaseReport.cshtml" />
     <Content Include="Views\SMSPurchaseReport\_NoRecords.cshtml" />
+    <Content Include="Views\RevenueReport\_Index.cshtml" />
+    <Content Include="Views\RevenueReport\_RevenueReport.cshtml" />
+    <Content Include="Views\RevenueReport\_NoRecords.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

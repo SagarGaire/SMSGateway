@@ -1,14 +1,13 @@
-﻿@model IEnumerable<SMSGateway.Models.spSMSPurchaseReport_Result>
+﻿@model IEnumerable<SMSGateway.Models.Report_SMSPurchase>
 
 @{
+    var totalQuantity = ViewBag.TotalQuantity;
+    var totalAmount = ViewBag.TotalAmount;
     DateTime? fromDate = ViewBag.FromDate;
     DateTime? toDate = ViewBag.ToDate;
-    int supplier = ViewBag.SupplierId;
 }
 
-<br />
 <hr />
-
 <div class="form-horizontal col-md-12">
     <div class="form-group">
         <div class="col-md-3 bg-red" style="">
@@ -17,7 +16,7 @@
                 <div class="inner col-md-12 text-center">
                     <h4><b>Total Quantity</b></h4>
                     <div class="inner col-md-12">
-                        <p class="text-bold" style="font-size: 28px;">@ViewBag.TotalQuantity</p>
+                        <p class="text-bold" style="font-size: 28px;">@totalQuantity</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pricetag"></i>
@@ -32,7 +31,7 @@
                 <div class="inner col-md-12 text-center">
                     <h4><b>Total Amount</b></h4>
                     <div class="inner col-md-12">
-                        <p class="text-bold" style="font-size: 28px;">@ViewBag.TotalAmount</p>
+                        <p class="text-bold" style="font-size: 28px;">@totalAmount</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-social-usd"></i>
@@ -74,7 +73,6 @@
         }
     </table>
 </div>
-
 
 
 

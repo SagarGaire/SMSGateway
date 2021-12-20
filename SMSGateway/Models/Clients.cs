@@ -11,8 +11,7 @@ namespace SMSGateway.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Clients
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,34 +19,20 @@ namespace SMSGateway.Models
         {
             this.OutgoingSMS = new HashSet<OutgoingSMS>();
         }
-
+    
         public string ClientCode { get; set; }
         public string PassKey { get; set; }
-
-        [Required]
-        [MaxLength(50, ErrorMessage = "Client Name length cannot be more than 50.")]
         public string Name { get; set; }
         public int Status { get; set; }
         public decimal Balance { get; set; }
-
-        [Required]
-        [EmailAddress(ErrorMessage = "Please enter a valid Email Address.")]
         public string EmailId { get; set; }
-
-        [Required]
-        [MaxLength(10, ErrorMessage = "Mobile Number length cannot be more than 10.")]
-        [MinLength(10, ErrorMessage = "Mobile Number length cannot be less than 10.")]
         public string MobileNumber { get; set; }
-
-        [Required]
         public Nullable<decimal> Rate { get; set; }
         public bool SMSNotification { get; set; }
         public bool EmailNotification { get; set; }
         public bool PostBilling { get; set; }
         public int MonthlyLimit { get; set; }
         public Nullable<System.DateTime> NotifiedAt { get; set; }
-
-        [Required]
         public Nullable<decimal> AlertLimit { get; set; }
         public string ColorVal { get; set; }
         public Nullable<long> TotalCreditsUsed { get; set; }

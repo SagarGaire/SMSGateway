@@ -66,7 +66,7 @@ html, body {
 .table-statement th,
 .table-pending-approval th,
 .table-supplier th,
-.table-expected-balance th{
+.table-expected-balance th {
     background-color: #222d32;
     color: white;
 }

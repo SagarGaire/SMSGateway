@@ -52,7 +52,7 @@
                         {
                             <img alt="Active" src="@Url.Content("~/Images/active.jpg")">
                         }
-                        else if (item.Status == 0)
+                        else if (item.Status == 9)
                         {
                             <img alt="Active" src="@Url.Content("~/Images/inactive.jpg")">
                         }
@@ -83,12 +83,12 @@
                                 <li class="balance-refill" style="cursor: pointer" data-toggle="tooltip" data-placement="bottom" title="Refill Balance">
                                     <img src="~/Images/refill-icon.png" />
                                 </li>
-                                if (session == "1" || session == "2")
+                                @*if (session == "1" || session == "2")
                                 {
-                                    <li class="client-remove" style="cursor: pointer" data-toggle="tooltip" data-placement="bottom" title="Delete">
-                                        <img alt="Delete" src="@Url.Content("~/Images/delete-icon.png")">
+                                    <li class="confirm-change-status" style="cursor: pointer" data-toggle="tooltip" data-placement="bottom" title="Change Status">
+                                        <img src="@Url.Content("~/Images/status.png")">
                                     </li>
-                                }
+                                }*@
 
                             }
                         </ul>

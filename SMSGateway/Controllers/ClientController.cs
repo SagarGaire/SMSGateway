@@ -124,16 +124,25 @@ namespace SMSGateway.Controllers
             return PartialView();
         }
 
-        public ActionResult _ConfirmRemove(string id)
+        public ActionResult _ConfirmChangeStatus(string id)
         {
             ViewBag.ClientCode = id;
             return PartialView();
         }
 
-        public string _RemoveClient(string id)
+        [HttpPost]
+        public string _ChangeStatus(string id)
         {
-            var row = (from m in db.Clients.Where(x => x.ClientCode == id) select m).Single();
-            db.Clients.Remove(row);
+            var row = (from m in db.Clients.Where(x => x.ClientCode == id) select m).SingleOrDefault();
+            if (row.Status == 1)
+            {
+                row.Status = 9;
+            }
+            else if (row.Status ==9)
+            {
+                row.Status = 1;
+            }
+            db.Entry(row).State = EntityState.Modified;
             try
             {
                 db.SaveChanges();
@@ -142,7 +151,7 @@ namespace SMSGateway.Controllers
             {
                 return ex.InnerException.InnerException != null ? ex.InnerException.Message : ex.Message;
             }
-            return "<text class=" + "text-success" + ">The selected client has been removed successfully</text>";
+            return "<text class=" + "text-success" + ">The selected client client has been changed successfully.</text>";
         }
 
         public ActionResult _GetUUID()

@@ -107,7 +107,8 @@ namespace SMSGateway.Models
         public string EntryBy { get; set; }
         public string BillNo { get; set; }
         public string Remarks { get; set; }
-    }
+    }   
+
     public partial class OutgoingSMSReport
     {
         [NotMapped]

@@ -1,4 +1,4 @@
-﻿function triggerClick() {
+﻿function triggerClickClientList() {
     var currentPage = $('body').find('#currentPage').val()
     var search = $('body').find('.txt-client-search').val()
     $.ajax({
@@ -131,11 +131,11 @@ $('body').on('click', '.balance-refill', function () {
     })
 })
 
-$('body').on('click', '.client-remove', function () {
+$('body').on('click', '.confirm-change-status', function () {
     var param = $(this).closest('tr').attr('clientCode')
     $.ajax({
         type: "GET",
-        url: "/Client/_ConfirmRemove",
+        url: "/Client/_ConfirmChangeStatus",
         data: { id: param },
         success: function (data) {
             $('.modal-content').html('');
@@ -152,19 +152,19 @@ $('body').on('click', '.client-remove', function () {
     })
 })
 
-$('body').on('click', '.confirm-remove', function () {
+$('body').on('click', '.change-status', function () {
     debugger;
-    var param = $('body').find('#ClientCode').val()
-    $(this).hide();
+    var param = $('body').find('#ClientCode').val();
     $.ajax({
-        type: "GET",
-        url: "/Client/_RemoveClient",
+        type: "POST",
+        url: "/Client/_ChangeStatus",
         data: { id: param },
         success: function (data) {
-            $('body').find('.remove-client-modal-body').html(data)
-            $('body').find('.btnCancel').text('Dismiss')
+            $('body').find('.change-status, .change-status-modal-body').remove();
+            $('body').find('.btnCancel').text('Dismiss');
+            $('body').find('.successmessage').text('The selected client client has been changed successfully.');
 
-            triggerClick();
+            triggerClickClientList();
         }
     })
 })

@@ -1,0 +1,131 @@
+﻿@model List<SMSGateway.Models.Report_Revenue>
+
+<div class="table-container">
+    @if (Model.Count > 0)
+    {
+    <table class="table table-striped table-revenue-report">
+        <tr>
+            <th colspan="2" class="th_left">Supplier</th>
+            <th colspan="1" class="th_left">SMS Type</th>
+            <th colspan="2" class="th_center">Opening</th>
+            <th colspan="2" class="th_center">Purchases</th>
+            <th colspan="2" class="th_center">Consumed</th>
+            <th colspan="2" class="th_center">Closing</th>
+            <th colspan="1" class="th_right">Cost of Credits</th>
+            <th colspan="1" class="th_right">Revenue</th>
+        </tr>
+        <tr>
+            <th class="next_th_center">ID</th>
+            <th class="next_th_left">Name</th>
+            <th></th>
+            <th class="next_th_right">Credits</th>
+            <th class="next_th_right">Amount</th>
+            <th class="next_th_right">Credits</th>
+            <th class="next_th_right">Amount</th>
+            <th class="next_th_right">Credits</th>
+            <th class="next_th_right">Amount</th>
+            <th class="next_th_right">Credits</th>
+            <th class="next_th_right">Amount</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td class="td_center">@item.Supplier</td>
+        <td class="td_left">@item.SupplierName</td>
+        <td class="td_left">@item.SubType </td>
+        <td class="td_revenue">@item.OpeningCredits</td>
+
+        @if(@item.OpeningAmount == 0){
+        <td class="td_revenue">@item.OpeningAmount</td>
+        }
+        else{
+        <td class="td_revenue">@item.OpeningAmount.ToString("#,#.##", System.Globalization.CultureInfo.CreateSpecificCulture("hi-IN"))</td>
+        }
+
+        <td class="td_revenue">@item.CreditsPurchases</td>
+
+        @if(@item.AmountPurchases == 0){
+        <td class="td_revenue">@item.AmountPurchases</td>
+        }
+        else{
+        <td class="td_revenue">@item.AmountPurchases.ToString("#,#.##", System.Globalization.CultureInfo.CreateSpecificCulture("hi-IN"))</td>
+        }
+
+        <td class="td_revenue">@item.CreditsConsumed</td>
+
+        @if(@item.AmountConsumed == 0){
+        <td class="td_revenue">@item.AmountConsumed</td>
+        }
+        else{
+        <td class="td_revenue">@item.AmountConsumed.ToString("#,#.##", System.Globalization.CultureInfo.CreateSpecificCulture("hi-IN"))</td>
+        }
+        <td class="td_revenue">@item.ClosingCredit</td>
+
+        @if(@item.ClosingAmount == 0){
+        <td class="td_revenue">@item.ClosingAmount</td>
+        }
+        else{
+        <td class="td_revenue">@item.ClosingAmount.ToString("#,#.##", System.Globalization.CultureInfo.CreateSpecificCulture("hi-IN"))</td>
+        }
+        @if(@item.CostOfCredits == 0){
+        <td class="td_revenue">@item.CostOfCredits</td>
+        }
+        else{
+        <td class="td_revenue">@item.CostOfCredits.ToString("#,#.##", System.Globalization.CultureInfo.CreateSpecificCulture("hi-IN"))</td>
+        }
+        @if(@item.Revenue == 0){
+        <td class="td_revenue">@item.Revenue</td>
+        }
+        else{
+        <td class="td_revenue">@item.Revenue.ToString("#,#.##", System.Globalization.CultureInfo.CreateSpecificCulture("hi-IN"))</td>
+        }        
+    </tr>
+        }
+    </table>
+    }
+
+    else
+    {
+        <b>No records could be found</b>
+    }
+</div>
+
+<style>
+    .th_right {
+        text-align: right;
+    }
+    .th_left {
+        text-align: left;
+    }
+    .table-revenue-report .th_center {
+        text-align: center;
+    }
+    .table-revenue-report .td_revenue {
+        text-align: right;
+    }
+    .table-revenue-report .td_center {
+        text-align: center;
+    }
+    .th_center{
+        text-align: center;
+    }
+    .table-revenue-report .next_th_right {
+        text-align: right;
+    }
+    .table-revenue-report .next_th_center {
+        text-align: center;
+    }
+    .table-revenue-report .next_th_left {
+        text-align: left;
+    }
+    .table-revenue-report .td_left {
+        text-align: left;
+    }
+    .table-revenue-report th {
+        background-color: #222d32 !important;
+        color: white !important;
+    }
+</style>
